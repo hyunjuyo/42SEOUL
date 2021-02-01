@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 17:52:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/01/31 22:54:36 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/02/01 11:30:21 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ int		find_linefeed(int fd, char *storage[], char *buf)
 	return (-1);
 }
 
-void	save_line(int fd, char *storage[], int i, char **line)
+char	*save_line(char *storage_fd, int i, char **line, int read_value)
 {
-	storage[fd][i] = '\0';
-	*line = storage[fd];
-	storage[fd] = ft_strdup(&storage[fd][i + 1]);
+	if (i != -1)
+		storage_fd[i] = '\0';
+	*line = storage_fd;
+	if (i == -1 && read_value == 0)
+		return (0);
+	else
+		return (ft_strdup(&storage_fd[i + 1]));
 }
 
 int		get_next_line(int fd, char **line)
@@ -55,31 +59,8 @@ int		get_next_line(int fd, char **line)
 		read_value = read(fd, buf, BUFFER_SIZE);
 		buf[read_value] = '\0';
 	}
-	save_line(fd, storage, i, line);
+	storage[fd] = save_line(storage[fd], i, line, read_value);
 	if (i == -1 && read_value == 0)
-	{
-		free(storage[fd]);
-		storage[fd] = 0;
 		return (0);
-	}
 	return (1);
-}
-
-int		main(void)
-{
-	int		fd;
-	char	*line;
-	int		result;
-
-	if ((fd = open("test1.txt", O_RDONLY)) == -1)
-		return (0);
-	while ((result = get_next_line(fd, &line)) > 0)
-	{
-		printf("%d | %s\n", result, line);
-		free(line);
-	}
-	printf("%d | %s\n", result, line);
-	free(line);
-	close(fd);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/03 18:01:37 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:46:59 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ void	map_set(t_game *game)
 
 void	game_init(t_game *game)
 {
-	game->img.img = mlx_new_image(game->mlx, MINIMAP_W, MINIMAP_H);
-	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp,
-			&game->img.size_l, &game->img.endian);
+	game->img2.img = mlx_new_image(game->mlx, MAP_X * CUBE_SIZE,
+			MAP_Y * CUBE_SIZE);
+	game->img2.data = (int *)mlx_get_data_addr(game->img2.img, &game->img2.bpp,
+			&game->img2.size_l, &game->img2.endian);
 	game->player.x = 2.0;
 	game->player.y = 2.0;
 	game->player.th = deg_to_rad(90.0);

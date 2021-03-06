@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/04 18:46:59 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/06 22:19:54 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	game_init(t_game *game)
 			MAP_Y * CUBE_SIZE);
 	game->img2.data = (int *)mlx_get_data_addr(game->img2.img, &game->img2.bpp,
 			&game->img2.size_l, &game->img2.endian);
-	game->player.x = 2.0;
-	game->player.y = 2.0;
-	game->player.th = deg_to_rad(90.0);
+	game->player.x = 1.5;
+	game->player.y = 1.5;
+	game->player.th = deg_to_rad(100.0);
 }
 
 int		main(void)

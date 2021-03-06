@@ -6,11 +6,27 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 18:09:22 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/03 18:00:23 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/06 22:46:08 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	check_steps(double th, int *xstep, int *ystep)
+{
+	if (cos(th) > EPSILON)
+		*xstep = 1;
+	else if (cos(th) < -EPSILON)
+		*xstep = -1;
+	else
+		*xstep = 0;
+	if (sin(th) > EPSILON)
+		*ystep = 1;
+	else if (sin(th) < -EPSILON)
+		*ystep = -1;
+	else
+		*ystep = 0;
+}
 
 double	get_dist(double x1, double y1, double x2, double y2)
 {

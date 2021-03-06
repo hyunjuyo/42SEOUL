@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/04 19:26:52 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/06 22:46:46 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@
 # define KEY_ESC	53
 
 # define EPSILON	0.000001
-
-static const double	g_fovh = FOV * M_PI / 180.0;
 
 typedef struct		s_img
 {
@@ -90,14 +88,33 @@ typedef struct		s_wall
 	t_dir	dir;
 }					t_wall;
 
+typedef enum		e_line
+{
+	VERT;
+	HORZ;
+}					t_line;
+
+typedef enum		e_bool
+{
+	FALSE,
+	TRUE
+}					t_bool;
+
 typedef struct		s_chk_pnt
 {
+	double	px;
+	double	py;
 	double	nx;
 	double	ny;
 	double	f_nx;
 	double	g_ny;
+	t_line	line;
+	int		mapx;
+	int		mapy;
 	int		xstep;
 	int		ystep;
+	t_bool	hit_wall;
+
 }					t_chk_pnt;
 
 int					key_set(int keycode, t_game *game);
@@ -106,5 +123,6 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 double				cast_single_ray(int x, t_game *game);
 double				get_dist(double x1, double y1, double x2, double y2);
 double				deg_to_rad(double th);
+void				check_steps(double th, int *xstep, int *ystep);
 
 #endif

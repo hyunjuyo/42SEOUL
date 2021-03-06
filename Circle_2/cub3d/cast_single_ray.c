@@ -6,74 +6,106 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/04 20:47:29 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/07 00:34:37 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_steps(double th, int *xstep, int *ystep)
+double	check_next_idx(int step_info, double p_idx)
 {
-	if (cos(th) > EPSILON)
-		*xstep = 1;
-	else if (cos(th) < -EPSILON)
-		*xstep = -1;
+	double	n_idx;
+
+	if (step_info == 1)
+		n_idx = floor(p_idx) + 1;
+	else if (step_info == -1)
+		n_idx = ceil(p_idx) - 1;
 	else
-		*xstep = 0;
-	if (sin(th) > EPSILON)
-		*ystep = 1;
-	else if (sin(th) < -EPSILON)
-		*ystep = -1;
-	else
-		*ystep = 0;
+		n_idx = p_idx;
+	return (n_idx);
 }
 
 void	get_next_point(double ray_th, double *px, double *py, t_chk_pnt *check)
 {
-	if (check->xstep  == 1)
-		check.nx = floor(*px) + 1;
-	else if (check.xstep == -1)
-		check.nx = ceil(*px) - 1;
-	else
-		check.nx = *px;
-	check.f_nx = tan(ray_th) * (check.nx - *px) + *py;
-	if (check->ystep == 1)
-		check.ny = floor(*py) + 1;
-	else if (check.ystep == -1)
-		check.ny = ceil(*py) - 1;
-	else
-		check.ny = *py;
-	check.g_ny = 1.0 / tan(ray_th) * (check.ny - *py) + *px;
-	if (get_dist(*px, *py, check.nx, check.f_nx)
-			< get_dist(*px, *py, check.g_ny, check.ny))
+	double	dist_v;
+	double	dist_h;
+	
+	check->nx = check_next_idx(check->xstep, *px);
+	check->f_nx = tan(ray_th) * (check->nx - *px) + *py;
+	check->ny = check_next_idx(check->ystep, *py);
+	check->g_ny = 1.0 / tan(ray_th) * (check->ny - *py) + *px;
+	dist_v = get_dist(*px, *py, check->nx, check->f_nx);
+	dist_h = get_dist(*px, *py, check->g_ny, check->ny);
+	if (dist_v < dist_h)
 	{
-		*px = check.nx;
-		*py = check.f_nx;
+		*px = check->nx;
+		*py = check->f_nx;
+		check->line = VERT;
 	}
 	else
 	{
-		*px = check.g_ny;
-		*py = check.ny;
+		*px = check->g_ny;
+		*py = check->ny;
+		check->line = HORZ;
 	}
 }
 
+int		convert_to_map_idx(t_chk_pnt *check, t_wall *wall)
+{
+	if (check->line == VERT)
+	{		
+		if (check->xstep == 1)
+		{
+			check->mapx = (int)check->px;
+			wall->dir = WEST;
+		}
+		else
+		{
+			check->mapx = (int)check->px - 1;
+			wall->dir = EAST;
+		}
+	}
+	else
+	{
+		if (check->ystep == 1)
+		{
+			check->mapy = (int)check->py;
+			wall->dir = SOUTH;
+		}
+		else
+		{
+			check->mapy = (int)check->py - 1;
+			wall->dir = NORTH;
+		}
+	}
+}
 
 void	get_wall_point(double ray_th, t_game *game, t_wall *wall)
 {
-	double		px;
-	double		py;
 	t_chk_pnt	check;
 
-	px = game->player.x;
-	py = game->player.y;
+	check.px = game->player.x;
+	check.py = game->player.y;
 	check_steps(ray_th, &check.xstep, &check.ystep);
-
-	get_next_point(ray_th, &px, &py, &check);
-	if (check.xstep == 1)
-
-
-
-
+	check.hit_wall = FALSE;
+	while (!check.hit_wall)
+	{
+		get_next_point(ray_th, &check.px, &check.py, &check);
+		if (check.line == VERT)
+		{
+			check.mapx = convert_to_map_idx(&check, wall);
+			check.mapy = (int)check->py;
+		}
+		else
+		{
+			check.mapx = (int)check->px;
+			check.mapy = convert_to_map_idx(&check, wall);
+		}
+		if (game->map[check.mapx][check.mapy] == 1)
+			check.hit_wall = TRUE;
+	}
+	wall.x = check.px;
+	wall.y = check.py;
 }
 
 double	cast_single_ray(int i, t_game *game)
@@ -81,8 +113,10 @@ double	cast_single_ray(int i, t_game *game)
 	double	dist;
 	double	ray_th;
 	t_wall	wall;
+	double	fov_h;
 
-	ray_th = (game->player.th + g_fovh / 2) - (g_fovh / (WIN_W - 1)) * i;
+	fov_h = deg_to_rad(FOV);
+	ray_th = (game->player.th + fov_h / 2) - (fov_h / (WIN_W - 1)) * i;
 	get_wall_point(ray_th, game, &wall);
 	dist = get_dist(game->player.x, game->player.y, wall.x, wall.y);
 	return (dist);

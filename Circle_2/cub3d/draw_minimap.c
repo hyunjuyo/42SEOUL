@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/04 18:51:33 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/06 22:24:33 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void	draw_one_square(t_game *game, int x_start, int y_start)
 {
 	int	w;
 	int	h;
-	int	map_width;
+	int	total_w;
 
-	map_width = MAP_Y * CUBE_SIZE;
+	total_w = MAP_Y * CUBE_SIZE;
 	h = 0;
 	while (h < CUBE_SIZE)
 	{
 		w = 0;
 		while (w < CUBE_SIZE)
 		{
-			game->img2.data[(y_start + h) * map_width + (x_start + w)] = WHITE;
+			game->img2.data[(y_start + h) * total_w + (x_start + w)] = WHITE;
 			w++;
 		}
 		h++;

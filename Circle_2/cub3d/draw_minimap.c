@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/07 19:14:18 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/07 23:23:30 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,40 @@ void	draw_squares(t_game *game)
 		y--;
 	}
 }
-/*
+
+void	draw_one_ray
+{
+
+
+	rx = px + 1;
+	while (rx < wall->x * CUBE_SIZE)
+	{
+		ry = tan(ray_th) * (rx - px) + py;
+
+		rx++;
+	}
+
+
+}
+
+void	draw_rays(t_game *game, t_wall *wall)
+{
+	int	rays_map[MAP_X * CUBE_SIZE][MAP_Y * CUBE_SIZE];
+	int	px;
+	int	py;
+	int	total_w;
+
+	total_w = 
+	ft_memset(rays_map, 0, sizeof(int) * MAP_X * CUBE_SIZE * MAP_Y * CUBE_SIZE);
+	px = (int)(game->player.x * CUBE_SIZE);
+	py = (int)(game->player.y * CUBE_SIZE);
+	game->img2.data[(MAP_Y * CUBE_SIZE - 1 - py) * total_w + px * CUBE_SIZE]
+		= BLUE;
+	
+
+
+}
+
 void	draw_fov(t_game *game, t_wall *wall)
 {
 	int		i;
@@ -61,16 +94,17 @@ void	draw_fov(t_game *game, t_wall *wall)
 	while (i < WIN_W)
 	{
 		dist = cast_single_ray(i, game, wall);
+		draw_rays(game, wall);
 		i++;
 	}
 }
-*/
+
 int		draw_minimap(t_game *game)
 {
 	t_wall	wall;
 
 	draw_squares(game);
-//	draw_fov(game, &wall);
+	draw_fov(game, &wall);
 	mlx_put_image_to_window(game->mlx, game->win, game->img2.img, 10, 10);
 	return (0);
 }

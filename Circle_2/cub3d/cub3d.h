@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/07 19:15:38 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/07 22:40:36 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct		s_chk_pnt
 int					key_set(int keycode, t_game *game);
 int					draw_minimap(t_game *game);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
+void				*ft_memset(void *b, int c, size_t len);
 double				cast_single_ray(int x, t_game *game, t_wall *wall);
 double				get_dist(double x1, double y1, double x2, double y2);
 double				deg_to_rad(double th);

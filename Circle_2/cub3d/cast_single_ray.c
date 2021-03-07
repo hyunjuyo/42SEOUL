@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/07 18:20:56 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/07 19:16:15 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,15 @@ void	get_wall_point(double ray_th, t_game *game, t_wall *wall)
 	wall->y = check.py;
 }
 
-double	cast_single_ray(int i, t_game *game)
+double	cast_single_ray(int i, t_game *game, t_wall *wall)
 {
 	double	dist;
 	double	ray_th;
-	t_wall	wall;
 	double	fov_h;
 
 	fov_h = deg_to_rad(FOV);
 	ray_th = (game->player.th + fov_h / 2) - (fov_h / (WIN_W - 1)) * i;
-	get_wall_point(ray_th, game, &wall);
-	dist = get_dist(game->player.x, game->player.y, wall.x, wall.y);
+	get_wall_point(ray_th, game, wall);
+	dist = get_dist(game->player.x, game->player.y, wall->x, wall->y);
 	return (dist);
 }

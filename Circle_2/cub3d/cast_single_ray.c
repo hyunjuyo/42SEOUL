@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/07 00:34:37 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/07 18:20:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,34 +50,32 @@ void	get_next_point(double ray_th, double *px, double *py, t_chk_pnt *check)
 	}
 }
 
-int		convert_to_map_idx(t_chk_pnt *check, t_wall *wall)
+int		check_dir(t_chk_pnt *check, t_wall *wall)
 {
+	int	minus;
+
+	minus = 0;
 	if (check->line == VERT)
 	{		
 		if (check->xstep == 1)
-		{
-			check->mapx = (int)check->px;
 			wall->dir = WEST;
-		}
 		else
 		{
-			check->mapx = (int)check->px - 1;
+			minus = -1;
 			wall->dir = EAST;
 		}
 	}
 	else
 	{
 		if (check->ystep == 1)
-		{
-			check->mapy = (int)check->py;
 			wall->dir = SOUTH;
-		}
 		else
 		{
-			check->mapy = (int)check->py - 1;
+			minus = -1;
 			wall->dir = NORTH;
 		}
 	}
+	return (minus);
 }
 
 void	get_wall_point(double ray_th, t_game *game, t_wall *wall)
@@ -93,19 +91,19 @@ void	get_wall_point(double ray_th, t_game *game, t_wall *wall)
 		get_next_point(ray_th, &check.px, &check.py, &check);
 		if (check.line == VERT)
 		{
-			check.mapx = convert_to_map_idx(&check, wall);
+			check.mapx = (int)check->px + check_dir(&check, wall);
 			check.mapy = (int)check->py;
 		}
 		else
 		{
 			check.mapx = (int)check->px;
-			check.mapy = convert_to_map_idx(&check, wall);
+			check.mapy = (int)check->py + check_dir(&check, wall);
 		}
 		if (game->map[check.mapx][check.mapy] == 1)
 			check.hit_wall = TRUE;
 	}
-	wall.x = check.px;
-	wall.y = check.py;
+	wall->x = check.px;
+	wall->y = check.py;
 }
 
 double	cast_single_ray(int i, t_game *game)

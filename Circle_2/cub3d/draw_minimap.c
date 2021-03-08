@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/07 23:23:30 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/08 19:06:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,35 +52,51 @@ void	draw_squares(t_game *game)
 	}
 }
 
-void	draw_one_ray
+void	draw_one_ray(int i, int px, int py, t_game *game, t_wall *wall)
 {
+	int	rx;
+	int	ry;
+	int	xstep;
+	int	ystep;
+	int	total_w;
 
-
-	rx = px + 1;
-	while (rx < wall->x * CUBE_SIZE)
+	total_w = MAP_X * CUBE_SIZE;
+	check_steps(game->player.ray_th, &xstep, &ystep);
+	rx = px + xstep;
+	while (rx != (int)wall->x * CUBE_SIZE)
 	{
-		ry = tan(ray_th) * (rx - px) + py;
+		if (xstep == 0 && sin(game->player.ray_th) > 0)
+		{
 
-		rx++;
+
+		}
+		else if (xstep == 0 && sin(game->player.ray_th) < 0)
+		{
+
+
+		}
+		else
+		{
+			ry = tan(ray_th) * (rx - px) + py;
+			game->img2.data[(MAP_Y * CUBE_SIZE - 1 - ry) * total_w + rx] = GREEN;
+		}
+		rx += xstep;
 	}
-
-
 }
 
-void	draw_rays(t_game *game, t_wall *wall)
+void	draw_rays(int i, t_game *game, t_wall *wall)
 {
 	int	rays_map[MAP_X * CUBE_SIZE][MAP_Y * CUBE_SIZE];
 	int	px;
 	int	py;
 	int	total_w;
 
-	total_w = 
+	total_w = MAP_X * CUBE_SIZE;
 	ft_memset(rays_map, 0, sizeof(int) * MAP_X * CUBE_SIZE * MAP_Y * CUBE_SIZE);
 	px = (int)(game->player.x * CUBE_SIZE);
 	py = (int)(game->player.y * CUBE_SIZE);
-	game->img2.data[(MAP_Y * CUBE_SIZE - 1 - py) * total_w + px * CUBE_SIZE]
-		= BLUE;
-	
+	game->img2.data[(MAP_Y * CUBE_SIZE - 1 - py) * total_w + px] = BLUE;
+	draw_one_ray(i, px, py, game, wall);
 
 
 }
@@ -94,7 +110,7 @@ void	draw_fov(t_game *game, t_wall *wall)
 	while (i < WIN_W)
 	{
 		dist = cast_single_ray(i, game, wall);
-		draw_rays(game, wall);
+		draw_rays(i, game, wall);
 		i++;
 	}
 }

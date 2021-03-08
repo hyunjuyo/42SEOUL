@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/07 22:40:36 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/08 18:32:07 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct		s_pla
 	double	x;
 	double	y;
 	double	th;
+	double	ray_th;
 }					t_pla;
 
 typedef struct		s_game

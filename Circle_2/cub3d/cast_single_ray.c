@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/07 19:16:15 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/08 18:34:14 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ double	cast_single_ray(int i, t_game *game, t_wall *wall)
 
 	fov_h = deg_to_rad(FOV);
 	ray_th = (game->player.th + fov_h / 2) - (fov_h / (WIN_W - 1)) * i;
+	game->player.ray_th = ray_th;
 	get_wall_point(ray_th, game, wall);
 	dist = get_dist(game->player.x, game->player.y, wall->x, wall->y);
 	return (dist);

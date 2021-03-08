@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/08 21:39:29 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:43:45 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	draw_one_ray(int i, int px, int py, t_game *game, t_wall *wall)
 void	draw_fov_rays(t_game *game, t_wall *wall)
 {
 	int		i;
-	double	dist;
 	int		px;
 	int		py;
 	int		total_w;
@@ -107,7 +106,7 @@ void	draw_fov_rays(t_game *game, t_wall *wall)
 	i = 0;
 	while (i < WIN_W)
 	{
-		dist = cast_single_ray(i, game, wall);
+		cast_single_ray(i, game, wall);
 		draw_one_ray(i, px, py, game, wall);
 		i++;
 	}

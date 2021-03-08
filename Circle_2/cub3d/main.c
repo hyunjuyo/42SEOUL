@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/06 22:19:54 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/08 23:23:18 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		main(void)
 	map_set(&game);
 	game_init(&game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_set, &game);
+//	mlx_loop_hook(game.mlx, draw_player_fov, &game);
 	mlx_loop_hook(game.mlx, draw_minimap, &game);
 	mlx_loop(game.mlx);
 	return (0);

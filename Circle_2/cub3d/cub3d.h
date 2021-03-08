@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/08 18:32:07 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:54:53 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define MAP_Y	7
 # define CUBE_SIZE	15
 
-# define MOVE	0.3
+# define MOVE_SPEED	0.3
+# define ROT_SPEED	1.0
 # define FOV	60
 
 # define WHITE	0xFFFFFF
@@ -43,6 +44,8 @@
 # define KEY_D		2
 # define KEY_S		1
 # define KEY_W		13
+# define KEY_LEFT	
+# define KEY_RIGHT	
 # define KEY_ESC	53
 
 # define EPSILON	0.000001

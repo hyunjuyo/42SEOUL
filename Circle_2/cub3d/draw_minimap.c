@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/09 17:57:50 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/09 19:01:30 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,33 @@ void	draw_one_ray(int px, int py, t_game *game, t_wall *wall)
 
 	w = MAP_X * CUBE_SIZE;
 	check_steps(game->player.ray_th, &xstep, &ystep);
-	rx = px + xstep;
-	while (xstep != 0 && rx != (int)(wall->x * CUBE_SIZE))
+
+	if (tan(game->player.ray_th) <= 1.0 && tan(game->player.ray_th) >= -1.0)
 	{
-		ry = tan(game->player.ray_th) * (rx - px) + py;
-		game->img2.data[(MAP_Y * CUBE_SIZE - 1 - ry) * w + rx] = GREEN;
-		rx += xstep;
+		rx = px + xstep;
+		while (xstep != 0 && rx != (int)(wall->x * CUBE_SIZE))
+		{
+			ry = tan(game->player.ray_th) * (rx - px) + py;
+			game->img2.data[(MAP_Y * CUBE_SIZE - 1 - ry) * w + rx] = GREEN;
+			rx += xstep;
+		}
+	}
+	else if (tan(game->player.ray_th) <= 5.0 && tan(game->player.ray_th) >= -5.0)
+	{
+		ry = py + ystep;
+		while (ystep != 0 && ry != (int)(wall->y * CUBE_SIZE))
+		{
+			rx = 1 / tan(game->player.ray_th) * (ry - py) + px;
+			game->img2.data[(MAP_Y * CUBE_SIZE - 1 - ry) * w + rx] = GREEN;
+			ry += ystep;
+		}
 	}
 //	ry = py;
 //	while (++ry < (int)(wall->y * CUBE_SIZE) && xstep == 0 && sin(game->player.ray_th) > 0)
 //			game->img2.data[(MAP_Y * CUBE_SIZE - 1 - ry) * w + rx] = CYAN;
 //	while (--ry > (int)(wall->y * CUBE_SIZE) && xstep == 0 && sin(game->player.ray_th) < 0)
 //			game->img2.data[(MAP_Y * CUBE_SIZE - 1 - ry) * w + rx] = YELLOW;
+/*
 	if (xstep == 0 && sin(game->player.ray_th) > 0)
 	{
 		printf("wow~~~");
@@ -90,6 +105,7 @@ void	draw_one_ray(int px, int py, t_game *game, t_wall *wall)
 		while (--ry > (int)(wall->y * CUBE_SIZE))
 			game->img2.data[(MAP_Y * CUBE_SIZE - 1 - ry) * w + rx] = YELLOW;
 	}
+*/
 }
 
 void	draw_fov_rays(t_game *game, t_wall *wall)

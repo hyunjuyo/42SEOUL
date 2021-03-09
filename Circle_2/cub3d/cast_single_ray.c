@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/08 22:47:02 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/09 17:24:08 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	get_next_point(double ray_th, double *px, double *py, t_chk_pnt *check)
 {
 	double	dist_v;
 	double	dist_h;
-	
+
 	check->nx = check_next_idx(check->xstep, *px);
 	check->f_nx = tan(ray_th) * (check->nx - *px) + *py;
 	check->ny = check_next_idx(check->ystep, *py);
@@ -56,7 +56,7 @@ int		check_dir(t_chk_pnt *check, t_wall *wall)
 
 	minus = 0;
 	if (check->line == VERT)
-	{		
+	{
 		if (check->xstep == 1)
 			wall->dir = WEST;
 		else
@@ -91,13 +91,13 @@ void	get_wall_point(double ray_th, t_game *game, t_wall *wall)
 		get_next_point(ray_th, &check.px, &check.py, &check);
 		if (check.line == VERT)
 		{
-			check.mapx = (int)check->px + check_dir(&check, wall);
-			check.mapy = (int)check->py;
+			check.mapx = (int)check.px + check_dir(&check, wall);
+			check.mapy = (int)check.py;
 		}
 		else
 		{
-			check.mapx = (int)check->px;
-			check.mapy = (int)check->py + check_dir(&check, wall);
+			check.mapx = (int)check.px;
+			check.mapy = (int)check.py + check_dir(&check, wall);
 		}
 		if (game->map[check.mapx][check.mapy] == 1)
 			check.hit_wall = TRUE;
@@ -106,14 +106,14 @@ void	get_wall_point(double ray_th, t_game *game, t_wall *wall)
 	wall->y = check.py;
 }
 
-double	cast_single_ray(int i, t_game *game, t_wall *wall)
+double	cast_single_ray(int i, t_game *game, t_wall *wall, int ray_num)
 {
 	double	dist;
 	double	ray_th;
 	double	fov_h;
 
 	fov_h = deg_to_rad(FOV);
-	ray_th = (game->player.th + fov_h / 2) - (fov_h / (WIN_W - 1)) * i;
+	ray_th = (game->player.th + fov_h / 2) - (fov_h / (ray_num - 1)) * i;
 	game->player.ray_th = ray_th;
 	get_wall_point(ray_th, game, wall);
 	dist = get_dist(game->player.x, game->player.y, wall->x, wall->y);

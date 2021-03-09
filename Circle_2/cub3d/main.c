@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/08 23:23:18 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/09 17:46:59 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	game_init(t_game *game)
 			&game->img2.size_l, &game->img2.endian);
 	game->player.x = 1.5;
 	game->player.y = 1.5;
-	game->player.th = deg_to_rad(100.0);
+	game->player.th = deg_to_rad(90.0);
 }
 
 int		main(void)

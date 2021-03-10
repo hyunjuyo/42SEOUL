@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 12:45:27 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:34:28 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define MAP_X	10
 # define MAP_Y	7
 # define CUBE_SIZE	50
-# define MINIMAP_RAY_NUM	50
+# define MINIMAP_RAY_NUM	7
 
 # define MOVE_SPEED	0.3
 # define ROT_SPEED_RAD	0.3
@@ -67,6 +67,21 @@ typedef struct		s_pla
 	double	th;
 	double	ray_th;
 }					t_pla;
+
+typedef enum		e_dir
+{
+	EAST,
+	WEST,
+	SOUTH,
+	NORTH
+}					t_dir;
+
+typedef struct		s_wall
+{
+	double	x;
+	double	y;
+	t_dir	dir;
+}					t_wall;
 
 typedef struct		s_game
 {

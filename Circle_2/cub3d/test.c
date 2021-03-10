@@ -10,7 +10,7 @@ int	main(void)
 	double	s;
 	double	t;
 
-	th = 90.0 * M_PI / 180.0;
+	th = 90.0001 * M_PI / 180.0;
 	c = cos(th);
 	s = sin(th);
 	t = tan(th);

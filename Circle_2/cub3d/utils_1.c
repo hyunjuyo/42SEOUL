@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 18:09:22 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/09 15:32:56 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:18:26 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,15 @@ double	rad_to_deg(double th)
 
 double	deg_to_rad(double th)
 {
-	return (th * M_PI / 180.0);
+	double	rad;
+
+	rad = th * M_PI / 180.0;
+	if (rad < 0.000002
+			|| rad - M_PI * 1 / 2 < 0.000002
+			|| rad - M_PI < 0.000002
+			|| rad - M_PI * 3 / 2 < 0.000002)
+		rad += 0.000002;
+	return (rad);
 }
 
 void	*ft_memset(void *b, int c, size_t len)

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 11:16:17 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:36:54 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ void	draw_squares(t_game *game)
 
 int		draw_minimap(t_game *game)
 {
-	t_wall	wall;
-
 	draw_squares(game);
-	draw_fov_rays_on_minimap(game, &wall);
+	draw_fov_rays_on_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img2.img, 10, 10);
 	return (0);
 }

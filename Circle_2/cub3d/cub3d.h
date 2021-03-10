@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 16:34:28 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 17:22:06 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 
 # define MAP_X	10
 # define MAP_Y	7
-# define CUBE_SIZE	50
+# define CUBE_SIZE	90
 # define MINIMAP_RAY_NUM	7
 
 # define MOVE_SPEED	0.3
-# define ROT_SPEED_RAD	0.3
+# define ROT_SPEED_RAD	0.1
 # define FOV	60
 
 # define WHITE	0xFFFFFF
@@ -90,23 +90,9 @@ typedef struct		s_game
 	t_img	img1;
 	t_img	img2;
 	t_pla	player;
+	t_wall	wall;
 	int		map[MAP_X][MAP_Y];
 }					t_game;
-
-typedef enum		e_dir
-{
-	EAST,
-	WEST,
-	SOUTH,
-	NORTH
-}					t_dir;
-
-typedef struct		s_wall
-{
-	double	x;
-	double	y;
-	t_dir	dir;
-}					t_wall;
 
 typedef enum		e_line
 {
@@ -151,11 +137,11 @@ int					key_set(int keycode, t_game *game);
 int					draw_minimap(t_game *game);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
-double				cast_single_ray(int x, t_game *game, t_wall *wall, int n);
+double				cast_single_ray(int x, t_game *game, int n);
 double				get_dist(double x1, double y1, double x2, double y2);
 double				deg_to_rad(double th);
 double				rad_to_deg(double th);
 void				check_steps(double th, int *xstep, int *ystep);
-void				draw_fov_rays_on_minimap(t_game *game, t_wall *wall);
+void				draw_fov_rays_on_minimap(t_game *game);
 
 #endif

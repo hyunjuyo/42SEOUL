@@ -6,22 +6,22 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:11:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 15:54:05 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:46:07 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_using_xstep(int px, int py, t_game *game, t_wall *wall, t_ray *ray)
+void	draw_using_xstep(int px, int py, t_game *game, t_ray *ray)
 {
 	ray->rx = px + ray->xstep;
-	while (ray->xstep == 1 && ray->rx < (int)(wall->x * CUBE_SIZE))
+	while (ray->xstep == 1 && ray->rx < (int)(game->wall.x * CUBE_SIZE))
 	{
 		ray->ry = tan(game->player.ray_th) * (ray->rx - px) + py;
 		game->img2.data[(ray->h - 1 - ray->ry) * ray->w + ray->rx] = GREEN;
 		ray->rx += ray->xstep;
 	}
-	while (ray->xstep == -1 && ray->rx > (int)(wall->x * CUBE_SIZE))
+	while (ray->xstep == -1 && ray->rx > (int)(game->wall.x * CUBE_SIZE))
 	{
 		ray->ry = tan(game->player.ray_th) * (ray->rx - px) + py;
 		game->img2.data[(ray->h - 1 - ray->ry) * ray->w + ray->rx] = GREEN;
@@ -29,16 +29,16 @@ void	draw_using_xstep(int px, int py, t_game *game, t_wall *wall, t_ray *ray)
 	}
 }
 
-void	draw_using_ystep(int px, int py, t_game *game, t_wall *wall, t_ray *ray)
+void	draw_using_ystep(int px, int py, t_game *game, t_ray *ray)
 {
 	ray->ry = py + ray->ystep;
-	while (ray->ystep == 1 && ray->ry < (int)(wall->y * CUBE_SIZE))
+	while (ray->ystep == 1 && ray->ry < (int)(game->wall.y * CUBE_SIZE))
 	{
 		ray->rx = 1 / tan(game->player.ray_th) * (ray->ry - py) + px;
 		game->img2.data[(ray->h - 1 - ray->ry) * ray->w + ray->rx] = GREEN;
 		ray->ry += ray->ystep;
 	}
-	while (ray->ystep == -1 && ray->ry > (int)(wall->y * CUBE_SIZE))
+	while (ray->ystep == -1 && ray->ry > (int)(game->wall.y * CUBE_SIZE))
 	{
 		ray->rx = 1 / tan(game->player.ray_th) * (ray->ry - py) + px;
 		game->img2.data[(ray->h - 1 - ray->ry) * ray->w + ray->rx] = GREEN;
@@ -46,7 +46,7 @@ void	draw_using_ystep(int px, int py, t_game *game, t_wall *wall, t_ray *ray)
 	}
 }
 
-void	draw_one_ray(int px, int py, t_game *game, t_wall *wall)
+void	draw_one_ray(int px, int py, t_game *game)
 {
 	t_ray	ray;
 	double	tan_th;
@@ -56,12 +56,12 @@ void	draw_one_ray(int px, int py, t_game *game, t_wall *wall)
 	ray.h = MAP_Y * CUBE_SIZE;
 	check_steps(game->player.ray_th, &ray.xstep, &ray.ystep);
 	if (tan_th <= 1.0 && tan_th >= -1.0)
-		draw_using_xstep(px, py, game, wall, &ray);
+		draw_using_xstep(px, py, game, &ray);
 	if (1.0 / tan_th <= 1.0 && 1.0 / tan_th >= -1.0)
-		draw_using_ystep(px, py, game, wall, &ray);
+		draw_using_ystep(px, py, game, &ray);
 }
 
-void	draw_fov_rays_on_minimap(t_game *game, t_wall *wall)
+void	draw_fov_rays_on_minimap(t_game *game)
 {
 	int		i;
 	int		px;
@@ -77,8 +77,8 @@ void	draw_fov_rays_on_minimap(t_game *game, t_wall *wall)
 	ray_num = MINIMAP_RAY_NUM;
 	while (i < ray_num)
 	{
-		cast_single_ray(i, game, wall, ray_num);
-		draw_one_ray(px, py, game, wall);
+		cast_single_ray(i, game, ray_num);
+		draw_one_ray(px, py, game);
 		i++;
 	}
 }

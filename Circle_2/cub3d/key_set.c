@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 16:26:57 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 17:11:46 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,26 @@ void	rotate_check(t_game *game)
 		game->player.th += M_PI * 2;
 }
 
-int		key_set(int keycode, t_game *game)
+int		hit_wall_check(t_game *game)
 {
-	if (keycode == KEY_W)
-		game->player.y += MOVE_SPEED;
-	else if (keycode == KEY_S)
-		game->player.y -= MOVE_SPEED;
-	else if (keycode == KEY_A)
-		game->player.x -= MOVE_SPEED;
-	else if (keycode == KEY_D)
+	int	mapx;
+	int	mapy;
+
+	mapx = (int)game->player.x;
+	mapy = (int)game->player.y;
+	if (game->map[mapx][mapy] == 1)
+		return (1);
+	return (0);
+}
+
+void	key_set_more(int keycode, t_game *game)
+{
+	if (keycode == KEY_D)
+	{
 		game->player.x += MOVE_SPEED;
+		if (hit_wall_check(game) == 1)
+			game->player.x -= MOVE_SPEED;
+	}
 	else if (keycode == KEY_LEFT)
 		game->player.th += ROT_SPEED_RAD;
 	else if (keycode == KEY_RIGHT)
@@ -39,5 +49,28 @@ int		key_set(int keycode, t_game *game)
 	rotate_check(game);
 	printf("(%f, %f) %f deg\n", game->player.x, game->player.y,
 			rad_to_deg(game->player.th));
+}
+
+int		key_set(int keycode, t_game *game)
+{
+	if (keycode == KEY_W)
+	{
+		game->player.y += MOVE_SPEED;
+		if (hit_wall_check(game) == 1)
+			game->player.y -= MOVE_SPEED;
+	}
+	else if (keycode == KEY_S)
+	{
+		game->player.y -= MOVE_SPEED;
+		if (hit_wall_check(game) == 1)
+			game->player.y += MOVE_SPEED;
+	}
+	else if (keycode == KEY_A)
+	{
+		game->player.x -= MOVE_SPEED;
+		if (hit_wall_check(game) == 1)
+			game->player.x += MOVE_SPEED;
+	}
+	key_set_more(keycode, game);
 	return (0);
 }

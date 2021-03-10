@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:11:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 12:45:53 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 13:07:23 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	draw_one_ray(int px, int py, t_game *game, t_wall *wall)
 	check_steps(game->player.ray_th, &ray.xstep, &ray.ystep);
 	if (tan_th <= 1.0 && tan_th >= -1.0)
 		draw_using_xstep(px, py, game, wall, &ray);
-	else if (1.0 / tan_th <= 1.0 && 1.0 / tan_th >= -1.0)
+	if (1.0 / tan_th <= 1.0 && 1.0 / tan_th >= -1.0)
 		draw_using_ystep(px, py, game, wall, &ray);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 18:09:22 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 16:18:26 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 18:05:29 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,21 @@ double	rad_to_deg(double th)
 	return (th * 180.0 / M_PI);
 }
 
-double	deg_to_rad(double th)
+double	deg_to_rad(double th, int type)
 {
 	double	rad;
 
-	rad = th * M_PI / 180.0;
-	if (rad < 0.000002
-			|| rad - M_PI * 1 / 2 < 0.000002
-			|| rad - M_PI < 0.000002
-			|| rad - M_PI * 3 / 2 < 0.000002)
-		rad += 0.000002;
+	if (type == 0)
+		rad = th * M_PI / 180.0;
+	else
+	{
+		rad = th * M_PI / 180.0;
+		if (rad < 0.000002
+				|| rad - M_PI * 1 / 2 < 0.000002
+				|| rad - M_PI < 0.000002
+				|| rad - M_PI * 3 / 2 < 0.000002)
+			rad += 0.000002;
+	}
 	return (rad);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/09 16:44:53 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/10 12:45:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define WIN_W	1920
-# define WIN_H	1080
+# define WIN_W	1280
+# define WIN_H	720
 
 # define MAP_X	10
 # define MAP_Y	7
 # define CUBE_SIZE	50
+# define MINIMAP_RAY_NUM	50
 
 # define MOVE_SPEED	0.3
 # define ROT_SPEED_RAD	0.3
@@ -121,6 +122,16 @@ typedef struct		s_chk_pnt
 
 }					t_chk_pnt;
 
+typedef struct		s_ray
+{
+	int		rx;
+	int		ry;
+	int		xstep;
+	int		ystep;
+	int		w;
+	int		h;
+}					t_ray;
+
 int					key_set(int keycode, t_game *game);
 int					draw_minimap(t_game *game);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -130,5 +141,6 @@ double				get_dist(double x1, double y1, double x2, double y2);
 double				deg_to_rad(double th);
 double				rad_to_deg(double th);
 void				check_steps(double th, int *xstep, int *ystep);
+void				draw_fov_rays_on_minimap(t_game *game, t_wall *wall);
 
 #endif

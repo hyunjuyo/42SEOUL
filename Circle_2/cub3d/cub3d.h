@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 18:07:14 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/11 15:55:15 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 
 # define MAP_X	10
 # define MAP_Y	7
-# define CUBE_SIZE	25
+# define CUBE_SIZE	20
 # define MINIMAP_RAY_NUM	7
 
 # define MOVE_SPEED	0.3
-# define ROT_SPEED_RAD	0.1
+# define ROT_SPEED_RAD	0.07
 # define FOV	60
 
 # define WHITE	0xFFFFFF

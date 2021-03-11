@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/11 18:07:53 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/11 18:41:55 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	h = space + 1;
 	while (h <= WIN_H - space)
 	{
-//		pixel_color = draw_texture_to_wall(i, h, WIN_H - space, game, &w_img);
+//		pixel_color = draw_texture_to_wall(h - (space + 1), h, WIN_H - space, game, &w_img);
 		game->img1.data[h * WIN_W + i] = WHITE;
 		h++;
 	}

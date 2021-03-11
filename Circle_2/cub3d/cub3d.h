@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/11 15:55:15 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/11 17:56:19 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,19 @@
 # define WIN_W	1280
 # define WIN_H	720
 
-# define MAP_X	10
-# define MAP_Y	7
+# define MAP_X	20
+# define MAP_Y	12
 # define CUBE_SIZE	20
 # define MINIMAP_RAY_NUM	7
 
-# define MOVE_SPEED	0.3
+# define MOVE_SPEED	0.7
 # define ROT_SPEED_RAD	0.07
 # define FOV	60
+
+# define WALL_NO	"./textures/wall_n.xpm"
+# define WALL_SO	"./textures/wall_s.xpm"
+# define WALL_WE	"./textures/wall_w.xpm"
+# define WALL_EA	"./textures/wall_e.xpm"
 
 # define WHITE	0xFFFFFF
 # define BLACK	0x000000
@@ -55,6 +60,8 @@ typedef struct		s_img
 {
 	void	*img;
 	int		*data;
+	int		width;
+	int		height;
 	int		bpp;
 	int		size_l;
 	int		endian;
@@ -144,5 +151,7 @@ double				rad_to_deg(double th);
 void				check_steps(double th, int *xstep, int *ystep);
 void				draw_fov_rays_on_minimap(t_game *game);
 int					draw_player_fov(t_game *game);
+int					draw_texture_to_wall(int x, int y1, int y2, t_game *game,
+		t_img *w_img);
 
 #endif

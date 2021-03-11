@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/11 16:00:16 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/11 18:07:53 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,49 @@ int		get_wall_h_pixels(double wdist)
 	return (wall_h);
 }
 
+void	get_wall_texture(t_game *game, t_img *w_img)
+{
+	char	*img_path;
+
+	if (game->wall.dir == NORTH)
+		img_path = WALL_NO;
+	else if (game->wall.dir == SOUTH)
+		img_path = WALL_SO;
+	else if (game->wall.dir == WEST)
+		img_path = WALL_WE;
+	else
+		img_path = WALL_EA;
+	w_img->img = mlx_xpm_file_to_image(game->mlx, img_path, &w_img->width,
+			&w_img->height);
+	w_img->data = (int *)mlx_get_data_addr(w_img->img, &w_img->bpp,
+			&w_img->size_l, &w_img->endian);
+}
+
 void	draw_one_vert_line(int i, double wdist, t_game *game)
 {
-	int	wall_h;
-	int	space;
-	int	h;
-	int	color;
+	int		wall_h;
+	int		space;
+	int		h;
+//	t_img	w_img;
+//	int		pixel_color;
 
+//	get_wall_texture(game, &w_img);
 	wall_h = get_wall_h_pixels(wdist);
 	if ((space = (WIN_H - wall_h) / 2) < 0)
 		space = 0;
-	h = space;
-	while (h < WIN_H - space)
+	h = space + 1;
+	while (h <= WIN_H - space)
 	{
-		if (game->wall.dir == NORTH)
-			color = WHITE;
-		else if (game->wall.dir == SOUTH)
-			color = CYAN;
-		else if (game->wall.dir == WEST)
-			color = MAGENTA;
-		else
-			color = GREEN;
-		game->img1.data[h * WIN_W + i] = color;
+//		pixel_color = draw_texture_to_wall(i, h, WIN_H - space, game, &w_img);
+		game->img1.data[h * WIN_W + i] = WHITE;
 		h++;
 	}
 }
 
 int		draw_player_fov(t_game *game)
 {
-	int		i;
-	double	wdist;
+	int			i;
+	double		wdist;
 
 	clear_screen(game);
 	i = 0;

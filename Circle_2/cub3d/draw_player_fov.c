@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/13 16:04:53 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:47:37 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		get_vert_line_length(double wdist)
 	return (length);
 }
 
-void	get_wall_texture(t_game *game, t_img *w_img)
+void	get_wall_texture_file(t_game *game, t_img *w_img)
 {
 	char	*img_path;
 
@@ -65,18 +65,22 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	int		line_len;
 	int		space;
 	int		h;
-//	t_img	w_img;
-//	int		pixel_color;
+	t_img	w_img;
+	double	invisible;
 
-//	get_wall_texture(game, &w_img);
+	get_wall_texture_file(game, &w_img);
 	line_len = get_vert_line_length(wdist);
+	invisible = 0.0;
 	if ((space = (WIN_H - line_len) / 2) < 0)
-		space = 0;
-	h = space;
-	while (h <= WIN_H - space)
 	{
-//		pixel_color = get_texture_pixel(h - (space + 1), h, WIN_H - space, game, &w_img);
-		game->img1.data[h * WIN_W + i] = WHITE;
+		invisible = (space * -1) / line_len;
+		space = 0;
+	}
+	h = 0;
+	while (h < line_len)
+	{
+		game->img1.data[(space + h) * WIN_W + i]
+			= get_texture_pixel_color(h, line_len, invisible, game, &w_img);
 		h++;
 	}
 }

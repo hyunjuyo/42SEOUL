@@ -6,13 +6,13 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 17:09:41 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/13 18:50:00 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:14:46 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_texture_pixel_color(int i, int pixels, double invisible, t_game *game,
+int	get_texture_pixel_color(int h, int line_len, double invisible, t_game *game,
 		t_img *w_img)
 {
 	double	x_ratio;
@@ -29,8 +29,8 @@ int	get_texture_pixel_color(int i, int pixels, double invisible, t_game *game,
 	else
 		x_ratio = 1.0 - (game->wall.y - floor(game->wall.y));
 	wx = (int)(w_img->width * x_ratio) - 1;
-	y_ratio = (i + 1) / pixels;
-	wy = (int)(w_img->height * y_ratio) - 1;
+	y_ratio = (h + 1) / (line_len * (1.0 - invisible * 2.0));
+	wy = (int)(w_img->height * (1.0 - invisible * 2.0) * y_ratio) - 1;
 	wy += (int)(w_img->height * invisible);
 	return (w_img->data[wy * w_img->width + wx]);
 }

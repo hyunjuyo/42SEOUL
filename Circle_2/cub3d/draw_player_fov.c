@@ -6,13 +6,13 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/11 18:41:55 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/13 16:04:53 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	clear_screen(t_game *game)
+void	clear_screen(t_game *game, int color)
 {
 	int	h;
 	int	w;
@@ -23,23 +23,23 @@ void	clear_screen(t_game *game)
 		w = 0;
 		while (w < WIN_W)
 		{
-			game->img1.data[h * WIN_W + w] = BLACK;
+			game->img1.data[h * WIN_W + w] = color;
 			w++;
 		}
 		h++;
 	}
 }
 
-int		get_wall_h_pixels(double wdist)
+int		get_vert_line_length(double wdist)
 {
 	double	fov_vert;
 	double	h_ratio;
-	int		wall_h;
+	int		length;
 
 	fov_vert = deg_to_rad(FOV * WIN_H / WIN_W, 0);
 	h_ratio = 1.0 / (wdist * tan(fov_vert / 2.0) * 2.0);
-	wall_h = (int)(WIN_H * h_ratio);
-	return (wall_h);
+	length = (int)(WIN_H * h_ratio);
+	return (length);
 }
 
 void	get_wall_texture(t_game *game, t_img *w_img)
@@ -62,20 +62,20 @@ void	get_wall_texture(t_game *game, t_img *w_img)
 
 void	draw_one_vert_line(int i, double wdist, t_game *game)
 {
-	int		wall_h;
+	int		line_len;
 	int		space;
 	int		h;
 //	t_img	w_img;
 //	int		pixel_color;
 
 //	get_wall_texture(game, &w_img);
-	wall_h = get_wall_h_pixels(wdist);
-	if ((space = (WIN_H - wall_h) / 2) < 0)
+	line_len = get_vert_line_length(wdist);
+	if ((space = (WIN_H - line_len) / 2) < 0)
 		space = 0;
-	h = space + 1;
+	h = space;
 	while (h <= WIN_H - space)
 	{
-//		pixel_color = draw_texture_to_wall(h - (space + 1), h, WIN_H - space, game, &w_img);
+//		pixel_color = get_texture_pixel(h - (space + 1), h, WIN_H - space, game, &w_img);
 		game->img1.data[h * WIN_W + i] = WHITE;
 		h++;
 	}
@@ -86,7 +86,7 @@ int		draw_player_fov(t_game *game)
 	int			i;
 	double		wdist;
 
-	clear_screen(game);
+	clear_screen(game, BLACK);
 	i = 0;
 	while (i < WIN_W)
 	{

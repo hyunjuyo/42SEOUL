@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/11 18:25:13 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/13 16:05:11 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ double				rad_to_deg(double th);
 void				check_steps(double th, int *xstep, int *ystep);
 void				draw_fov_rays_on_minimap(t_game *game);
 int					draw_player_fov(t_game *game);
-int					draw_texture_to_wall(int i, int y1, int y2, t_game *game,
+int					get_texture_pixel(int i, int y1, int y2, t_game *game,
 		t_img *w_img);
 
 #endif

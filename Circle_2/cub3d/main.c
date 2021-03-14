@@ -39,6 +39,22 @@ void	map_set(t_game *game)
 	ft_memcpy(game->map, map, sizeof(int) * MAP_X * MAP_Y);
 }
 
+void	map_parsing(char *map_file)
+{
+	int	fd;
+
+	if ((fd = open(map_file, O_RDONLY)) == -1)
+	{
+		printf("open() fail\n");
+		printf("Error\n");
+		exit(1);
+	}
+
+
+
+
+}
+
 void	game_init(t_game *game)
 {
 	game->img1.img = mlx_new_image(game->mlx, WIN_W, WIN_H);
@@ -53,10 +69,13 @@ void	game_init(t_game *game)
 	game->player.th = deg_to_rad(90.0, 1);
 }
 
-int		main(void)
+int		main(int argc, char *argv[])
 {
 	t_game	game;
+	char	*map_file;
 
+	map_file = argv[1];
+//	map_parsing(map_file);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, WIN_W, WIN_H, "cub3d 1st");
 	map_set(&game);

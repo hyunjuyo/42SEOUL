@@ -19,6 +19,7 @@ int	get_texture_pixel_color(int h, int line_len, double invisible, t_game *game,
 	double	y_ratio;
 	int		wx;
 	int		wy;
+	double	visible;
 
 	if (game->wall.dir == SOUTH)
 		x_ratio = game->wall.x - floor(game->wall.x);
@@ -29,8 +30,9 @@ int	get_texture_pixel_color(int h, int line_len, double invisible, t_game *game,
 	else
 		x_ratio = 1.0 - (game->wall.y - floor(game->wall.y));
 	wx = (int)(w_img->width * x_ratio) - 1;
-	y_ratio = (h + 1) / (line_len * (1.0 - invisible * 2.0));
-	wy = (int)(w_img->height * (1.0 - invisible * 2.0) * y_ratio) - 1;
+	visible = 1.0 - invisible * 2.0;
+	y_ratio = (h + 1) / (line_len * visible);
+	wy = (int)(w_img->height * visible * y_ratio) - 1;
 	wy += (int)(w_img->height * invisible);
 	return (w_img->data[wy * w_img->width + wx]);
 }

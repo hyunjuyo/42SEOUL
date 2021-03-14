@@ -18,6 +18,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 # define WIN_W	1280
 # define WIN_H	720
@@ -55,6 +56,21 @@
 # define KEY_ESC	53
 
 # define EPSILON	0.000001
+
+typedef struct		s_conf
+{
+	int		win_w;
+	int		win_h;
+	int		map_x;
+	int		map_y;
+	char	*wall_no;
+	char	*wall_so;
+	char	*wall_we;
+	char	*wall_ea;
+	char	*wall_sp;
+	int		ceil;
+	int		floor;
+}					t_conf;
 
 typedef struct		s_img
 {
@@ -98,6 +114,7 @@ typedef struct		s_game
 	t_img	img2;
 	t_pla	player;
 	t_wall	wall;
+	t_conf	conf;
 	int		map[MAP_X][MAP_Y];
 }					t_game;
 

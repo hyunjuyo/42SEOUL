@@ -41,18 +41,22 @@ void	map_set(t_game *game)
 
 void	map_parsing(char *map_file)
 {
-	int	fd;
+	int		fd;
+	char	*line;
+	int		i;
 
 	if ((fd = open(map_file, O_RDONLY)) == -1)
 	{
-		printf("open() fail\n");
+		printf("open() failed\n");
 		printf("Error\n");
 		exit(1);
 	}
-
-
-
-
+	i = 0;
+	while (get_next_line(fd, &line) != 0)
+	{
+		save_map_info(line);
+		free(line);
+	}
 }
 
 void	game_init(t_game *game)

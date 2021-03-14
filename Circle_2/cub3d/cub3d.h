@@ -18,7 +18,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <fcntl.h>
+# include "get_next_line.h"
 
 # define WIN_W	1280
 # define WIN_H	720

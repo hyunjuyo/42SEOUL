@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "get_next_line.h"
+# include "libft.h"
 
 # define WIN_W	1280
 # define WIN_H	720
@@ -57,6 +58,12 @@
 
 # define EPSILON	0.000001
 
+typedef enum		e_bool
+{
+	FALSE,
+	TRUE
+}					t_bool;
+
 typedef struct		s_conf
 {
 	int		win_w;
@@ -70,6 +77,7 @@ typedef struct		s_conf
 	char	*wall_sp;
 	int		ceil;
 	int		floor;
+	t_bool	map_start;
 }					t_conf;
 
 typedef struct		s_img
@@ -123,12 +131,6 @@ typedef enum		e_line
 	VERT,
 	HORZ
 }					t_line;
-
-typedef enum		e_bool
-{
-	FALSE,
-	TRUE
-}					t_bool;
 
 typedef struct		s_chk_pnt
 {

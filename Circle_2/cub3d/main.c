@@ -39,7 +39,47 @@ void	map_set(t_game *game)
 	ft_memcpy(game->map, map, sizeof(int) * MAP_X * MAP_Y);
 }
 
-void	map_parsing(char *map_file)
+void	save_conf_info(char *line, t_game *game)
+{
+	int		i;
+	char	*l_ptr;
+	char	*w_ptr;
+
+	if (game->conf.map_start == TRUE)
+		save_map_info(line, game); // need to make~ other info complete check!!
+	l_ptr = ft_strtrim(line, " ");
+	if (ft_strlen(l_ptr) == 0)
+	{
+		free(ptr);
+		return ;
+	}
+	w_ptr = get_next_word(l_ptr); // need to make~
+	if (ft_strncmp(w_ptr, "R ", 2) == 0)
+	{
+		game->conf.win_x = ft_atoi(get_next_word(l_ptr));
+		game->conf.win_y = ft_atoi(get_next_word(l_ptr));
+	}
+	else if (ft_strncmp(w_ptr, "NO", 2) == 0)
+		game->conf.wall_no = get_next_word(l_ptr);
+	else if (ft_strncmp(w_ptr, "SO", 2) == 0)
+		game->conf.wall_so = get_next_word(l_ptr);
+	else if (ft_strncmp(w_ptr, "WE", 2) == 0)
+		game->conf.wall_we = get_next_word(l_ptr);
+	else if (ft_strncmp(w_ptr, "EA", 2) == 0)
+		game->conf.wall_ea = get_next_word(l_ptr);
+
+
+	free(w_ptr);
+	i = 0;
+	while (l_ptr[i] && (l_ptr[i] == '1' || l_ptr[i] == ' '))
+		i++;
+	if (i == ft_strlen(l_ptr))
+		game->conf.map_start = TRUE;
+	free(l_ptr);
+
+}
+
+void	map_parsing(char *map_file, t_game *game)
 {
 	int		fd;
 	char	*line;
@@ -51,10 +91,11 @@ void	map_parsing(char *map_file)
 		printf("Error\n");
 		exit(1);
 	}
+	game->conf.map_start = FALSE;
 	i = 0;
 	while (get_next_line(fd, &line) != 0)
 	{
-		save_map_info(line);
+		save_conf_info(line, game);
 		free(line);
 	}
 }
@@ -79,7 +120,7 @@ int		main(int argc, char *argv[])
 	char	*map_file;
 
 	map_file = argv[1];
-//	map_parsing(map_file);
+//	map_parsing(map_file, &game);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, WIN_W, WIN_H, "cub3d 1st");
 	map_set(&game);

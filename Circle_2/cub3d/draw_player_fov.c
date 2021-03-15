@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/13 19:35:12 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/15 10:53:43 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,14 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	get_wall_texture_file(game, &w_img);
 	line_len = get_vert_line_length(wdist);
 	invisible = 0.0;
-	if ((space = (WIN_H - line_len) / 2) < 0)
+	space = (WIN_H - line_len) / 2;
+	if (WIN_H - line_len < 0)
 	{
-		invisible = (space * -1) / line_len;
+		invisible = (double)abs(space) / (double)line_len;
 		space = 0;
 	}
 	h = 0;
-	while (h < line_len * (1.0 - invisible * 2.0) && h < WIN_H)
+	while (h < line_len && h < WIN_H)
 	{
 		game->img1.data[(space + h) * WIN_W + i]
 			= get_texture_pixel_color(h, line_len, invisible, game, &w_img);

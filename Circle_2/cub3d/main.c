@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/11 16:16:22 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/15 10:21:32 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	map_set(t_game *game)
 	};
 	ft_memcpy(game->map, map, sizeof(int) * MAP_X * MAP_Y);
 }
-
+/*
 void	save_conf_info(char *line, t_game *game)
 {
 	int		i;
@@ -99,7 +99,7 @@ void	map_parsing(char *map_file, t_game *game)
 		free(line);
 	}
 }
-
+*/
 void	game_init(t_game *game)
 {
 	game->img1.img = mlx_new_image(game->mlx, WIN_W, WIN_H);
@@ -114,12 +114,12 @@ void	game_init(t_game *game)
 	game->player.th = deg_to_rad(90.0, 1);
 }
 
-int		main(int argc, char *argv[])
+int		main(void)
 {
 	t_game	game;
-	char	*map_file;
+//	char	*map_file;
 
-	map_file = argv[1];
+//	map_file = argv[1];
 //	map_parsing(map_file, &game);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, WIN_W, WIN_H, "cub3d 1st");

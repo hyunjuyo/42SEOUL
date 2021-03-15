@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/11 15:47:49 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/15 12:03:05 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	key_set_more_and_more(int keycode, t_game *game)
 	else if (keycode == KEY_ESC)
 		exit(0);
 	rotate_check(game);
-	printf("(%f, %f) %f deg\n", game->player.x, game->player.y,
-			rad_to_deg(game->player.th));
+//	printf("(%f, %f) %f deg\n", game->player.x, game->player.y,
+//			rad_to_deg(game->player.th));
 }
 
 void	key_set_more(int keycode, t_game *game)

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/15 18:06:36 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:26:47 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,15 @@ void	save_conf_info(char *line, t_game *game)
 		printf("Error\n");
 		exit(1);
 	}
-	printf("conf.win_w : %d\n", game->conf.win_w);
-	printf("conf.win_h : %d\n", game->conf.win_h);
-	printf("conf.wall_no : %s\n", game->conf.wall_no);
-	printf("conf.wall_so : %s\n", game->conf.wall_so);
-	printf("conf.wall_we : %s\n", game->conf.wall_we);
-	printf("conf.wall_ea : %s\n", game->conf.wall_ea);
-	printf("conf.sprite : %s\n", game->conf.sprite);
-    printf("conf.chk_complete : %d\n", game->conf.chk_complete);
-	printf("conf.map_start : %d\n", game->conf.map_start);
+//	printf("conf.win_w : %d\n", game->conf.win_w);
+//	printf("conf.win_h : %d\n", game->conf.win_h);
+//	printf("conf.wall_no : %s\n", game->conf.wall_no);
+//	printf("conf.wall_so : %s\n", game->conf.wall_so);
+//	printf("conf.wall_we : %s\n", game->conf.wall_we);
+//	printf("conf.wall_ea : %s\n", game->conf.wall_ea);
+//	printf("conf.sprite : %s\n", game->conf.sprite);
+//	printf("conf.chk_complete : %d\n", game->conf.chk_complete);
+//	printf("conf.map_start : %d\n", game->conf.map_start);
 	free(temp);
 }
 
@@ -155,7 +155,7 @@ void	map_parsing(char *map_file, t_game *game)
 	i = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
-        printf("line : %s\n", line);
+//		printf("line : %s\n", line);
 		save_conf_info(line, game);
 		free(line);
 	}

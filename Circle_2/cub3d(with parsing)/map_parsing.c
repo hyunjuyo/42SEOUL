@@ -36,7 +36,7 @@ char	*get_next_word(char **l_ptr)
 	return (w_ptr);
 }
 
-void	join_color_info(char *l_ptr, char *w_ptr)
+void	join_all_color_info(char *l_ptr, char *w_ptr)
 {
 	int		i;
 	char	*temp1;
@@ -59,10 +59,27 @@ void	join_color_info(char *l_ptr, char *w_ptr)
 int		get_rgb_color(char *l_ptr, char *w_ptr)
 {
 	int		rgb;
+	char	**color_info;
+	int		num;
+	int		i;
 
-
-
-
+	rgb = 0x0;
+	join_all_color_info(l_ptr, w_ptr);
+	color_info = ft_split(w_ptr, ',');
+	i = 0;
+	while (i < 3)
+	{
+		rgb *= 16 * 16;
+		num = ft_atoi(color_info[i]);
+		if (!(num >= 0 && num <= 255))
+		{
+			printf("parsing failed : incorrect RGB color\n");
+			printf("Error\n");
+			exit(1);
+		}
+		rgb += num;
+	}
+	return (rgb);
 }
 
 void	check_conf_type_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
@@ -73,7 +90,6 @@ void	check_conf_type_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) != -1)
 			game->conf.chk_complete++;
-        return ;
     }
 	else if (ft_strncmp(w_ptr, "C", 2) == 0)
     {
@@ -81,7 +97,6 @@ void	check_conf_type_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) != -1)
 			game->conf.chk_complete++;
-        return ;
     }
 	else if (w_ptr[0] == '1')
 	{

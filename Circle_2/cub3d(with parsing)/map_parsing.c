@@ -36,14 +36,12 @@ char	*get_next_word(char **l_ptr)
 	return (w_ptr);
 }
 
-void	join_all_color_info(char *l_ptr, char *w_ptr)
+char	*join_next_words(char *l_ptr, char *w_ptr, int max_count)
 {
 	int		i;
 	char	*temp1;
-	char	*tamp2;
-	int		max_count;
+	char	*temp2;
 
-	max_count = 4;
 	i = 0;
 	while (i < max_count)
 	{
@@ -54,6 +52,7 @@ void	join_all_color_info(char *l_ptr, char *w_ptr)
 		free(temp2);
 		i++;
 	}
+	return (w_ptr);
 }
 
 int		get_rgb_color(char *l_ptr, char *w_ptr)
@@ -64,7 +63,7 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 	int		i;
 
 	rgb = 0x0;
-	join_all_color_info(l_ptr, w_ptr);
+	w_ptr = join_next_words(l_ptr, w_ptr, 4);
 	color_info = ft_split(w_ptr, ',');
 	i = 0;
 	while (i < 3)

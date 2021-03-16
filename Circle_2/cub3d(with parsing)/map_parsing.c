@@ -62,15 +62,15 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 	int		num;
 	int		i;
 
-	rgb = 0x0;
 	w_ptr = join_next_words(l_ptr, w_ptr, 4);
+	rgb = 0x0;
 	color_info = ft_split(w_ptr, ',');
 	i = 0;
 	while (i < 3)
 	{
-		rgb *= 16 * 16;
+		rgb *= 0x10 * 0x10;
 		num = ft_atoi(color_info[i]);
-		if (!(num >= 0 && num <= 255))
+		if (num < 0 && num > 255))
 		{
 			printf("parsing failed : incorrect RGB color\n");
 			printf("Error\n");
@@ -83,23 +83,23 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 
 void	check_conf_type_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
 {
-	if (ft_strncmp(w_ptr, "F", 2) == 0)
+	if (ft_strncmp(w_ptr, "C", 2) == 0)
     {
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) != -1)
+		if ((game->conf.ceil = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
     }
-	else if (ft_strncmp(w_ptr, "C", 2) == 0)
+	else if (ft_strncmp(w_ptr, "F", 2) == 0)
     {
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) != -1)
+		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
     }
 	else if (w_ptr[0] == '1')
 	{
-        game->conf.map_start = TRUE;
+        game->conf.map_lines = 1;
         save_map_info(line, game);
 	}
 	else
@@ -173,7 +173,7 @@ void	save_conf_info(char *line, t_game *game)
 	char	*w_ptr;
     char    *temp;
 
-	if (game->conf.map_start == TRUE)
+	if (game->conf.map_lines > 0)
     {
 		save_map_info(line, game);
         return ;
@@ -195,7 +195,7 @@ void	save_conf_info(char *line, t_game *game)
 //	printf("conf.wall_ea : %s\n", game->conf.wall_ea);
 //	printf("conf.sprite : %s\n", game->conf.sprite);
 //	printf("conf.chk_complete : %d\n", game->conf.chk_complete);
-//	printf("conf.map_start : %d\n", game->conf.map_start);
+//	printf("conf.map_lines : %d\n", game->conf.map_lines);
 	free(w_ptr);
 	free(temp);
 }
@@ -213,7 +213,9 @@ void	map_parsing(char *map_file, t_game *game)
 		exit(1);
 	}
     game->conf.chk_complete = 0;
-	game->conf.map_start = FALSE;
+	game->conf.map_lines = 0;
+	game->conf.ceil = -1;
+	game->conf.floor = -1;
 	i = 0;
 	while (get_next_line(fd, &line) == 1)
 	{

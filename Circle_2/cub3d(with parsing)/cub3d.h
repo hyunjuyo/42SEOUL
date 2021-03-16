@@ -79,7 +79,7 @@ typedef struct		s_conf
 	int		ceil;
 	int		floor;
 	int		chk_complete;
-	t_bool	map_start;
+	int		map_lines;
 }					t_conf;
 
 typedef struct		s_img

@@ -36,18 +36,51 @@ char	*get_next_word(char **l_ptr)
 	return (w_ptr);
 }
 
-void	save_conf_info_more_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
+void	join_color_info(char *l_ptr, char *w_ptr)
+{
+	int		i;
+	char	*temp1;
+	char	*tamp2;
+	int		max_count;
+
+	max_count = 4;
+	i = 0;
+	while (i < max_count)
+	{
+		temp1 = w_ptr;
+		temp2 = get_next_word(&l_ptr);
+		w_ptr = ft_strjoin(temp1, temp2);
+		free(temp1);
+		free(temp2);
+		i++;
+	}
+}
+
+int		get_rgb_color(char *l_ptr, char *w_ptr)
+{
+	int		rgb;
+
+
+
+
+}
+
+void	check_conf_type_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
 {
 	if (ft_strncmp(w_ptr, "F", 2) == 0)
     {
 		free(w_ptr);
-        game->conf.chk_complete++;
+		w_ptr = get_next_word(&l_ptr);
+		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) != -1)
+			game->conf.chk_complete++;
         return ;
     }
 	else if (ft_strncmp(w_ptr, "C", 2) == 0)
     {
 		free(w_ptr);
-        game->conf.chk_complete++;
+		w_ptr = get_next_word(&l_ptr);
+		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) != -1)
+			game->conf.chk_complete++;
         return ;
     }
 	else if (w_ptr[0] == '1')
@@ -64,7 +97,7 @@ void	save_conf_info_more_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
 	}
 }
 
-void	save_conf_info_more_2(char *line, t_game *game, char *l_ptr, char *w_ptr)
+void	check_conf_type_2(char *line, t_game *game, char *l_ptr, char *w_ptr)
 {
 	if (ft_strncmp(w_ptr, "WE", 2) == 0)
 	{
@@ -88,10 +121,10 @@ void	save_conf_info_more_2(char *line, t_game *game, char *l_ptr, char *w_ptr)
 			game->conf.chk_complete++;
 	}
 	else
-		save_conf_info_more_3(line, game, l_ptr, w_ptr);
+		check_conf_type_3(line, game, l_ptr, w_ptr);
 }
 
-void	save_conf_info_more_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
+void	check_conf_type_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
 {
 	if (ft_strncmp(w_ptr, "R", 2) == 0)
 	{
@@ -117,7 +150,7 @@ void	save_conf_info_more_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
 			game->conf.chk_complete++;
 	}
 	else
-		save_conf_info_more_2(line, game, l_ptr, w_ptr);
+		check_conf_type_2(line, game, l_ptr, w_ptr);
 }
 
 void	save_conf_info(char *line, t_game *game)
@@ -139,7 +172,7 @@ void	save_conf_info(char *line, t_game *game)
 		return ;
 	}
 	w_ptr = get_next_word(&l_ptr);
-	save_conf_info_more_1(line, game, l_ptr, w_ptr);
+	check_conf_type_1(line, game, l_ptr, w_ptr);
 //	printf("conf.win_w : %d\n", game->conf.win_w);
 //	printf("conf.win_h : %d\n", game->conf.win_h);
 //	printf("conf.wall_no : %s\n", game->conf.wall_no);

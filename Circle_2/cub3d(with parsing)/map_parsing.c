@@ -36,6 +36,90 @@ char	*get_next_word(char **l_ptr)
 	return (w_ptr);
 }
 
+void	save_conf_info_more_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
+{
+	if (ft_strncmp(w_ptr, "F", 2) == 0)
+    {
+		free(w_ptr);
+        game->conf.chk_complete++;
+        return ;
+    }
+	else if (ft_strncmp(w_ptr, "C", 2) == 0)
+    {
+		free(w_ptr);
+        game->conf.chk_complete++;
+        return ;
+    }
+	else if (w_ptr[0] == '1')
+	{
+        game->conf.map_start = TRUE;
+        save_map_info(line, game);
+	}
+	else
+	{
+		free(w_ptr);
+		printf("parsing failed : incorrect information\n");
+		printf("Error\n");
+		exit(1);
+	}
+}
+
+void	save_conf_info_more_2(char *line, t_game *game, char *l_ptr, char *w_ptr)
+{
+	if (ft_strncmp(w_ptr, "WE", 2) == 0)
+	{
+		free(w_ptr);
+		w_ptr = get_next_word(&l_ptr);
+		if (ft_strlcpy(game->conf.wall_we, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
+	}
+	else if (ft_strncmp(w_ptr, "EA", 2) == 0)
+	{
+		free(w_ptr);
+		w_ptr = get_next_word(&l_ptr);
+		if (ft_strlcpy(game->conf.wall_ea, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
+	}
+	else if (ft_strncmp(w_ptr, "S", 2) == 0)
+	{
+		free(w_ptr);
+		w_ptr = get_next_word(&l_ptr);
+		if (ft_strlcpy(game->conf.sprite, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
+	}
+	else
+		save_conf_info_more_3(line, game, l_ptr, w_ptr);
+}
+
+void	save_conf_info_more_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
+{
+	if (ft_strncmp(w_ptr, "R", 2) == 0)
+	{
+		free(w_ptr);
+		if ((game->conf.win_w = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
+			game->conf.chk_complete++;
+		free(w_ptr);
+		if ((game->conf.win_h = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
+			game->conf.chk_complete++;
+	}
+	else if (ft_strncmp(w_ptr, "NO", 2) == 0)
+	{
+		free(w_ptr);
+		w_ptr = get_next_word(&l_ptr);
+		if (ft_strlcpy(game->conf.wall_no, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
+	}
+	else if (ft_strncmp(w_ptr, "SO", 2) == 0)
+	{
+		free(w_ptr);
+		w_ptr = get_next_word(&l_ptr);
+		if (ft_strlcpy(game->conf.wall_so, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
+	}
+	else
+		save_conf_info_more_2(line, game, l_ptr, w_ptr);
+}
+
 void	save_conf_info(char *line, t_game *game)
 {
 	char	*l_ptr;
@@ -55,78 +139,7 @@ void	save_conf_info(char *line, t_game *game)
 		return ;
 	}
 	w_ptr = get_next_word(&l_ptr);
-	if (ft_strncmp(w_ptr, "R", 2) == 0)
-	{
-		free(w_ptr);
-		if ((game->conf.win_w = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
-			game->conf.chk_complete++;
-		free(w_ptr);
-		if ((game->conf.win_h = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
-			game->conf.chk_complete++;
-		free(w_ptr);
-	}
-	else if (ft_strncmp(w_ptr, "NO", 2) == 0)
-	{
-		free(w_ptr);
-		w_ptr = get_next_word(&l_ptr);
-		if (ft_strlcpy(game->conf.wall_no, w_ptr, PATH_LEN) != 0)
-			game->conf.chk_complete++;
-		free(w_ptr);
-	}
-	else if (ft_strncmp(w_ptr, "SO", 2) == 0)
-	{
-		free(w_ptr);
-		w_ptr = get_next_word(&l_ptr);
-		if (ft_strlcpy(game->conf.wall_so, w_ptr, PATH_LEN) != 0)
-			game->conf.chk_complete++;
-		free(w_ptr);
-	}
-	else if (ft_strncmp(w_ptr, "WE", 2) == 0)
-	{
-		free(w_ptr);
-		w_ptr = get_next_word(&l_ptr);
-		if (ft_strlcpy(game->conf.wall_we, w_ptr, PATH_LEN) != 0)
-			game->conf.chk_complete++;
-		free(w_ptr);
-	}
-	else if (ft_strncmp(w_ptr, "EA", 2) == 0)
-	{
-		free(w_ptr);
-		w_ptr = get_next_word(&l_ptr);
-		if (ft_strlcpy(game->conf.wall_ea, w_ptr, PATH_LEN) != 0)
-			game->conf.chk_complete++;
-		free(w_ptr);
-	}
-	else if (ft_strncmp(w_ptr, "S", 2) == 0)
-	{
-		free(w_ptr);
-		w_ptr = get_next_word(&l_ptr);
-		if (ft_strlcpy(game->conf.sprite, w_ptr, PATH_LEN) != 0)
-			game->conf.chk_complete++;
-		free(w_ptr);
-	}
-	else if (ft_strncmp(w_ptr, "F", 2) == 0)
-    {
-        game->conf.chk_complete++;
-        return ;
-    }
-	else if (ft_strncmp(w_ptr, "C", 2) == 0)
-    {
-        game->conf.chk_complete++;
-        return ;
-    }
-	else if (w_ptr[0] == '1')
-	{
-        game->conf.map_start = TRUE;
-        save_map_info(line, game);
-	}
-	else
-	{
-		free(w_ptr);
-		printf("parsing failed : incorrect information\n");
-		printf("Error\n");
-		exit(1);
-	}
+	save_conf_info_more_1(line, game, l_ptr, w_ptr);
 //	printf("conf.win_w : %d\n", game->conf.win_w);
 //	printf("conf.win_h : %d\n", game->conf.win_h);
 //	printf("conf.wall_no : %s\n", game->conf.wall_no);
@@ -136,6 +149,7 @@ void	save_conf_info(char *line, t_game *game)
 //	printf("conf.sprite : %s\n", game->conf.sprite);
 //	printf("conf.chk_complete : %d\n", game->conf.chk_complete);
 //	printf("conf.map_start : %d\n", game->conf.map_start);
+	free(w_ptr);
 	free(temp);
 }
 

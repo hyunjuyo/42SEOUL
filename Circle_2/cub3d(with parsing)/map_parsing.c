@@ -58,51 +58,51 @@ void	save_conf_info(char *line, t_game *game)
 	if (ft_strncmp(w_ptr, "R", 2) == 0)
 	{
 		free(w_ptr);
-		game->conf.win_w = ft_atoi(w_ptr = get_next_word(&l_ptr));
-        game->conf.chk_complete++;
+		if ((game->conf.win_w = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
+			game->conf.chk_complete++;
 		free(w_ptr);
-		game->conf.win_h = ft_atoi(w_ptr = get_next_word(&l_ptr));
-        game->conf.chk_complete++;
+		if ((game->conf.win_h = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
+			game->conf.chk_complete++;
 		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "NO", 2) == 0)
 	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		ft_strlcpy(game->conf.wall_no, w_ptr, PATH_LEN);
-        game->conf.chk_complete++;
+		if (ft_strlcpy(game->conf.wall_no, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
 		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "SO", 2) == 0)
 	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		ft_strlcpy(game->conf.wall_so, w_ptr, PATH_LEN);
-        game->conf.chk_complete++;
+		if (ft_strlcpy(game->conf.wall_so, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
 		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "WE", 2) == 0)
 	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		ft_strlcpy(game->conf.wall_we, w_ptr, PATH_LEN);
-        game->conf.chk_complete++;
+		if (ft_strlcpy(game->conf.wall_we, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
 		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "EA", 2) == 0)
 	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		ft_strlcpy(game->conf.wall_ea, w_ptr, PATH_LEN);
-        game->conf.chk_complete++;
+		if (ft_strlcpy(game->conf.wall_ea, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
 		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "S", 2) == 0)
 	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		ft_strlcpy(game->conf.sprite, w_ptr, PATH_LEN);
-        game->conf.chk_complete++;
+		if (ft_strlcpy(game->conf.sprite, w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
 		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "F", 2) == 0)
@@ -122,7 +122,8 @@ void	save_conf_info(char *line, t_game *game)
 	}
 	else
 	{
-		printf("map parsing failed\n");
+		free(w_ptr);
+		printf("parsing failed : incorrect information\n");
 		printf("Error\n");
 		exit(1);
 	}

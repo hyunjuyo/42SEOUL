@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:03:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/17 12:22:34 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/17 13:26:54 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	check_conf_type_5(char *line, t_game *game, char *w_ptr)
 	if (w_ptr[0] == '1')
 	{
 		free(w_ptr);
-        game->conf.map_lines = 1;
         save_map_info(line, game);
 	}
 	else

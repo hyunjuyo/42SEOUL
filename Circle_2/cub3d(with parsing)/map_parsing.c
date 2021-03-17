@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/17 12:19:11 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/17 13:13:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	map_parsing(char *map_file, t_game *game)
 	}
     game->conf.chk_complete = 0;
 	game->conf.map_lines = 0;
+	game->conf.map_x = 0;
+	game->conf.map_y = 0;
 	game->conf.ceil = -1;
 	game->conf.floor = -1;
 	i = 0;

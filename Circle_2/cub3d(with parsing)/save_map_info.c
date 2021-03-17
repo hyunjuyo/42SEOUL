@@ -27,9 +27,12 @@ int		error_check(char *line, t_game *game)
 				|| line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
 				|| line[i] == 'E' || line[i] == ' '))
 		i++;
-	if (i != (int)ft_strlen(line))
+	if (i == 0 || i != (int)ft_strlen(line))
 	{
-		printf("map parsing failed : '%c' is impossible character\n", line[i]);
+		if (i == 0)
+			printf("map parsing failed : one or more empty line(s)\n");
+		else
+			printf("map parsing failed : '%c' is impossible character\n", line[i]);
 		printf("Error\n");
 		exit(1);
 	}

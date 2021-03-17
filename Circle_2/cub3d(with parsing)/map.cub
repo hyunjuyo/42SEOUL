@@ -1,12 +1,12 @@
    R   1280   720
-NO        ./textures/wall_n.xpm
-SO  ./textures/wall_s.xpm
-WE   ./textures/wall_w.xpm
-EA     ./textures/wall_e.xpm
+NO        ./textures/wall_no.xpm
+SO  ./textures/wall_so.xpm
+WE   ./textures/wall_we.xpm
+EA     ./textures/wall_ea.xpm
 
-S
-F
-C
+S ./temp
+F 70, 210, 150
+C    70 , 150   ,   210
 
           11111111111111111111
           10000000000110000001

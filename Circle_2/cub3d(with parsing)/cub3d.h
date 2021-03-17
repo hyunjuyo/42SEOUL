@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/15 16:43:57 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/17 12:41:02 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define CUBE_SIZE	20
 # define MINIMAP_RAY_NUM	7
 
-# define MOVE_SPEED	0.7
-# define ROT_SPEED_RAD	0.07
+# define MOVE_SPEED	0.9
+# define ROT_SPEED_RAD	0.09
 # define FOV	60
 
 # define WALL_NO	"./textures/wall_n.xpm"
@@ -176,5 +176,9 @@ int					get_texture_pixel_color(int i, int pixels, double invisible,
 		t_game *game, t_img *w_img);
 void				map_parsing(char *map_file, t_game *game);
 void				save_map_info(char *line, t_game *game);
+void				check_conf_type_1(char *line, t_game *game, char *l_ptr,
+		char *w_ptr);
+int					get_rgb_color(char *l_ptr, char *w_ptr);
+char				*get_next_word(char **l_ptr);
 
 #endif

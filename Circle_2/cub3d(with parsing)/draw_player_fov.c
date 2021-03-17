@@ -6,13 +6,13 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/15 18:06:19 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/17 12:37:32 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	clear_screen(t_game *game, int color)
+void	clear_screen(t_game *game, int ceil_color, int floor_color)
 {
 	int	h;
 	int	w;
@@ -23,7 +23,10 @@ void	clear_screen(t_game *game, int color)
 		w = 0;
 		while (w < WIN_W)
 		{
-			game->img1.data[h * WIN_W + w] = color;
+			if (h < WIN_H / 2)
+				game->img1.data[h * WIN_W + w] = ceil_color;
+			else
+				game->img1.data[h * WIN_W + w] = floor_color;
 			w++;
 		}
 		h++;
@@ -54,8 +57,9 @@ void	get_wall_texture_file(t_game *game, t_img *w_img)
 		img_path = game->conf.wall_we;
 	else
 		img_path = game->conf.wall_ea;
-	w_img->img = mlx_xpm_file_to_image(game->mlx, img_path, &w_img->width,
-			&w_img->height);
+	if (!(w_img->img = mlx_xpm_file_to_image(game->mlx, img_path, &w_img->width,
+			&w_img->height)))
+		printf("xpm_file open failed\nError\n");
 	w_img->data = (int *)mlx_get_data_addr(w_img->img, &w_img->bpp,
 			&w_img->size_l, &w_img->endian);
 }
@@ -91,7 +95,7 @@ int		draw_player_fov(t_game *game)
 	int			i;
 	double		wdist;
 
-	clear_screen(game, BLACK);
+	clear_screen(game, game->conf.ceil, game->conf.floor);
 	i = 0;
 	while (i < WIN_W)
 	{

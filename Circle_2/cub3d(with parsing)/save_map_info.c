@@ -41,22 +41,22 @@ int		error_check(char *line, t_game *game)
 
 void	save_map_info(char *line, t_game *game)
 {
-	int		i;
-	int		x_len;
-	int		y_len;
-	char	**ptr;
+	int			i;
+	int			x_len;
+	static char	*map_info[MAPY_MAX];
 
+	game->conf.temp_map_addr = map_info; // for free() after save_map_info()
 	if (error_check(line, game) == 0)
 		game->conf.map_lines++;
-	y_len = game->conf.map_lines;
+	game->conf.map_y = game->conf.map_lines;
 	if ((x_len = ft_strlen(line)) > game->conf.map_x)
 		game->conf.map_x = x_len;
-	if (!(ptr = (char *)malloc(sizeof(char) * (x_len + 1))))
+	if (!(map_info[game->conf.map_y - 1] = (char *)malloc(sizeof(char) * (x_len + 1))))
 	{
-		printf("map parsing failed : malloc() failed\n", line[i]);
+		printf("map parsing failed : malloc() failed\n");
 		printf("Error\n");
 		exit(1);
 	}
-
+	ft_strlcpy(map_info[game->conf.map_y - 1], line, x_len + 1);
 	printf("save_map_info process ..ing\n");
 }

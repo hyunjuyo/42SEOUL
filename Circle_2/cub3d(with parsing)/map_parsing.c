@@ -44,6 +44,20 @@ void	save_conf_info(char *line, t_game *game)
 	free(temp);
 }
 
+void	temp_map_info_free(t_game *game)
+{
+	int	i;
+	int	count;
+
+	count = game->conf.map_y;
+	i = 0;
+	while (i < count)
+	{
+		free(game->conf.temp_map_addr[i]);
+		i++;
+	}
+}
+
 void	map_parsing(char *map_file, t_game *game)
 {
 	int		fd;
@@ -70,5 +84,7 @@ void	map_parsing(char *map_file, t_game *game)
 		free(line);
 	}
 	save_conf_info(line, game);
+//	temp_map_info_free(game);
 	free(line);
+	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:07:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/17 13:28:39 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:46:02 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		error_check(char *line, t_game *game)
 
 	if (game->conf.chk_complete < 9)
 	{
-		printf("parsing failed : insufficient information\n");
+		printf("Parsing failed : insufficient info. before map content\n");
 		printf("Error\n");
 		exit(1);
 	}
@@ -30,9 +30,10 @@ int		error_check(char *line, t_game *game)
 	if (i == 0 || i != (int)ft_strlen(line))
 	{
 		if (i == 0)
-			printf("map parsing failed : one or more empty line(s)\n");
+			printf("Map parsing failed : one or more empty line(s)\n");
 		else
-			printf("map parsing failed : '%c' is impossible character\n", line[i]);
+			printf("Map parsing failed : '%c' is an impossible character\n",
+					line[i]);
 		printf("Error\n");
 		exit(1);
 	}
@@ -51,12 +52,17 @@ void	save_map_info(char *line, t_game *game)
 	game->conf.map_y = game->conf.map_lines;
 	if ((x_len = ft_strlen(line)) > game->conf.map_x)
 		game->conf.map_x = x_len;
-	if (!(map_info[game->conf.map_y - 1] = (char *)malloc(sizeof(char) * (x_len + 1))))
+	if (!(map_info[game->conf.map_y - 1] = (char *)malloc(sizeof(char) *
+					(x_len + 1))))
 	{
-		printf("map parsing failed : malloc() failed\n");
+		printf("Map parsing failed : malloc() failed\n");
 		printf("Error\n");
 		exit(1);
 	}
 	ft_strlcpy(map_info[game->conf.map_y - 1], line, x_len + 1);
+	printf("MAP_X : %d, MAP_Y : %d\n", game->conf.map_x, game->conf.map_y);
+	i = -1;
+	while (++i < game->conf.map_y)
+		printf("%s\n", map_info[i]);
 	printf("save_map_info process ..ing\n");
 }

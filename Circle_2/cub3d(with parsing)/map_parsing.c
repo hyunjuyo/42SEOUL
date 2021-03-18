@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/17 13:13:56 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:02:53 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ void	save_conf_info(char *line, t_game *game)
 	printf("conf.map_lines : %d\n", game->conf.map_lines); //
 	free(temp);
 }
-
+/*
 void	temp_map_info_free(t_game *game)
 {
 	int	i;
+	int	j;
 	int	count;
 
 	count = game->conf.map_y;
@@ -57,12 +58,37 @@ void	temp_map_info_free(t_game *game)
 		i++;
 	}
 }
+*/
+
+void	fill_with_spaces(t_game *game)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	while (i < game->conf.map_x)
+	{
+		len = ft_strlen(game->conf.temp_map_addr[i]);
+		if (len < game->conf.map_y)
+		{
+			while (len < game->conf.map_y)
+			{
+				game->conf.temp_map_addr[i][len] = ' ';
+				len++;
+			}
+			game->conf.temp_map_addr[i][len] = '\0';
+		}
+		i++;
+	}
+}
 
 void	map_parsing(char *map_file, t_game *game)
 {
 	int		fd;
 	char	*line;
 	int		i;
+	int		j;
+	char	test[MAPX_MAX][MAPY_MAX];
 
 	if ((fd = open(map_file, O_RDONLY)) == -1)
 	{
@@ -83,7 +109,21 @@ void	map_parsing(char *map_file, t_game *game)
 		save_conf_info(line, game);
 		free(line);
 	}
-	save_conf_info(line, game);
+	fill_with_spaces(game);
+	i = 0;
+	while (i < game->conf.map_x)
+	{
+		j = 0;
+		while (j < game->conf.map_y)
+		{
+			test[i][j] = game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
+			j++;
+		}
+		i++;
+	}
+	i = -1;
+	while (++i < game->conf.map_x)
+		printf("%s\n", test[i]);
 //	temp_map_info_free(game);
 	free(line);
 	close(fd);

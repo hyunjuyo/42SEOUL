@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/17 12:41:02 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:00:47 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define WIN_W	1280
 # define WIN_H	720
 
-# define MAPY_MAX	1000
+# define MAPX_MAX	1000 + 1
+# define MAPY_MAX	1000 + 1
 # define MAP_X	20
 # define MAP_Y	12
 # define CUBE_SIZE	20
@@ -127,6 +128,7 @@ typedef struct		s_game
 	t_pla		player;
 	t_wall		wall;
 	t_conf		conf;
+//	char		map[MAPX_MAX][MAPY_MAX];
 	int			map[MAP_X][MAP_Y];
 }					t_game;
 

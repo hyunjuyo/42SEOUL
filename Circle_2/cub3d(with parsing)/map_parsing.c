@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 12:06:38 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 13:07:22 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,21 @@ void	save_conf_info(char *line, t_game *game)
 	}
 	w_ptr = get_next_word(&l_ptr);
 	check_conf_type_1(line, game, l_ptr, w_ptr);
-	printf("conf.win_w : %d\n", game->conf.win_w); //
-	printf("conf.win_h : %d\n", game->conf.win_h); //
-	printf("conf.wall_no : %s\n", game->conf.wall_no); //
-	printf("conf.wall_so : %s\n", game->conf.wall_so); //
-	printf("conf.wall_we : %s\n", game->conf.wall_we); //
-	printf("conf.wall_ea : %s\n", game->conf.wall_ea); //
-	printf("conf.sprite : %s\n", game->conf.sprite); //
-	printf("conf.chk_complete : %d\n", game->conf.chk_complete); //
-	printf("conf.map_lines : %d\n", game->conf.map_lines); //
+	printf("conf.win_w : %d\n", game->conf.win_w); // test
+	printf("conf.win_h : %d\n", game->conf.win_h); // test
+	printf("conf.wall_no : %s\n", game->conf.wall_no); // test
+	printf("conf.wall_so : %s\n", game->conf.wall_so); // test
+	printf("conf.wall_we : %s\n", game->conf.wall_we); // test
+	printf("conf.wall_ea : %s\n", game->conf.wall_ea); // test
+	printf("conf.sprite : %s\n", game->conf.sprite); // test
+	printf("conf.chk_complete : %d\n", game->conf.chk_complete); // test
+	printf("conf.map_lines : %d\n", game->conf.map_lines); // test
 	free(temp);
 }
-/*
-void	temp_map_info_free(t_game *game)
+
+void	temp_map_addr_free(t_game *game)
 {
 	int	i;
-	int	j;
 	int	count;
 
 	count = game->conf.map_y;
@@ -58,7 +57,6 @@ void	temp_map_info_free(t_game *game)
 		i++;
 	}
 }
-*/
 
 void	fill_with_spaces(t_game *game)
 {
@@ -88,7 +86,7 @@ void	map_parsing(char *map_file, t_game *game)
 	char	*line;
 	int		i;
 	int		j;
-	char	test[MAPX_MAX][MAPY_MAX];
+//	char	test[MAPX_MAX][MAPY_MAX];
 
 	if ((fd = open(map_file, O_RDONLY)) == -1)
 	{
@@ -105,10 +103,17 @@ void	map_parsing(char *map_file, t_game *game)
 	i = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
-		printf("line : %s\n", line); //
+		printf("line : %s\n", line); // test
 		save_conf_info(line, game);
 		free(line);
 	}
+	if (ft_strlen(line) != 0)
+	{
+		save_conf_info(line, game);
+		free(line);
+	}
+	else
+		free(line);
 	fill_with_spaces(game);
 	i = 0;
 	while (i < game->conf.map_x)
@@ -116,15 +121,14 @@ void	map_parsing(char *map_file, t_game *game)
 		j = 0;
 		while (j < game->conf.map_y)
 		{
-			test[i][j] = game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
+			game->map[i][j] = game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
 			j++;
 		}
 		i++;
 	}
-	i = -1;
-	while (++i < game->conf.map_x)
-		printf("%s\n", test[i]);
-//	temp_map_info_free(game);
-	free(line);
+	i = -1; // test
+	while (++i < game->conf.map_x) // test
+		printf("%s\n", game->map[i]); // test
+	temp_map_addr_free(game);
 	close(fd);
 }

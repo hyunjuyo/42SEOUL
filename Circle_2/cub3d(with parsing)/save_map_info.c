@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:07:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 11:46:02 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:37:37 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	save_map_info(char *line, t_game *game)
 		exit(1);
 	}
 	ft_strlcpy(map_info[game->conf.map_y - 1], line, x_len + 1);
-	printf("MAP_X : %d, MAP_Y : %d\n", game->conf.map_x, game->conf.map_y);
-	i = -1;
-	while (++i < game->conf.map_y)
-		printf("%s\n", map_info[i]);
+	printf("MAP_X : %d, MAP_Y : %d\n", game->conf.map_x, game->conf.map_y); // test
+	i = -1; // test
+	while (++i < game->conf.map_y) // test
+		printf("%s\n", map_info[i]); // test
 	printf("save_map_info process ..ing\n");
 }

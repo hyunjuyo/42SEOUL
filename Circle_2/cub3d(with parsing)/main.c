@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/17 12:42:25 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 13:45:19 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		main(int argc, char *argv[])
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, game.conf.win_w, game.conf.win_h,
 			"cub3d 1st");
-	map_set(&game);
+//	map_set(&game);
 	game_init(&game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_set, &game);
 	mlx_loop_hook(game.mlx, draw_player_fov, &game);

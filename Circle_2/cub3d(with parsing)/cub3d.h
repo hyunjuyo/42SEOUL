@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 12:00:47 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:36:15 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,8 @@ typedef struct		s_game
 	t_pla		player;
 	t_wall		wall;
 	t_conf		conf;
-//	char		map[MAPX_MAX][MAPY_MAX];
-	int			map[MAP_X][MAP_Y];
+	char		map[MAPX_MAX][MAPY_MAX];
+//	int			map[MAP_X][MAP_Y];
 }					t_game;
 
 typedef enum		e_line

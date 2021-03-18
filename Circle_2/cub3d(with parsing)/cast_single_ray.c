@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/10 18:06:48 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 13:45:42 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	get_wall_point(double ray_th, t_game *game)
 			check.mapx = (int)check.px;
 			check.mapy = (int)check.py + check_dir(&check, game);
 		}
-		if (game->map[check.mapx][check.mapy] == 1)
+		if (game->map[check.mapx][check.mapy] == '1')
 			check.hit_wall = TRUE;
 	}
 	game->wall.x = check.px;

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 12:02:53 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:06:38 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void	fill_with_spaces(t_game *game)
 	int	len;
 
 	i = 0;
-	while (i < game->conf.map_x)
+	while (i < game->conf.map_y)
 	{
 		len = ft_strlen(game->conf.temp_map_addr[i]);
-		if (len < game->conf.map_y)
+		if (len < game->conf.map_x)
 		{
-			while (len < game->conf.map_y)
+			while (len < game->conf.map_x)
 			{
 				game->conf.temp_map_addr[i][len] = ' ';
 				len++;

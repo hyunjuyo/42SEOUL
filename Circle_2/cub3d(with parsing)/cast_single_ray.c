@@ -78,7 +78,7 @@ int		check_dir(t_chk_pnt *check, t_game *game)
 	return (minus);
 }
 
-void	get_wall_point(double ray_th, t_game *game)
+void	get_wall_point(int i, double ray_th, t_game *game)
 {
 	t_chk_pnt	check;
 
@@ -101,6 +101,16 @@ void	get_wall_point(double ray_th, t_game *game)
 		}
 		if (game->map[check.mapx][check.mapy] == '1')
 			check.hit_wall = TRUE;
+//		else if (game->map[check.mapx][check.mapy] == '2')  // need to separate
+//		{
+//			game->spr_map[check.mapx][check.mapy].type = '2';
+//			game->spr1.near_than_wall[i] = TRUE;
+//		}
+//		else if (game->map[check.mapx][check.mapy] == '3')  // need to separate
+//		{
+//			game->spr_map[check.mapx][check.mapy].type = '3';
+//			game->spr2.near_than_wall[i] = TRUE;
+//		}
 	}
 	game->wall.x = check.px;
 	game->wall.y = check.py;
@@ -115,7 +125,7 @@ double	cast_single_ray(int i, t_game *game, int ray_num)
 	fov_h = deg_to_rad(FOV, 0);
 	ray_th = (game->player.th + fov_h / 2) - (fov_h / (ray_num - 1)) * i;
 	game->player.ray_th = ray_th;
-	get_wall_point(ray_th, game);
+	get_wall_point(i, ray_th, game);
 	dist =
 		get_dist(game->player.x, game->player.y, game->wall.x, game->wall.y);
 	return (dist);

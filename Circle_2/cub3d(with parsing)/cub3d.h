@@ -119,6 +119,26 @@ typedef struct		s_wall
 	t_dir		dir;
 }					t_wall;
 
+typedef struct		s_sprite
+{
+	void		*img;
+	int			*data;
+	int			width;
+	int			height;
+	int			bpp;
+	int			size_l;
+	int			endian;
+	double		x;
+	double		y;
+	t_bool		*near_than_wall;
+}					t_sprite;
+
+typedef struct		s_spr_info
+{
+	char		type;
+	double		dist;
+}					t_spr_info;
+
 typedef struct		s_game
 {
 	void		*mlx;
@@ -127,8 +147,11 @@ typedef struct		s_game
 	t_img		img2;
 	t_pla		player;
 	t_wall		wall;
+	t_sprite	spr1;
+	t_sprite	spr2;
 	t_conf		conf;
 	char		map[MAPX_MAX][MAPY_MAX];
+	t_spr_info	**spr_map;
 //	int			map[MAP_X][MAP_Y];
 }					t_game;
 

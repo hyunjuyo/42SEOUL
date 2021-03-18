@@ -47,11 +47,9 @@ void	save_conf_info(char *line, t_game *game)
 void	temp_map_addr_free(t_game *game)
 {
 	int	i;
-	int	count;
 
-	count = game->conf.map_y;
 	i = 0;
-	while (i < count)
+	while (i < game->conf.map_y)
 	{
 		free(game->conf.temp_map_addr[i]);
 		i++;
@@ -116,10 +114,10 @@ void	map_parsing(char *map_file, t_game *game)
 		free(line);
 	fill_with_spaces(game);
 	i = 0;
-	while (i < game->conf.map_x)
+	while (i < game->conf.map_x)     // need to check NULL at the last index
 	{
 		j = 0;
-		while (j < game->conf.map_y)
+		while (j < game->conf.map_y)     // need to check NULL at the last index
 		{
 			game->map[i][j] = game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
 			j++;

@@ -24,8 +24,9 @@
 # define WIN_W	1280
 # define WIN_H	720
 
-# define MAPX_MAX	1000 + 1
-# define MAPY_MAX	1000 + 1
+# define MAPX_MAX	1000
+# define MAPY_MAX	1000
+# define SPRITE_MAX	100
 # define MAP_X	20
 # define MAP_Y	12
 # define CUBE_SIZE	20
@@ -130,14 +131,8 @@ typedef struct		s_sprite
 	int			endian;
 	double		x;
 	double		y;
-	t_bool		*near_than_wall;
+//	t_bool		*near_than_wall;
 }					t_sprite;
-
-typedef struct		s_spr_info
-{
-	char		type;
-	double		dist;
-}					t_spr_info;
 
 typedef struct		s_game
 {
@@ -147,11 +142,10 @@ typedef struct		s_game
 	t_img		img2;
 	t_pla		player;
 	t_wall		wall;
-	t_sprite	spr1;
-	t_sprite	spr2;
+	t_sprite	spr[SPRITE_MAX];
 	t_conf		conf;
 	char		map[MAPX_MAX][MAPY_MAX];
-	t_spr_info	**spr_map;
+	char		**spr_in_fov;
 //	int			map[MAP_X][MAP_Y];
 }					t_game;
 

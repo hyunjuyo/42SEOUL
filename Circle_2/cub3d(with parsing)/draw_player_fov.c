@@ -96,20 +96,20 @@ int		draw_player_fov(t_game *game)
 	double		wdist;
 
 	clear_screen(game, game->conf.ceil, game->conf.floor);
-//	game->spr_map = (t_spr_info *)ft_calloc(game->conf.map_x * game->conf.map_y, sizeof(t_spr_info));
-//	game->spr1.near_than_wall = (t_bool *)ft_calloc(game->conf.win_w, sizeof(t_bool));
-//	game->spr2.near_than_wall = (t_bool *)ft_calloc(game->conf.win_w, sizeof(t_bool));
+//	game->spr_in_fov = (char *)ft_calloc(game->conf.map_x * game->conf.map_y, sizeof(char));
+//	game->wall.dist = (double *)ft_calloc(game->conf.win_w, sizeof(double));
 	i = 0;
 	while (i < WIN_W)
 	{
 		wdist = cast_single_ray(i, game, WIN_W);
+		game->wall.dist[i] = wdist;
 		wdist *= cos(game->player.th - game->player.ray_th);
 		draw_one_vert_line(i, wdist, game);
 		i++;
 	}
-//	free(game->spr1.near_than_wall);
-//	free(game->spr2.near_than_wall);
-//	free(game->spr_map);
+//	check_draw_sprite(game); // need to make
+//	free(game->wall.dist);
+//	free(game->spr_in_fov);
 	mlx_put_image_to_window(game->mlx, game->win, game->img1.img, 0, 0);
 	return (0);
 }

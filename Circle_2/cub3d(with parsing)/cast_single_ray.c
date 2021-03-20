@@ -103,14 +103,12 @@ void	get_wall_point(int i, double ray_th, t_game *game)
 			check.hit_wall = TRUE;
 //		else if (game->map[check.mapx][check.mapy] == '2')  // need to separate
 //		{
-//			game->spr_map[check.mapx][check.mapy].type = '2';
-//			game->spr1.near_than_wall[i] = TRUE;
+//			game->spr_in_fov[check.mapx][check.mapy] == '2';
+//			game->spr[game->spr.idx].x = check.mapx + 0.5; //
+//			game->spr.y = check.mapy + 0.5; //
 //		}
 //		else if (game->map[check.mapx][check.mapy] == '3')  // need to separate
-//		{
-//			game->spr_map[check.mapx][check.mapy].type = '3';
-//			game->spr2.near_than_wall[i] = TRUE;
-//		}
+//			game->spr_in_fov[check.mapx][check.mapy] == '3';
 	}
 	game->wall.x = check.px;
 	game->wall.y = check.py;

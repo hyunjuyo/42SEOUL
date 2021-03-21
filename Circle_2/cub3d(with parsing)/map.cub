@@ -4,7 +4,8 @@ SO  ./textures/wall_so.xpm
 WE   ./textures/wall_we.xpm
 EA     ./textures/wall_ea.xpm
 
-S ./temp
+S1 ./temp1
+S2 ./temp2
 F 70, 210, 150
 C    50 , 70  ,   120
 

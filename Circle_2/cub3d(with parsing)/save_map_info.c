@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:07:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 12:37:37 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:43:23 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		error_check(char *line, t_game *game)
 {
 	int	i;
 
-	if (game->conf.chk_complete < 9)
+	if (game->conf.chk_complete < 10)
 	{
 		printf("Parsing failed : insufficient info. before map content\n");
 		printf("Error\n");

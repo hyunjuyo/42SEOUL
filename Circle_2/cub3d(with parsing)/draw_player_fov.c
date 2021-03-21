@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 12:55:01 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/21 14:53:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	clear_screen(t_game *game, int ceil_color, int floor_color)
 	}
 }
 
-int		get_vert_line_length(double wdist)
+int		get_vert_line_length(double wdist, t_game *game)
 {
 	double	fov_vert;
 	double	h_ratio;
 	int		length;
 
-	fov_vert = deg_to_rad(FOV * WIN_H / WIN_W, 0);
+	fov_vert = deg_to_rad(FOV * game->conf.win_h / game->conf.win_w, 0);
 	h_ratio = 1.0 / (wdist * tan(fov_vert / 2.0) * 2.0);
 	length = (int)(WIN_H * h_ratio);
 	return (length);
@@ -59,7 +59,7 @@ void	get_wall_texture_file(t_game *game, t_img *w_img)
 		img_path = game->conf.wall_ea;
 	if (!(w_img->img = mlx_xpm_file_to_image(game->mlx, img_path, &w_img->width,
 			&w_img->height)))
-		printf("mlx_xpm_file_to_image() failed\nError\n");
+		printf("[wall]mlx_xpm_file_to_image() failed\nError\n");
 	w_img->data = (int *)mlx_get_data_addr(w_img->img, &w_img->bpp,
 			&w_img->size_l, &w_img->endian);
 }
@@ -73,7 +73,7 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	double	invisible;
 
 	get_wall_texture_file(game, &w_img);
-	line_len = get_vert_line_length(wdist);
+	line_len = get_vert_line_length(wdist, game);
 	invisible = 0.0;
 	space = (WIN_H - line_len) / 2;
 	if (WIN_H - line_len < 0)
@@ -96,8 +96,8 @@ int		draw_player_fov(t_game *game)
 	double		wdist;
 
 	clear_screen(game, game->conf.ceil, game->conf.floor);
-//	game->spr_in_fov = (char *)ft_calloc(game->conf.map_x * game->conf.map_y, sizeof(char));
-//	game->wall.dist = (double *)ft_calloc(game->conf.win_w, sizeof(double));
+	game->spr_in_fov = (char **)ft_calloc(game->conf.map_x * game->conf.map_y, sizeof(char));
+	game->wall.dist = (double *)ft_calloc(game->conf.win_w, sizeof(double));
 	i = 0;
 	while (i < WIN_W)
 	{
@@ -107,9 +107,9 @@ int		draw_player_fov(t_game *game)
 		draw_one_vert_line(i, wdist, game);
 		i++;
 	}
-//	check_draw_sprite(game); // need to make
-//	free(game->wall.dist);
-//	free(game->spr_in_fov);
+//	ready_to_draw_sprite(game); // make ..ing
+	free(game->wall.dist);
+	free(game->spr_in_fov);
 	mlx_put_image_to_window(game->mlx, game->win, game->img1.img, 0, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 13:07:22 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/21 14:55:40 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	save_conf_info(char *line, t_game *game)
 	char	*w_ptr;
     char    *temp;
 
-	if (game->conf.map_lines > 0)
+	if (game->conf.map_lines > 0) // if map starts
     {
 		save_map_info(line, game);
         return ;
@@ -38,7 +38,8 @@ void	save_conf_info(char *line, t_game *game)
 	printf("conf.wall_so : %s\n", game->conf.wall_so); // test
 	printf("conf.wall_we : %s\n", game->conf.wall_we); // test
 	printf("conf.wall_ea : %s\n", game->conf.wall_ea); // test
-	printf("conf.sprite : %s\n", game->conf.sprite); // test
+	printf("conf.sprite1 : %s\n", game->conf.sprite[0]); // test
+	printf("conf.sprite2 : %s\n", game->conf.sprite[1]); // test
 	printf("conf.chk_complete : %d\n", game->conf.chk_complete); // test
 	printf("conf.map_lines : %d\n", game->conf.map_lines); // test
 	free(temp);

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 12:36:15 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/21 14:51:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 
 # define MAPX_MAX	1000
 # define MAPY_MAX	1000
-# define SPRITE_MAX	100
+# define SPR_TYPE	2
+# define SPR_MAX_IN_FOV	100
 # define MAP_X	20
 # define MAP_Y	12
 # define CUBE_SIZE	20
@@ -78,7 +79,7 @@ typedef struct		s_conf
 	char		wall_so[PATH_LEN];
 	char		wall_we[PATH_LEN];
 	char		wall_ea[PATH_LEN];
-	char		sprite[PATH_LEN];
+	char		sprite[SPR_TYPE][PATH_LEN];
 	int			ceil;
 	int			floor;
 	int			chk_complete;
@@ -117,6 +118,7 @@ typedef struct		s_wall
 {
 	double		x;
 	double		y;
+	double		*dist;
 	t_dir		dir;
 }					t_wall;
 
@@ -131,7 +133,8 @@ typedef struct		s_sprite
 	int			endian;
 	double		x;
 	double		y;
-//	t_bool		*near_than_wall;
+	double		th;
+	double		dist;
 }					t_sprite;
 
 typedef struct		s_game
@@ -142,7 +145,7 @@ typedef struct		s_game
 	t_img		img2;
 	t_pla		player;
 	t_wall		wall;
-	t_sprite	spr[SPRITE_MAX];
+	t_sprite	spr[SPR_MAX_IN_FOV];
 	t_conf		conf;
 	char		map[MAPX_MAX][MAPY_MAX];
 	char		**spr_in_fov;
@@ -201,5 +204,10 @@ void				check_conf_type_1(char *line, t_game *game, char *l_ptr,
 		char *w_ptr);
 int					get_rgb_color(char *l_ptr, char *w_ptr);
 char				*get_next_word(char **l_ptr);
+void				check_sprite_in_fov(t_game *game);
+void				ready_to_draw_sprite(t_game *game);
+int					get_vert_line_length(double wdist, t_game *game);
+void				draw_one_vert_sprite_line(t_game *game, int i, int j,
+		int length);
 
 #endif

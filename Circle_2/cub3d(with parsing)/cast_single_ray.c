@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/21 15:00:06 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/22 12:28:42 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	get_wall_point(double ray_th, t_game *game)
 		}
 		if (game->map[check.mapx][check.mapy] == '1')
 			check.hit_wall = TRUE;
-//		check_sprite_in_fov(game);
+		check_sprite_in_fov(game, &check);
 	}
 	game->wall.x = check.px;
 	game->wall.y = check.py;

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/21 14:51:56 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/22 12:45:13 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct		s_sprite
 	double		y;
 	double		th;
 	double		dist;
+	int			length;
 }					t_sprite;
 
 typedef struct		s_game
@@ -148,7 +149,7 @@ typedef struct		s_game
 	t_sprite	spr[SPR_MAX_IN_FOV];
 	t_conf		conf;
 	char		map[MAPX_MAX][MAPY_MAX];
-	char		**spr_in_fov;
+	char		*spr_in_fov;
 //	int			map[MAP_X][MAP_Y];
 }					t_game;
 
@@ -204,10 +205,10 @@ void				check_conf_type_1(char *line, t_game *game, char *l_ptr,
 		char *w_ptr);
 int					get_rgb_color(char *l_ptr, char *w_ptr);
 char				*get_next_word(char **l_ptr);
-void				check_sprite_in_fov(t_game *game);
+void				check_sprite_in_fov(t_game *game, t_chk_pnt *check);
 void				ready_to_draw_sprite(t_game *game);
 int					get_vert_line_length(double wdist, t_game *game);
-void				draw_one_vert_sprite_line(t_game *game, int i, int j,
-		int length);
+void				draw_one_vert_sprite_line(t_game *game, int idx, int j,
+		int start_spot);
 
 #endif

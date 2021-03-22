@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/21 14:53:56 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/22 12:45:03 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		draw_player_fov(t_game *game)
 	double		wdist;
 
 	clear_screen(game, game->conf.ceil, game->conf.floor);
-	game->spr_in_fov = (char **)ft_calloc(game->conf.map_x * game->conf.map_y, sizeof(char));
+	game->spr_in_fov = (char *)ft_calloc(game->conf.map_x * game->conf.map_y, sizeof(char));
 	game->wall.dist = (double *)ft_calloc(game->conf.win_w, sizeof(double));
 	i = 0;
 	while (i < WIN_W)
@@ -107,7 +107,7 @@ int		draw_player_fov(t_game *game)
 		draw_one_vert_line(i, wdist, game);
 		i++;
 	}
-//	ready_to_draw_sprite(game); // make ..ing
+	ready_to_draw_sprite(game);
 	free(game->wall.dist);
 	free(game->spr_in_fov);
 	mlx_put_image_to_window(game->mlx, game->win, game->img1.img, 0, 0);

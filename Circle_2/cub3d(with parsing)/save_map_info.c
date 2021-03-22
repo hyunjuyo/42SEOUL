@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:07:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/21 12:43:23 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/22 13:40:13 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		error_check(char *line, t_game *game)
 	i = 0;
 	while (line[i] && (line[i] == '1' || line[i] == '2' || line[i] == '0'
 				|| line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
-				|| line[i] == 'E' || line[i] == ' '))
+				|| line[i] == 'E' || line[i] == ' ' || line[i] == '3'))
 		i++;
 	if (i == 0 || i != (int)ft_strlen(line))
 	{

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 14:38:13 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/22 17:29:31 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/22 18:59:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,23 @@ void	draw_one_vert_sprite_line(t_game *game, int idx, int j, int start_spot)
 	int		h;
 	int		space;
 	int		color;
-	int		invisible;
+	double	invisible;
+	int		line_len;
 
-	invisible = 0;
-	space = (game->conf.win_h - game->spr[idx].length) / 2;
-	if (game->conf.win_h - game->spr[idx].length < 0)
+	line_len = game->spr[idx].length;
+	invisible = 0.0;
+	space = (game->conf.win_h - line_len);
+	if (game->conf.win_h - line_len < 0)
 	{
-		invisible = abs(space);
+		invisible = (double)abs(space) / (double)line_len;
 		space = 0;
 	}
 	h = 0;
-	while (h + invisible < game->spr[idx].length && h + invisible <
-			game->conf.win_h)
+	while (h < line_len && h < game->conf.win_h)
 	{
-		color = get_sprite_pixel_color(idx, h + invisible, j, game, start_spot);
+		color = get_sprite_pixel_color(idx, h + line_len * invisible / 2, j, game, start_spot);
 		if (color != WHITE)
-			game->img1.data[(space + h) * game->conf.win_w + j] = color;
+			game->img1.data[(space / 2 + h) * game->conf.win_w + j] = color;
 		h++;
 	}
 }

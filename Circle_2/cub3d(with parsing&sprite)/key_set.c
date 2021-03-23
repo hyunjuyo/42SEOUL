@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/18 12:50:52 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/23 11:37:11 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		hit_wall_check(t_game *game)
 
 	mapx = (int)game->player.x;
 	mapy = (int)game->player.y;
-	if (game->map[mapx][mapy] == '1')
+	if (game->map[mapx][mapy] == '1' || game->map[mapx][mapy] == '2')
 		return (1);
 	return (0);
 }

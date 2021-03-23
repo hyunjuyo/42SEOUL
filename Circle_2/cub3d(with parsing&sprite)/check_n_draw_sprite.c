@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:38:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/22 16:04:50 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/23 11:31:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	draw_sprites_in_order(t_game *game, int cnt)
 		j = 0;
 		while (j < game->conf.win_w)
 		{
-			if (j >= start_spot && j < start_spot + game->spr[i].length)
+			if (j >= start_spot && j < start_spot + game->spr[i].length
+					&& game->spr[i].dist < game->wall.dist[j])
 				draw_one_vert_sprite_line(game, i, j, start_spot);
 			j++;
 		}

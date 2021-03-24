@@ -17,12 +17,15 @@ void	fade_setting(int *r, int *g, int *b, double dist, t_game *game)
 	double	dark_dist;
 	double	fade_dist;
 	double	fade_ratio;
+	double	weight;
 
 	dark_dist = get_dist(1.0, 1.0, game->conf.map_x - 1, game->conf.map_y - 1);
 	fade_dist = dark_dist * 0.3;
+	weight = 1.5;
 	if (dist > fade_dist)
 	{
-		fade_ratio = 1.0 - ((dist - fade_dist) * 1.5 / (dark_dist - fade_dist));
+		fade_ratio = 1.0 - ((dist - fade_dist) / (dark_dist - fade_dist))
+			* weight;
 		if (fade_ratio < 0.5)
 			fade_ratio = 0.5;
 		*r *= fade_ratio;

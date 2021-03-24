@@ -45,18 +45,6 @@ void	save_conf_info(char *line, t_game *game)
 	free(temp);
 }
 
-void	temp_map_addr_free(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < game->conf.map_y)
-	{
-		free(game->conf.temp_map_addr[i]);
-		i++;
-	}
-}
-
 void	fill_with_spaces(t_game *game)
 {
 	int	i;
@@ -79,24 +67,16 @@ void	fill_with_spaces(t_game *game)
 	}
 }
 
-void	map_parsing(char *map_file, t_game *game)
+void	map_file_open_n_read(char *map_file, t_game *game)
 {
-	int		fd;
-	char	*line;
-	int		i;
-	int		j;
-//	char	test[MAPX_MAX][MAPY_MAX];
-
+	int	i;
+	
 	if ((fd = open(map_file, O_RDONLY)) == -1)
 	{
-		printf("open() failed\n");
-		printf("Error\n");
+		printf("open() failed\nError\n");
 		exit(1);
 	}
-    game->conf.chk_complete = 0;
-	game->conf.map_lines = 0;
-	game->conf.map_x = 0;
-	game->conf.map_y = 0;
+	ft_memset(&game->conf, 0, sizeof(t_conf));
 	game->conf.ceil = -1;
 	game->conf.floor = -1;
 	i = 0;
@@ -114,6 +94,12 @@ void	map_parsing(char *map_file, t_game *game)
 	else
 		free(line);
 	fill_with_spaces(game);
+}
+
+void	store_entire_map(t_game *game)
+{
+	int	i;
+
 	i = 0;
 	while (i < game->conf.map_x)     // need to check NULL at the last index
 	{
@@ -128,6 +114,23 @@ void	map_parsing(char *map_file, t_game *game)
 	i = -1; // test
 	while (++i < game->conf.map_x) // test
 		printf("%s\n", game->map[i]); // test
-	temp_map_addr_free(game);
+	i = 0;
+	while (i < game->conf.map_y)
+	{
+		free(game->conf.temp_map_addr[i]);
+		i++;
+	}
+}
+
+void	map_parsing(char *map_file, t_game *game)
+{
+	int		fd;
+	char	*line;
+	int		i;
+	int		j;
+//	char	test[MAPX_MAX][MAPY_MAX];
+
+	map_file_open_n_read(map_file, game);
+	store_entire_map(game);
 	close(fd);
 }

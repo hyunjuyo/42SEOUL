@@ -12,9 +12,17 @@
 
 #include "cub3d.h"
 
-void	check_conf_type_5(char *line, t_game *game, char *w_ptr)
+void	check_conf_type_5(char *line, t_game *game, char *l_ptr, char *w_ptr)
 {
-	if (w_ptr[0] == '1')
+	if (ft_strncmp(w_ptr, "S2", 2) == 0)
+	{
+		free(w_ptr);
+		w_ptr = get_next_word(&l_ptr);
+		if (ft_strlcpy(game->conf.sprite[1], w_ptr, PATH_LEN) != 0)
+			game->conf.chk_complete++;
+		free(w_ptr);
+	}
+	else if (w_ptr[0] == '1')
 	{
 		free(w_ptr);
         save_map_info(line, game);
@@ -47,7 +55,7 @@ void	check_conf_type_4(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		free(w_ptr);
     }
 	else
-		check_conf_type_5(line, game, w_ptr);
+		check_conf_type_5(line, game, l_ptr, w_ptr);
 }
 
 void	check_conf_type_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
@@ -60,7 +68,7 @@ void	check_conf_type_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
 			game->conf.chk_complete++;
 		free(w_ptr);
 	}
-	else if (ft_strncmp(w_ptr, "S", 2) == 0)
+	else if (ft_strncmp(w_ptr, "S1", 2) == 0)
 	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);

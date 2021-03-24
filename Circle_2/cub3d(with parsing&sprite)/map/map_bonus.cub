@@ -4,7 +4,8 @@ SO  ./textures/wall_so.xpm
 WE   ./textures/wall_we.xpm
 EA     ./textures/wall_ea.xpm
 
-S ./textures/sprite1.xpm
+S1 ./textures/sprite1.xpm
+S2 ./textures/sprite2.xpm
 F 70, 210, 150
 C    50 , 70  ,   120
 

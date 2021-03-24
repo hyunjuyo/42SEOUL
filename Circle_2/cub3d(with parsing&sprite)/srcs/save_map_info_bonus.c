@@ -16,7 +16,7 @@ int		error_check(char *line, t_game *game)
 {
 	int	i;
 
-	if (game->conf.chk_complete < 9)
+	if (game->conf.chk_complete < 10)
 	{
 		printf("Parsing failed : insufficient info. before map content\n");
 		printf("Error\n");
@@ -25,7 +25,7 @@ int		error_check(char *line, t_game *game)
 	i = 0;
 	while (line[i] && (line[i] == '1' || line[i] == '2' || line[i] == '0'
 				|| line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
-				|| line[i] == 'E' || line[i] == ' '))
+				|| line[i] == 'E' || line[i] == ' ' || line[i] == '3'))
 		i++;
 	if (i == 0 || i != (int)ft_strlen(line))
 	{

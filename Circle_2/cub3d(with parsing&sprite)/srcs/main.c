@@ -21,9 +21,9 @@ void	game_init(t_game *game)
 			MAP_Y * CUBE_SIZE);
 	game->img2.data = (int *)mlx_get_data_addr(game->img2.img, &game->img2.bpp,
 			&game->img2.size_l, &game->img2.endian);
-	game->player.x = 1.5;
-	game->player.y = 1.5;
-	game->player.th = deg_to_rad(90.0, 1);
+//	game->player.x = 1.5;
+//	game->player.y = 1.5;
+//	game->player.th = deg_to_rad(90.0, 1);
 }
 
 int		main(int argc, char *argv[])

@@ -25,14 +25,17 @@ void	rotate_check(t_game *game)
 		game->player.th += 0.000002;
 }
 
-int		hit_wall_check(t_game *game)
+int		hit_wall_check(t_game *game, int type)
 {
 	int	mapx;
 	int	mapy;
 
 	mapx = (int)game->player.x;
 	mapy = (int)game->player.y;
-	if (game->map[mapx][mapy] == '1' || game->map[mapx][mapy] == '2')
+	if (type == 0 && game->map[mapx][mapy] == '1')
+		return (1);
+	else if (type == 1 && (game->map[mapx][mapy] == '1'
+				|| game->map[mapx][mapy] == '2'))
 		return (1);
 	return (0);
 }
@@ -56,7 +59,7 @@ void	key_set_more(int keycode, t_game *game)
 	{
 		game->player.x += MOVE_SPEED * cos(game->player.th + deg_to_rad(90, 0));
 		game->player.y += MOVE_SPEED * sin(game->player.th + deg_to_rad(90, 0));
-		if (hit_wall_check(game) == 1)
+		if (hit_wall_check(game, 1) == 1)
 		{
 			game->player.x
 				-= MOVE_SPEED * cos(game->player.th + deg_to_rad(90, 0));
@@ -68,7 +71,7 @@ void	key_set_more(int keycode, t_game *game)
 	{
 		game->player.x += MOVE_SPEED * cos(game->player.th - deg_to_rad(90, 0));
 		game->player.y += MOVE_SPEED * sin(game->player.th - deg_to_rad(90, 0));
-		if (hit_wall_check(game) == 1)
+		if (hit_wall_check(game, 1) == 1)
 		{
 			game->player.x
 				-= MOVE_SPEED * cos(game->player.th - deg_to_rad(90, 0));
@@ -85,7 +88,7 @@ int		key_set(int keycode, t_game *game)
 	{
 		game->player.x += MOVE_SPEED * cos(game->player.th);
 		game->player.y += MOVE_SPEED * sin(game->player.th);
-		if (hit_wall_check(game) == 1)
+		if (hit_wall_check(game, 1) == 1)
 		{
 			game->player.x -= MOVE_SPEED * cos(game->player.th);
 			game->player.y -= MOVE_SPEED * sin(game->player.th);
@@ -95,7 +98,7 @@ int		key_set(int keycode, t_game *game)
 	{
 		game->player.x -= MOVE_SPEED * cos(game->player.th);
 		game->player.y -= MOVE_SPEED * sin(game->player.th);;
-		if (hit_wall_check(game) == 1)
+		if (hit_wall_check(game, 1) == 1)
 		{
 			game->player.x += MOVE_SPEED * cos(game->player.th);
 			game->player.y += MOVE_SPEED * sin(game->player.th);;

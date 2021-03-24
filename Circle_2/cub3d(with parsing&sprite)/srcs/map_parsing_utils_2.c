@@ -12,6 +12,29 @@
 
 #include "cub3d.h"
 
+void	save_player_info(t_game *game, t_pla *temp, int i, int j, char c)
+{
+	if (game->player.x != -1.0 || game->player.y != -1.0)
+	{
+		printf("Map parsing failed : too many player's position(s)\n");
+		printf("Error\n");
+		exit(1);
+	}
+	game->player.x = (double)i;
+	game->player.y = (double)j;
+	if (c == 'N')
+		game->player.th = deg_to_rad(90.0, 1);
+	else if (c == 'S')
+		game->player.th = deg_to_rad(270.0, 1);
+	else if (c == 'W')
+		game->player.th = deg_to_rad(180.0, 1);
+	else
+		game->player.th = deg_to_rad(0.0, 1);
+	temp->x = game->player.x;
+	temp->y = game->player.y;
+	temp->th = game->player.th;
+}
+
 char	*get_next_word(char **l_ptr)
 {
 	char	*w_ptr;

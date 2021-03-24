@@ -208,5 +208,7 @@ int					get_vert_line_length(double wdist, t_game *game);
 void				draw_one_vert_sprite_line(t_game *game, int idx, int j,
 		int start_spot);
 int					fade_color(int color, double dist, t_game *game);
+void				save_player_info(t_game *game, t_pla *temp, int i, int j,
+		char c);
 
 #endif

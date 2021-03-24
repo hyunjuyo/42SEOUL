@@ -96,17 +96,24 @@ void	map_file_open_n_read(char *map_file, t_game *game)
 	fill_with_spaces(game);
 }
 
-void	store_entire_map(t_game *game)
+void	store_rotated_map(t_game *game, t_pla *temp)
 {
 	int	i;
+	int	j;
 
+	ft_memset(game->map, 0, sizeof(char) * MAPX_MAX * MAPY_MAX);
+	ft_memset(&game->player, -1, sizeof(t_pla));
 	i = 0;
 	while (i < game->conf.map_x)     // need to check NULL at the last index
 	{
 		j = 0;
 		while (j < game->conf.map_y)     // need to check NULL at the last index
 		{
-			game->map[i][j] = game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
+			game->map[i][j]
+				= game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
+			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
+					|| game->map[i][j] == 'W' || game->map[i][j] == 'E')
+				save_player_info(game, temp, i, j, game->map[i][j]);
 			j++;
 		}
 		i++;
@@ -114,23 +121,73 @@ void	store_entire_map(t_game *game)
 	i = -1; // test
 	while (++i < game->conf.map_x) // test
 		printf("%s\n", game->map[i]); // test
-	i = 0;
-	while (i < game->conf.map_y)
-	{
+	i = -1;
+	while (++i < game->conf.map_y)
 		free(game->conf.temp_map_addr[i]);
-		i++;
-	}
 }
 
 void	map_parsing(char *map_file, t_game *game)
 {
 	int		fd;
 	char	*line;
+	t_pla	temp;
+	t_pla	start;
 	int		i;
-	int		j;
 //	char	test[MAPX_MAX][MAPY_MAX];
 
 	map_file_open_n_read(map_file, game);
-	store_entire_map(game);
+	store_rotated_map(game, &temp);
+	game->player.th = deg_to_rad(180.0, 0);
+	while (hit_wall_check(game, 0) != 1)
+	{
+		game->player.x += 1.0 * cos(game->player.th);
+		game->player.y += 1.0 * sin(game->player.th);
+		if (!(game->player.x >= 1.0 && game->player.y >= 1.0 && game->player.x <= game->conf.mapx - 1.0 && game->player.y <= game->conf.mapy - 1.0))
+		{
+			printf("Map parsing failed : The map must be closed\nError\n");
+			exit(1);
+		}
+	}
+	game->player.x -= 1.0 * cos(game->player.th);
+	game->player.y -= 1.0 * sin(game->player.th);
+	start.x = game->player.x;
+	start.y = game->player.y;
+	game->player.th -= deg_to_rad(90.0, 0)
+	while (game->player.x >= 1.0 && game->player.y >= 1.0 && game->player.x <= game->conf.mapx - 1.0 && game->player.y <= game->conf.mapy - 1.0)
+	{
+		game->player.th += deg_to_rad(90.0, 0)
+		game->player.x += 1.0 * cos(game->player.th);
+		game->player.y += 1.0 * sin(game->player.th);
+		if (hit_wall_check(game, 0) == 1)
+		{
+			game->player.x -= 1.0 * cos(game->player.th);
+			game->player.y -= 1.0 * sin(game->player.th);
+			game->player.th -= deg_to_rad(90.0, 0);
+		}
+		game->player.x += 1.0 * cos(game->player.th);
+		game->player.y += 1.0 * sin(game->player.th);
+		if (hit_wall_check(game, 0) == 1)
+		{
+			game->player.x -= 1.0 * cos(game->player.th);
+			game->player.y -= 1.0 * sin(game->player.th);
+			game->player.th -= deg_to_rad(90.0, 0);
+		}
+		game->player.th += deg_to_rad(90.0, 0)
+		game->player.x += 1.0 * cos(game->player.th);
+		game->player.y += 1.0 * sin(game->player.th);
+		if (hit_wall_check(game, 0) == 1)
+		{
+			game->player.x -= 1.0 * cos(game->player.th);
+			game->player.y -= 1.0 * sin(game->player.th);
+			game->player.th -= deg_to_rad(90.0, 0);
+		}
+		if (game->player.x == start.x && game->player.y == start.y)
+			break ;
+	}
+	if (!(game->player.x >= 1.0 && game->player.y >= 1.0 && game->player.x <= game->conf.mapx - 1.0 && game->player.y <= game->conf.mapy - 1.0))
+	{
+		printf("Map parsing failed : The map must be closed\nError\n");
+		exit(1);
+	}
 	close(fd);
 }

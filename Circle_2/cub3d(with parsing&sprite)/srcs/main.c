@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/22 19:02:36 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:08:39 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ int		main(int argc, char *argv[])
 	map_file = argv[1];
 	map_parsing(map_file, &game);
 	game.mlx = mlx_init();
+	screen_size_check(&game);
+	printf("display R : %d %d\n", game.conf.display_w, game.conf.display_h); // test
 	game.win = mlx_new_window(game.mlx, game.conf.win_w, game.conf.win_h,
-			"cub3d 1st");
+			"Cub3D 1st");
 	game_init(&game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_set, &game);
 	mlx_loop_hook(game.mlx, draw_player_fov, &game);

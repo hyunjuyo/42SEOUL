@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_utils_1.c                              :+:      :+:    :+:   */
+/*   map_parsing_utils_1_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:03:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/21 14:57:00 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/25 15:39:01 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	check_conf_type_3(char *line, t_game *game, char *l_ptr, char *w_ptr)
 			game->conf.chk_complete++;
 		free(w_ptr);
 	}
-	else if (ft_strncmp(w_ptr, "S1", 2) == 0)
+	else if (ft_strncmp(w_ptr, "S", 2) == 0)
 	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);

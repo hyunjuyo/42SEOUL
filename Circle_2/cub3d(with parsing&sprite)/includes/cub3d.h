@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/25 15:12:25 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:07:28 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef enum		e_bool
 
 typedef struct		s_conf
 {
+	int			display_w;
+	int			display_h;
 	int			win_w;
 	int			win_h;
 	int			map_x;
@@ -211,5 +213,6 @@ int					fade_color(int color, double dist, t_game *game);
 void				save_player_info(t_game *game, int i, int j, char c);
 int					hit_wall_check(t_game *game, int type);
 void				map_parsing_wall_check(t_game *game);
+void				screen_size_check(t_game *game);
 
 #endif

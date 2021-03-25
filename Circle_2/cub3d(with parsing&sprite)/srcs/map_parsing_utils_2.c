@@ -6,22 +6,23 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:17:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/21 12:43:38 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/25 13:12:03 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	save_player_info(t_game *game, t_pla *temp, int i, int j, char c)
+void	save_player_info(t_game *game, int i, int j, char c)
 {
-	if (game->player.x != -1.0 || game->player.y != -1.0)
+	if (game->player.x != 0.0 || game->player.y != 0.0)
 	{
+		printf("(%f, %f)\n", game->player.x, game->player.y); // test
 		printf("Map parsing failed : too many player's position(s)\n");
 		printf("Error\n");
 		exit(1);
 	}
-	game->player.x = (double)i;
-	game->player.y = (double)j;
+	game->player.x = (double)i + 0.5;
+	game->player.y = (double)j + 0.5;
 	if (c == 'N')
 		game->player.th = deg_to_rad(90.0, 1);
 	else if (c == 'S')
@@ -30,9 +31,6 @@ void	save_player_info(t_game *game, t_pla *temp, int i, int j, char c)
 		game->player.th = deg_to_rad(180.0, 1);
 	else
 		game->player.th = deg_to_rad(0.0, 1);
-	temp->x = game->player.x;
-	temp->y = game->player.y;
-	temp->th = game->player.th;
 }
 
 char	*get_next_word(char **l_ptr)

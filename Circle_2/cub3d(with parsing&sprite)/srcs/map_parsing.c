@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/21 14:55:40 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/25 13:19:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ void	fill_with_spaces(t_game *game)
 	}
 }
 
-void	map_file_open_n_read(char *map_file, t_game *game)
+void	map_file_open_n_read(int *fd, char *map_file, t_game *game)
 {
-	int	i;
+	char	*line;
+	int		i;
 	
-	if ((fd = open(map_file, O_RDONLY)) == -1)
+	if ((*fd = open(map_file, O_RDONLY)) == -1)
 	{
 		printf("open() failed\nError\n");
 		exit(1);
@@ -80,7 +81,7 @@ void	map_file_open_n_read(char *map_file, t_game *game)
 	game->conf.ceil = -1;
 	game->conf.floor = -1;
 	i = 0;
-	while (get_next_line(fd, &line) == 1)
+	while (get_next_line(*fd, &line) == 1)
 	{
 		printf("line : %s\n", line); // test
 		save_conf_info(line, game);
@@ -96,13 +97,13 @@ void	map_file_open_n_read(char *map_file, t_game *game)
 	fill_with_spaces(game);
 }
 
-void	store_rotated_map(t_game *game, t_pla *temp)
+void	store_rotated_map(t_game *game)
 {
 	int	i;
 	int	j;
 
 	ft_memset(game->map, 0, sizeof(char) * MAPX_MAX * MAPY_MAX);
-	ft_memset(&game->player, -1, sizeof(t_pla));
+	ft_memset(&game->player, 0, sizeof(t_pla));
 	i = 0;
 	while (i < game->conf.map_x)     // need to check NULL at the last index
 	{
@@ -113,7 +114,7 @@ void	store_rotated_map(t_game *game, t_pla *temp)
 				= game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
 			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
 					|| game->map[i][j] == 'W' || game->map[i][j] == 'E')
-				save_player_info(game, temp, i, j, game->map[i][j]);
+				save_player_info(game, i, j, game->map[i][j]);
 			j++;
 		}
 		i++;
@@ -123,71 +124,25 @@ void	store_rotated_map(t_game *game, t_pla *temp)
 		printf("%s\n", game->map[i]); // test
 	i = -1;
 	while (++i < game->conf.map_y)
+	{
+		printf("Here~~ free!!\n");
 		free(game->conf.temp_map_addr[i]);
+	}
+
 }
 
 void	map_parsing(char *map_file, t_game *game)
 {
 	int		fd;
-	char	*line;
 	t_pla	temp;
-	t_pla	start;
-	int		i;
 //	char	test[MAPX_MAX][MAPY_MAX];
 
-	map_file_open_n_read(map_file, game);
-	store_rotated_map(game, &temp);
-	game->player.th = deg_to_rad(180.0, 0);
-	while (hit_wall_check(game, 0) != 1)
-	{
-		game->player.x += 1.0 * cos(game->player.th);
-		game->player.y += 1.0 * sin(game->player.th);
-		if (!(game->player.x >= 1.0 && game->player.y >= 1.0 && game->player.x <= game->conf.mapx - 1.0 && game->player.y <= game->conf.mapy - 1.0))
-		{
-			printf("Map parsing failed : The map must be closed\nError\n");
-			exit(1);
-		}
-	}
-	game->player.x -= 1.0 * cos(game->player.th);
-	game->player.y -= 1.0 * sin(game->player.th);
-	start.x = game->player.x;
-	start.y = game->player.y;
-	game->player.th -= deg_to_rad(90.0, 0)
-	while (game->player.x >= 1.0 && game->player.y >= 1.0 && game->player.x <= game->conf.mapx - 1.0 && game->player.y <= game->conf.mapy - 1.0)
-	{
-		game->player.th += deg_to_rad(90.0, 0)
-		game->player.x += 1.0 * cos(game->player.th);
-		game->player.y += 1.0 * sin(game->player.th);
-		if (hit_wall_check(game, 0) == 1)
-		{
-			game->player.x -= 1.0 * cos(game->player.th);
-			game->player.y -= 1.0 * sin(game->player.th);
-			game->player.th -= deg_to_rad(90.0, 0);
-		}
-		game->player.x += 1.0 * cos(game->player.th);
-		game->player.y += 1.0 * sin(game->player.th);
-		if (hit_wall_check(game, 0) == 1)
-		{
-			game->player.x -= 1.0 * cos(game->player.th);
-			game->player.y -= 1.0 * sin(game->player.th);
-			game->player.th -= deg_to_rad(90.0, 0);
-		}
-		game->player.th += deg_to_rad(90.0, 0)
-		game->player.x += 1.0 * cos(game->player.th);
-		game->player.y += 1.0 * sin(game->player.th);
-		if (hit_wall_check(game, 0) == 1)
-		{
-			game->player.x -= 1.0 * cos(game->player.th);
-			game->player.y -= 1.0 * sin(game->player.th);
-			game->player.th -= deg_to_rad(90.0, 0);
-		}
-		if (game->player.x == start.x && game->player.y == start.y)
-			break ;
-	}
-	if (!(game->player.x >= 1.0 && game->player.y >= 1.0 && game->player.x <= game->conf.mapx - 1.0 && game->player.y <= game->conf.mapy - 1.0))
-	{
-		printf("Map parsing failed : The map must be closed\nError\n");
-		exit(1);
-	}
+	map_file_open_n_read(&fd, map_file, game);
+	store_rotated_map(game);
+	temp.x = game->player.x;
+	temp.y = game->player.y;
+	map_parsing_wall_check(game);
+	game->player.x = temp.x;
+	game->player.y = temp.y;
 	close(fd);
 }

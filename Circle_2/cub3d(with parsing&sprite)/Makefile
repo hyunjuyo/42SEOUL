@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/03/25 13:08:28 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/03/25 15:33:24 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,19 +17,31 @@ MLX_FLAGS	= -framework OpenGL -framework AppKit -L./mlx/ -lmlx
 MATH_FLAGS	= -lm
 LIBFT_FLAGS	= -L./Libft -lft
 
-SRCS	= ./srcs/main.c ./srcs/map_parsing.c ./srcs/map_parsing_utils_1.c \
-		  ./srcs/map_parsing_utils_2.c ./srcs/save_map_info.c ./srcs/utils_1.c \
-		  ./srcs/utils_2.c ./srcs/get_next_line.c ./srcs/draw_player_fov.c \
-		  ./srcs/cast_single_ray.c ./srcs/get_texture_pixel_color.c \
-		  ./srcs/check_n_draw_sprite.c ./srcs/draw_one_vert_sprite_line.c \
-		  ./srcs/key_set.c ./srcs/map_parsing_wall_check.c
-SRCS_B	= ./srcs/main.c ./srcs/map_parsing.c ./srcs/map_parsing_utils_1_bonus.c \
-		  ./srcs/map_parsing_utils_2.c ./srcs/save_map_info_bonus.c \
-		  ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/get_next_line.c \
-		  ./srcs/draw_player_fov.c ./srcs/cast_single_ray.c \
-		  ./srcs/get_texture_pixel_color.c ./srcs/check_n_draw_sprite.c \
-		  ./srcs/draw_one_vert_sprite_line.c ./srcs/key_set.c \
-		  ./srcs/map_parsing_wall_check.c
+SRCS	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
+		  ./srcs/parsing/map_parsing.c \
+		  ./srcs/parsing/get_next_line.c \
+		  ./srcs/parsing/map_parsing_utils_1.c \
+		  ./srcs/parsing/map_parsing_utils_2.c \
+		  ./srcs/parsing/save_map_info.c \
+		  ./srcs/parsing/map_parsing_wall_check.c \
+		  ./srcs/draw_fov/draw_player_fov.c \
+		  ./srcs/draw_fov/cast_single_ray.c \
+		  ./srcs/draw_fov/get_texture_pixel_color.c \
+		  ./srcs/draw_fov/check_n_draw_sprite.c \
+		  ./srcs/draw_fov/draw_one_vert_sprite_line.c
+SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
+		  ./srcs/parsing/map_parsing.c \
+		  ./srcs/parsing/get_next_line.c \
+		  ./srcs/parsing/map_parsing_utils_1_bonus.c \
+		  ./srcs/parsing/map_parsing_utils_2.c \
+		  ./srcs/parsing/save_map_info_bonus.c \
+		  ./srcs/parsing/map_parsing_wall_check.c \
+		  ./srcs/draw_fov/draw_player_fov.c \
+		  ./srcs/draw_fov/cast_single_ray.c \
+		  ./srcs/draw_fov/get_texture_pixel_color.c \
+		  ./srcs/draw_fov/check_n_draw_sprite.c \
+		  ./srcs/draw_fov/draw_one_vert_sprite_line.c
+
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)
 
@@ -37,12 +49,12 @@ OBJS_B	= $(SRCS_B:.c=.o)
 	gcc $(CFLAGS) -c $< -o $@ -I./includes/ -I./mlx/ -I./Libft/
 
 $(NAME) : $(OBJS)
-	gcc $(MLX_FLAGS) $(LIBFT_FLAGS) $(OBJS) -o $(NAME)
+	gcc $(MLX_FLAGS) $(MATH_FLAGS) $(LIBFT_FLAGS) $(OBJS) -o $(NAME)
 
 all : $(NAME)
 
 bonus : $(OBJS_B)
-	gcc $(MLX_FLAGS) $(LIBFT_FLAGS) $(OBJS_B) -o $(NAME)
+	gcc $(MLX_FLAGS) $(MATH_FLAGS) $(LIBFT_FLAGS) $(OBJS_B) -o $(NAME)
 
 clean :
 	rm -f $(OBJS) $(OBJS_B)

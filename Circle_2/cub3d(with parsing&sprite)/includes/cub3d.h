@@ -117,7 +117,7 @@ typedef struct		s_wall
 {
 	double		x;
 	double		y;
-	double		*dist;
+	double		dist;
 	t_dir		dir;
 }					t_wall;
 
@@ -143,8 +143,10 @@ typedef struct		s_game
 	void		*win;
 	t_img		img1;
 	t_img		img2;
+	t_img		c_img;
+	t_img		f_img;
 	t_pla		player;
-	t_wall		wall;
+	t_wall		*wall;
 	t_sprite	spr[SPR_MAX_IN_FOV];
 	t_conf		conf;
 	char		map[MAPX_MAX][MAPY_MAX];

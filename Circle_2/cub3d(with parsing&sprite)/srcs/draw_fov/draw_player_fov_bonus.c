@@ -45,15 +45,15 @@ int		get_vert_line_length(double wdist, t_game *game)
 	return (length);
 }
 
-void	get_wall_texture_file(t_game *game, t_img *w_img)
+void	get_wall_texture_file(int i, t_game *game, t_img *w_img)
 {
 	char	*img_path;
 
-	if (game->wall.dir == NORTH)
+	if (game->wall[i].dir == NORTH)
 		img_path = game->conf.wall_no;
-	else if (game->wall.dir == SOUTH)
+	else if (game->wall[i].dir == SOUTH)
 		img_path = game->conf.wall_so;
-	else if (game->wall.dir == WEST)
+	else if (game->wall[i].dir == WEST)
 		img_path = game->conf.wall_we;
 	else
 		img_path = game->conf.wall_ea;
@@ -72,7 +72,7 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	t_img	w_img;
 	double	invisible;
 
-	get_wall_texture_file(game, &w_img);
+	get_wall_texture_file(i, game, &w_img);
 	line_len = get_vert_line_length(wdist, game);
 	invisible = 0.0;
 	space = game->conf.win_h - line_len;
@@ -97,19 +97,19 @@ int		draw_player_fov(t_game *game)
 
 	clear_screen(game, game->conf.ceil, game->conf.floor);
 	game->spr_in_fov = (char *)ft_calloc(game->conf.map_x * game->conf.map_y, sizeof(char));
-	game->wall.dist = (double *)ft_calloc(game->conf.win_w, sizeof(double));
+	game->wall = (t_wall *)ft_calloc(game->conf.win_w, sizeof(t_wall));
 	i = 0;
 	while (i < game->conf.win_w)
 	{
 		wdist = cast_single_ray(i, game, game->conf.win_w);
-		game->wall.dist[i] = wdist;
+		game->wall[i].dist = wdist;
 		wdist *= cos(game->player.th - game->player.ray_th);
 		draw_one_vert_line(i, wdist, game);
 		i++;
 	}
 	texture_ceil_n_floor(game);
 	ready_to_draw_sprite(game);
-	free(game->wall.dist);
+	free(game->wall);
 	free(game->spr_in_fov);
 	mlx_put_image_to_window(game->mlx, game->win, game->img1.img, 0, 0);
 	return (0);

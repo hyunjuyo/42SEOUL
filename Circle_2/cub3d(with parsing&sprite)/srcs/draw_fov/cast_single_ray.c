@@ -50,7 +50,7 @@ void	get_next_point(double ray_th, double *px, double *py, t_chk_pnt *check)
 	}
 }
 
-int		check_dir(t_chk_pnt *check, t_game *game)
+int		check_dir(int i, t_chk_pnt *check, t_game *game)
 {
 	int	minus;
 
@@ -58,27 +58,27 @@ int		check_dir(t_chk_pnt *check, t_game *game)
 	if (check->line == VERT)
 	{
 		if (check->xstep == 1)
-			game->wall.dir = WEST;
+			game->wall[i].dir = WEST;
 		else
 		{
 			minus = -1;
-			game->wall.dir = EAST;
+			game->wall[i].dir = EAST;
 		}
 	}
 	else
 	{
 		if (check->ystep == 1)
-			game->wall.dir = SOUTH;
+			game->wall[i].dir = SOUTH;
 		else
 		{
 			minus = -1;
-			game->wall.dir = NORTH;
+			game->wall[i].dir = NORTH;
 		}
 	}
 	return (minus);
 }
 
-void	get_wall_point(double ray_th, t_game *game)
+void	get_wall_point(int i, double ray_th, t_game *game)
 {
 	t_chk_pnt	check;
 
@@ -91,20 +91,20 @@ void	get_wall_point(double ray_th, t_game *game)
 		get_next_point(ray_th, &check.px, &check.py, &check);
 		if (check.line == VERT)
 		{
-			check.mapx = (int)check.px + check_dir(&check, game);
+			check.mapx = (int)check.px + check_dir(i, &check, game);
 			check.mapy = (int)check.py;
 		}
 		else
 		{
 			check.mapx = (int)check.px;
-			check.mapy = (int)check.py + check_dir(&check, game);
+			check.mapy = (int)check.py + check_dir(i, &check, game);
 		}
 		if (game->map[check.mapx][check.mapy] == '1')
 			check.hit_wall = TRUE;
 		check_sprite_in_fov(game, &check);
 	}
-	game->wall.x = check.px;
-	game->wall.y = check.py;
+	game->wall[i].x = check.px;
+	game->wall[i].y = check.py;
 }
 
 double	cast_single_ray(int i, t_game *game, int ray_num)
@@ -116,7 +116,7 @@ double	cast_single_ray(int i, t_game *game, int ray_num)
 	fov_h = deg_to_rad(FOV, 0);
 	ray_th = (game->player.th + fov_h / 2) - (fov_h / (ray_num - 1)) * i;
 	game->player.ray_th = ray_th;
-	get_wall_point(ray_th, game);
+	get_wall_point(i, ray_th, game);
 	dist =
 		get_dist(game->player.x, game->player.y, game->wall.x, game->wall.y);
 	return (dist);

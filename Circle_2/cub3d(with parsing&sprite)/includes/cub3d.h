@@ -214,5 +214,6 @@ void				save_player_info(t_game *game, int i, int j, char c);
 int					hit_wall_check(t_game *game, int type);
 void				map_parsing_wall_check(t_game *game);
 void				screen_size_check(t_game *game);
+void				texture_ceil_n_floor(t_game *game);
 
 #endif

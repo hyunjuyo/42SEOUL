@@ -41,9 +41,10 @@ SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
 		  ./srcs/parsing/map_parsing_utils.c \
 		  ./srcs/parsing/save_map_info_bonus.c \
 		  ./srcs/parsing/map_parsing_wall_check.c \
-		  ./srcs/draw_fov/draw_player_fov.c \
+		  ./srcs/draw_fov/draw_player_fov_bonus.c \
 		  ./srcs/draw_fov/cast_single_ray.c \
 		  ./srcs/draw_fov/get_texture_pixel_color.c \
+		  ./srcs/draw_fov/texture_ceil_n_floor_bonus.c \
 		  ./srcs/draw_fov/check_n_draw_sprite.c \
 		  ./srcs/draw_fov/draw_one_vert_sprite_line.c
 
@@ -59,7 +60,7 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 bonus : $(OBJS_B)
-	gcc $(MLX_FLAGS) $(MATH_FLAGS) $(LIBFT_FLAGS) $(OBJS_B) -o $(NAME)
+	gcc $(MLX_FLAGS) $(MATH_FLAGS) $(LIBFT_FLAGS) $(OBJS_B) $(MLX_MMS_LIB) -o $(NAME)
 
 clean :
 	rm -f $(OBJS) $(OBJS_B)

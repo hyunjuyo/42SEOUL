@@ -1,10 +1,16 @@
-
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_ceil_n_floor_bonus.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/27 15:15:02 by hyunjuyo          #+#    #+#             */
+/*   Updated: 2021/03/27 16:48:03 by hyunjuyo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 double	get_min_dist_in_fov(t_game *game)
 {
@@ -12,7 +18,7 @@ double	get_min_dist_in_fov(t_game *game)
 	double	min_dist;
 	double	half_wall_len;
 
-	fov_vert = deg_to_rad(FOV * game->conf.win_h / game->conf.won_w, 0);
+	fov_vert = deg_to_rad(FOV * game->conf.win_h / game->conf.win_w, 0);
 	half_wall_len = 0.5;
 	min_dist = half_wall_len / tan(fov_vert / 2.0);
 	return (min_dist);
@@ -56,12 +62,12 @@ void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist, t_game *g
 	j = 0;
 	while (j < area_len)
 	{
-		h = j / game->conf.win_h;
+		h = (double)j / (double)game->conf.win_h;
 		t_dist = min_dist / (1 - 2 * h);
 		game->img1.data[j * game->conf.win_w + i]
-			= get_ceil_n_floor_texture(i, t_dist, game, 'C');
-		game->img1.data[(game_conf.win_h - 1 - j) * game->conf.win_w + i]
-			= get_ceil_n_floor_texture(i, t_dist, game, 'F');
+			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'C'), t_dist, game);
+		game->img1.data[(game->conf.win_h - 1 - j) * game->conf.win_w + i]
+			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'F'), t_dist, game);
 		j++;
 	}
 }
@@ -86,7 +92,7 @@ void	texture_ceil_n_floor(t_game *game)
 	i = 0;
 	while (i < game->conf.win_w)
 	{
-		wall_len = get_vert_line_length(game->wall.dist[i], game);
+		wall_len = get_vert_line_length(game->wall[i].dist, game);
 		draw_vert_ceil_n_floor_line(i, wall_len, min_dist, game);
 		i++;
 	}

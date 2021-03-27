@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_player_fov.c                                  :+:      :+:    :+:   */
+/*   draw_player_fov_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/23 12:48:52 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:20:32 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,21 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	int		space;
 	int		h;
 	t_img	w_img;
-	double	invisible;
 
 	get_wall_texture_file(i, game, &w_img);
 	line_len = get_vert_line_length(wdist, game);
-	invisible = 0.0;
+	w_img.invisible = 0.0;
 	space = game->conf.win_h - line_len;
 	if (game->conf.win_h - line_len < 0)
 	{
-		invisible = (double)abs(space) / (double)line_len;
+		w_img.invisible = (double)abs(space) / (double)line_len;
 		space = 0;
 	}
 	h = 0;
 	while (h < line_len && h < game->conf.win_h)
 	{
 		game->img1.data[(space / 2 + h) * game->conf.win_w + i]
-			= fade_color(get_texture_pixel_color(h, line_len, invisible, game, &w_img), wdist, game);
+			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img), wdist, game);
 		h++;
 	}
 }
@@ -102,8 +101,8 @@ int		draw_player_fov(t_game *game)
 	while (i < game->conf.win_w)
 	{
 		wdist = cast_single_ray(i, game, game->conf.win_w);
-		game->wall[i].dist = wdist;
 		wdist *= cos(game->player.th - game->player.ray_th);
+		game->wall[i].dist = wdist;
 		draw_one_vert_line(i, wdist, game);
 		i++;
 	}

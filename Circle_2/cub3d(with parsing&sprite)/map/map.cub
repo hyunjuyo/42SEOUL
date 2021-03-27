@@ -5,7 +5,7 @@ WE   ./textures/wall_we.xpm
 EA     ./textures/wall_ea.xpm
 
 S ./textures/sprite1.xpm
-F 70, 210, 150
+F 25, 35, 25
 C    50 , 70  ,   120
 
         1111111111111111111111111111111111111111111

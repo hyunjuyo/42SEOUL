@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/22 12:28:42 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 13:58:51 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ double	cast_single_ray(int i, t_game *game, int ray_num)
 	game->player.ray_th = ray_th;
 	get_wall_point(i, ray_th, game);
 	dist =
-		get_dist(game->player.x, game->player.y, game->wall.x, game->wall.y);
+		get_dist(game->player.x, game->player.y, game->wall[i].x, game->wall[i].y);
 	return (dist);
 }

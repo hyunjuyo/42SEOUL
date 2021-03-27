@@ -6,11 +6,39 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 15:30:27 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/23 13:34:18 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:51:48 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		check_color_area(int color, int refer_color, int area)
+{
+	int		r;
+	int		g;
+	int		b;
+	int		temp;
+	int		result;
+
+	result = 0;
+	b = color % (0x10 * 0x10);
+	color = color / (0x10 * 0x10);
+	g = color % (0x10 * 0x10);
+	color = color / (0x10 * 0x10);
+	r = color % (0x10 * 0x10);
+	temp = refer_color % (0x10 * 0x10);
+	if (b >= temp - area && b <= temp + area)
+		result += 1;
+	refer_color = refer_color / (0x10 * 0x10);
+	temp = refer_color % (0x10 * 0x10);
+	if (g >= temp - area && g <= temp + area)
+		result += 10;
+	refer_color = refer_color / (0x10 * 0x10);
+	temp = refer_color % (0x10 * 0x10);
+	if (r >= temp - area && r <= temp + area)
+		result += 100;
+	return (result);
+}
 
 void	fade_setting(int *r, int *g, int *b, double dist, t_game *game)
 {
@@ -21,7 +49,7 @@ void	fade_setting(int *r, int *g, int *b, double dist, t_game *game)
 
 	dark_dist = get_dist(1.0, 1.0, game->conf.map_x - 1, game->conf.map_y - 1);
 	fade_dist = dark_dist * 0.3;
-	weight = 1.5;
+	weight = 1.7;
 	if (dist > fade_dist)
 	{
 		fade_ratio = 1.0 - ((dist - fade_dist) / (dark_dist - fade_dist))

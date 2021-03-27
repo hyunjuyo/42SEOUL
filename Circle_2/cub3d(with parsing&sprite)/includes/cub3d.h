@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/25 18:07:28 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 14:42:50 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct		s_img
 	int			bpp;
 	int			size_l;
 	int			endian;
+	double		invisible;
 }					t_img;
 
 typedef struct		s_pla
@@ -198,7 +199,7 @@ double				rad_to_deg(double th);
 void				check_steps(double th, int *xstep, int *ystep);
 void				draw_fov_rays_on_minimap(t_game *game);
 int					draw_player_fov(t_game *game);
-int					get_texture_pixel_color(int i, int pixels, double invisible,
+int					get_texture_pixel_color(int i, int h, int pixels,
 		t_game *game, t_img *w_img);
 void				map_parsing(char *map_file, t_game *game);
 void				save_map_info(char *line, t_game *game);
@@ -217,5 +218,6 @@ int					hit_wall_check(t_game *game, int type);
 void				map_parsing_wall_check(t_game *game);
 void				screen_size_check(t_game *game);
 void				texture_ceil_n_floor(t_game *game);
+int					check_color_area(int color, int refer_color, int area);
 
 #endif

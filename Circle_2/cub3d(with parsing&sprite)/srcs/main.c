@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/25 18:08:39 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:50:49 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ int		main(int argc, char *argv[])
 
 	a = argc;
 	map_file = argv[1];
-	map_parsing(map_file, &game);
-	game.mlx = mlx_init();
+	ft_memset(&game.conf, 0, sizeof(t_conf));
 	screen_size_check(&game);
 	printf("display R : %d %d\n", game.conf.display_w, game.conf.display_h); // test
+	map_parsing(map_file, &game);
+	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, game.conf.win_w, game.conf.win_h,
 			"Cub3D 1st");
 	game_init(&game);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_one_vert_sprite_line.c                        :+:      :+:    :+:   */
+/*   draw_vert_spr_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 14:38:13 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 15:26:31 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:13:24 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		get_sprite_pixel_color(int idx, int h, int j, t_game *game, int start)
 	return(game->spr[idx].data[spr_h * game->spr[idx].width + spr_w]);
 }
 
-void	draw_one_vert_sprite_line(t_game *game, int idx, int j, int start_spot)
+void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
 {
 	int		h;
 	int		space;
@@ -48,7 +48,7 @@ void	draw_one_vert_sprite_line(t_game *game, int idx, int j, int start_spot)
 		color = get_sprite_pixel_color(idx, h + line_len * invisible / 2, j, game, start_spot);
 		if (check_color_area(color, BLUE, 0x89) != 111)
 			game->img1.data[(space / 2 + h) * game->conf.win_w + j]
-				= fade_color(color, game->spr[idx].dist, game);
+				= fade_color(color, game->spr[idx].dist, game, 1.5);
 		h++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 16:20:19 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:12:46 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	while (h < line_len && h < game->conf.win_h)
 	{
 		game->img1.data[(space / 2 + h) * game->conf.win_w + i]
-			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img), wdist, game);
+			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img), wdist, game, 1.5);
 		h++;
 	}
 }

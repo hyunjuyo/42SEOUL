@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/25 13:19:56 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:50:16 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	map_file_open_n_read(int *fd, char *map_file, t_game *game)
 		printf("open() failed\nError\n");
 		exit(1);
 	}
-	ft_memset(&game->conf, 0, sizeof(t_conf));
 	game->conf.ceil = -1;
 	game->conf.floor = -1;
 	i = 0;

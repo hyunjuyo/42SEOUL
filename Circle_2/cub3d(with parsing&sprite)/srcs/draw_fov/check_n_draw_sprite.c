@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:38:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 16:56:43 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:14:02 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,28 @@ void	draw_sprites_in_order(t_game *game, int cnt)
 	int		i;
 	int		spot;
 	double	fov_h;
+	double	th;
 	int		j;
-	int		start_spot;
 
 	fov_h = deg_to_rad(FOV, 0);
 	i = 0;
 	while (i < cnt)
 	{
 		game->spr[i].length = get_vert_line_length(game->spr[i].dist, game);
-		spot = (((game->player.th + fov_h / 2) - game->spr[i].th) / fov_h)
-			* game->conf.win_w;
+		if ((th = (game->player.th + fov_h / 2) - game->spr[i].th) < 0.0)
+			th += M_PI * 2.0;
+		else if (th > M_PI * 2.0)
+			th -= M_PI * 2.0;
+		spot = (th / fov_h) * game->conf.win_w;
 //		printf("game->player.th : %f\n", game->player.th);
 //		printf("game->spr[%d].th : %f\n", i, game->spr[i].th);
-		start_spot = spot - game->spr[i].length / 2;
+//		printf("spot : %d, start_spot : %d\n", spot, spot - game->spr[i].length / 2);
 		j = 0;
 		while (j < game->conf.win_w)
 		{
-			if (j >= start_spot && j < start_spot + game->spr[i].length
+			if (j >= spot - game->spr[i].length / 2 && j < spot + game->spr[i].length / 2
 					&& game->spr[i].dist < game->wall[j].dist)
-				draw_one_vert_sprite_line(game, i, j, start_spot);
+				draw_vert_spr_line(game, i, j, spot - game->spr[i].length / 2);
 			j++;
 		}
 		i++;

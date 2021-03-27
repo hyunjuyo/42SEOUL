@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_utils_1_bonus.c                        :+:      :+:    :+:   */
+/*   map_parsing_config_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:03:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/25 15:39:01 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:27:07 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,18 @@ void	check_conf_type_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
 	{
 		free(w_ptr);
 		if ((game->conf.win_w = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
+		{
+			if (game->conf.win_w > game->conf.display_w)
+				game->conf.win_w = game->conf.display_w;
 			game->conf.chk_complete++;
+		}
 		free(w_ptr);
 		if ((game->conf.win_h = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
+		{
+			if (game->conf.win_h > game->conf.display_h)
+				game->conf.win_h = game->conf.display_h;
 			game->conf.chk_complete++;
+		}
 		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "NO", 2) == 0)

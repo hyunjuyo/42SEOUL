@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/03/25 19:00:26 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/03/27 17:36:26 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
 		  ./srcs/draw_fov/cast_single_ray.c \
 		  ./srcs/draw_fov/get_texture_pixel_color.c \
 		  ./srcs/draw_fov/check_n_draw_sprite.c \
-		  ./srcs/draw_fov/draw_one_vert_sprite_line.c
+		  ./srcs/draw_fov/draw_vert_spr_line.c
 SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
 		  ./srcs/screen_size_check.c \
 		  ./srcs/parsing/map_parsing.c \
@@ -46,7 +46,7 @@ SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
 		  ./srcs/draw_fov/get_texture_pixel_color.c \
 		  ./srcs/draw_fov/texture_ceil_n_floor_bonus.c \
 		  ./srcs/draw_fov/check_n_draw_sprite.c \
-		  ./srcs/draw_fov/draw_one_vert_sprite_line.c
+		  ./srcs/draw_fov/draw_vert_spr_line.c
 
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)

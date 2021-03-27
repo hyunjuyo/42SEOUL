@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 14:42:50 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:11:57 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,13 @@ typedef struct		s_img
 	int			endian;
 	double		invisible;
 }					t_img;
+
+typedef struct		s_color
+{
+	int			r;
+	int			g;
+	int			b;
+}					t_color;
 
 typedef struct		s_pla
 {
@@ -210,9 +217,10 @@ char				*get_next_word(char **l_ptr);
 void				check_sprite_in_fov(t_game *game, t_chk_pnt *check);
 void				ready_to_draw_sprite(t_game *game);
 int					get_vert_line_length(double wdist, t_game *game);
-void				draw_one_vert_sprite_line(t_game *game, int idx, int j,
+void				draw_vert_spr_line(t_game *game, int idx, int j,
 		int start_spot);
-int					fade_color(int color, double dist, t_game *game);
+int					fade_color(int color, double dist, t_game *game,
+		double weight);
 void				save_player_info(t_game *game, int i, int j, char c);
 int					hit_wall_check(t_game *game, int type);
 void				map_parsing_wall_check(t_game *game);

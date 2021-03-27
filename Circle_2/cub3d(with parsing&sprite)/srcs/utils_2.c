@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 15:30:27 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 16:51:48 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:27:07 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,42 +40,38 @@ int		check_color_area(int color, int refer_color, int area)
 	return (result);
 }
 
-void	fade_setting(int *r, int *g, int *b, double dist, t_game *game)
+void	fade_setting(t_color *rgb, double dist, t_game *game, double weight)
 {
 	double	dark_dist;
 	double	fade_dist;
 	double	fade_ratio;
-	double	weight;
 
 	dark_dist = get_dist(1.0, 1.0, game->conf.map_x - 1, game->conf.map_y - 1);
 	fade_dist = dark_dist * 0.3;
-	weight = 1.7;
 	if (dist > fade_dist)
 	{
 		fade_ratio = 1.0 - ((dist - fade_dist) / (dark_dist - fade_dist))
 			* weight;
 		if (fade_ratio < 0.5)
 			fade_ratio = 0.5;
-		*r *= fade_ratio;
-		*g *= fade_ratio;
-		*b *= fade_ratio;
+		rgb->r *= fade_ratio;
+		rgb->g *= fade_ratio;
+		rgb->b *= fade_ratio;
 	}
 }
 
-int		fade_color(int color, double dist, t_game *game)
+int		fade_color(int color, double dist, t_game *game, double weight)
 {
-	int		r;
-	int		g;
-	int		b;
+	t_color	rgb;
 	int		fade_color;
 
-	b = color % (0x10 * 0x10);
+	rgb.b = color % (0x10 * 0x10);
 	color = color / (0x10 * 0x10);
-	g = color % (0x10 * 0x10);
+	rgb.g = color % (0x10 * 0x10);
 	color = color / (0x10 * 0x10);
-	r = color % (0x10 * 0x10);
-	fade_setting(&r, &g, &b, dist, game);
-	fade_color = r * 0x10 * 0x10 * 0x10 * 0x10 + g * 0x10 * 0x10 + b;
+	rgb.r = color % (0x10 * 0x10);
+	fade_setting(&rgb, dist, game, weight);
+	fade_color = rgb.r * 0x10 * 0x10 * 0x10 * 0x10 + rgb.g * 0x10 * 0x10 + rgb.b;
 	return (fade_color);
 }
 

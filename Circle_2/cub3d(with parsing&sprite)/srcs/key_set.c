@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/25 18:08:36 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/28 12:55:54 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rotate_check(t_game *game)
 			|| game->player.th - M_PI * 1 / 2 < 0.000002
 			|| game->player.th - M_PI < 0.000002
 			|| game->player.th - M_PI * 3 / 2 < 0.000002)
-		game->player.th += 0.000002;
+		game->player.th += 0.000003;
 }
 
 int		hit_wall_check(t_game *game, int type)

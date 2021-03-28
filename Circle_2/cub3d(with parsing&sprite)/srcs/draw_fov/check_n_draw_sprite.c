@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:38:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 18:14:02 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/28 13:50:19 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw_sprites_in_order(t_game *game, int cnt)
 //		printf("game->spr[%d].th : %f\n", i, game->spr[i].th);
 //		printf("spot : %d, start_spot : %d\n", spot, spot - game->spr[i].length / 2);
 		j = 0;
-		while (j < game->conf.win_w)
+		while (j < game->conf.win_w && spot > 0 - game->conf.win_w / 2 && spot < game->conf.win_w + game->conf.win_w / 2)
 		{
 			if (j >= spot - game->spr[i].length / 2 && j < spot + game->spr[i].length / 2
 					&& game->spr[i].dist < game->wall[j].dist)

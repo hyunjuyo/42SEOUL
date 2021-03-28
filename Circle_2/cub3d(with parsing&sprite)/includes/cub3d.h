@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 19:11:57 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/28 13:57:19 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define CUBE_SIZE	20
 # define MINIMAP_RAY_NUM	7
 
-# define MOVE_SPEED	0.9
-# define ROT_SPEED_RAD	0.09
+# define MOVE_SPEED	0.35
+# define ROT_SPEED_RAD	0.07
 # define FOV	60
 
 # define WALL_NO	"./textures/wall_n.xpm"

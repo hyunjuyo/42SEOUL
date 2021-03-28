@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/03/27 17:36:26 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/03/28 12:48:00 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,3 +69,5 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+
+bonus_re : fclean bonus

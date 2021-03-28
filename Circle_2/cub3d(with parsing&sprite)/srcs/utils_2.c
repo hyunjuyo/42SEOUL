@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 15:30:27 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 19:27:07 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/28 14:03:02 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	fade_setting(t_color *rgb, double dist, t_game *game, double weight)
 	{
 		fade_ratio = 1.0 - ((dist - fade_dist) / (dark_dist - fade_dist))
 			* weight;
-		if (fade_ratio < 0.5)
-			fade_ratio = 0.5;
+		if (fade_ratio < 0.39)
+			fade_ratio = 0.39;
 		rgb->r *= fade_ratio;
 		rgb->g *= fade_ratio;
 		rgb->b *= fade_ratio;

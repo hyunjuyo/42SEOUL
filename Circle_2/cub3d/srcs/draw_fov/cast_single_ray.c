@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/28 19:01:11 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:51:35 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,12 @@ void	get_next_point(double ray_th, double *px, double *py, t_chk_pnt *check)
 	check->f_nx = tan(ray_th) * (check->nx - *px) + *py;
 	check->ny = check_next_idx(check->ystep, *py);
 	check->g_ny = 1.0 / tan(ray_th) * (check->ny - *py) + *px;
-	dist_v = get_dist(*px, *py, check->nx, check->f_nx);
-	dist_h = get_dist(*px, *py, check->g_ny, check->ny);
+	if ((dist_v = get_dist(*px, *py, check->nx, check->f_nx)) == 0.0)
+		dist_v = INFINITY;
+	if ((dist_h = get_dist(*px, *py, check->g_ny, check->ny)) == 0.0)
+		dist_h = INFINITY;
+//	printf("tan(th) : %f, 1 / tan(th) : %f\n", tan(ray_th), 1.0 / tan(ray_th));
+//	printf("dist_v : %f(%f, %f), dist_h : %f(%f, %f)\n", dist_v, check->nx, check->f_nx, dist_h, check->g_ny, check->ny);
 	if (dist_v < dist_h)
 	{
 		*px = check->nx;
@@ -117,7 +121,7 @@ double	cast_single_ray(int i, t_game *game, int ray_num)
 	ray_th = (game->player.th + fov_h / 2) - (fov_h / (ray_num - 1)) * i;
 	game->player.ray_th = ray_th;
 	get_wall_point(i, ray_th, game);
-	printf("ray : %d, ray_th : %f, wall : (%f, %f)\n", i, rad_to_deg(ray_th), game->wall[i].x, game->wall[i].y);
+//	printf("ray : %d, ray_th : %f, wall : (%f, %f)\n", i, rad_to_deg(ray_th), game->wall[i].x, game->wall[i].y);
 	dist =
 		get_dist(game->player.x, game->player.y, game->wall[i].x, game->wall[i].y);
 	return (dist);

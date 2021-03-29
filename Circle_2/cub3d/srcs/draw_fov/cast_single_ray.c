@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/29 19:51:35 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/29 21:43:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ double	cast_single_ray(int i, t_game *game, int ray_num)
 	game->player.ray_th = ray_th;
 	get_wall_point(i, ray_th, game);
 //	printf("ray : %d, ray_th : %f, wall : (%f, %f)\n", i, rad_to_deg(ray_th), game->wall[i].x, game->wall[i].y);
-	dist =
-		get_dist(game->player.x, game->player.y, game->wall[i].x, game->wall[i].y);
+	dist = get_dist(game->player.x, game->player.y, game->wall[i].x,
+			game->wall[i].y);
 	return (dist);
 }

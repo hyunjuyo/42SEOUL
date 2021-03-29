@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_vert_spr_line.c                               :+:      :+:    :+:   */
+/*   draw_vert_spr_line_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 14:38:13 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/29 22:00:11 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/29 22:01:39 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
 		color = get_sprite_pixel_color(idx, h + line_len * invisible / 2, j,
 				game, start_spot);
 		if (check_color_area(color, BLUE, 0x87) != 111)
-			game->img1.data[(space / 2 + h) * game->conf.win_w + j] = color;
+			game->img1.data[(space / 2 + h) * game->conf.win_w + j]
+				= fade_color(color, game->spr[idx].dist, game, 1.5);
 		h++;
 	}
 }

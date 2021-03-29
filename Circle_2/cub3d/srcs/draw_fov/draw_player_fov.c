@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/29 20:42:17 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/29 21:06:19 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	int		space;
 	int		h;
 	t_img	w_img;
-//	double	invisible;
 
 	get_wall_texture_file(i, game, &w_img);
 	line_len = get_vert_line_length(wdist, game);
@@ -85,7 +84,7 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	while (h < line_len && h < game->conf.win_h)
 	{
 		game->img1.data[(space / 2 + h) * game->conf.win_w + i]
-			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img), wdist, game, 1.5);
+			= get_texture_pixel_color(i, h, line_len, game, &w_img);
 		h++;
 	}
 }
@@ -96,7 +95,8 @@ int		draw_player_fov(t_game *game)
 	double		wdist;
 
 	clear_screen(game, game->conf.ceil, game->conf.floor);
-	game->spr_in_fov = (char *)ft_calloc(game->conf.map_x * game->conf.map_y, sizeof(char));
+	game->spr_in_fov = (char *)ft_calloc(game->conf.map_x * game->conf.map_y,
+			sizeof(char));
 	game->wall = (t_wall *)ft_calloc(game->conf.win_w, sizeof(t_wall));
 	i = 0;
 	while (i < game->conf.win_w)

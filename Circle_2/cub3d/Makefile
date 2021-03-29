@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/03/29 18:32:08 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/03/29 22:02:00 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
 		  ./srcs/draw_fov/get_texture_pixel_color.c \
 		  ./srcs/draw_fov/texture_ceil_n_floor_bonus.c \
 		  ./srcs/draw_fov/check_n_draw_sprite.c \
-		  ./srcs/draw_fov/draw_vert_spr_line.c \
+		  ./srcs/draw_fov/draw_vert_spr_line_bonus.c \
 		  ./srcs/draw_minimap/draw_minimap.c \
 		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c
 

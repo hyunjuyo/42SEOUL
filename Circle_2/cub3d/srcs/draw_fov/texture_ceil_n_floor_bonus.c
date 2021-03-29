@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 15:15:02 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/27 19:18:59 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/29 22:11:28 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int		get_ceil_n_floor_texture(int i, double t_dist, t_game *game, char type)
 	}
 }
 
-void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist, t_game *game)
+void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist,
+		t_game *game)
 {
 	int		j;
 	int		area_len;
@@ -65,9 +66,11 @@ void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist, t_game *g
 		h = (double)j / (double)game->conf.win_h;
 		t_dist = min_dist / (1 - 2 * h);
 		game->img1.data[j * game->conf.win_w + i]
-			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'C'), t_dist, game, 2.0);
+			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'C'), t_dist,
+					game, 2.0);
 		game->img1.data[(game->conf.win_h - 1 - j) * game->conf.win_w + i]
-			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'F'), t_dist, game, 2.0);
+			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'F'), t_dist,
+					game, 2.0);
 		j++;
 	}
 }

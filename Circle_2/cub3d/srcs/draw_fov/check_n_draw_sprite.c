@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:38:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/28 13:50:19 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/29 21:55:26 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	sort_sprites(t_game *game, int cnt)
 			if (game->spr[start].dist < game->spr[start + i].dist)
 			{
 				ft_memcpy(&temp, &game->spr[start], sizeof(t_sprite));
-				ft_memcpy(&game->spr[start], &game->spr[start + i], sizeof(t_sprite));
+				ft_memcpy(&game->spr[start], &game->spr[start + i],
+						sizeof(t_sprite));
 				ft_memcpy(&game->spr[start + i], &temp, sizeof(t_sprite));
 			}
 			i++;
@@ -71,8 +72,8 @@ void	draw_sprites_in_order(t_game *game, int cnt)
 	int		j;
 
 	fov_h = deg_to_rad(FOV, 0);
-	i = 0;
-	while (i < cnt)
+	i = -1;
+	while (++i < cnt)
 	{
 		game->spr[i].length = get_vert_line_length(game->spr[i].dist, game);
 		if ((th = (game->player.th + fov_h / 2) - game->spr[i].th) < 0.0)
@@ -83,15 +84,14 @@ void	draw_sprites_in_order(t_game *game, int cnt)
 //		printf("game->player.th : %f\n", game->player.th);
 //		printf("game->spr[%d].th : %f\n", i, game->spr[i].th);
 //		printf("spot : %d, start_spot : %d\n", spot, spot - game->spr[i].length / 2);
-		j = 0;
-		while (j < game->conf.win_w && spot > 0 - game->conf.win_w / 2 && spot < game->conf.win_w + game->conf.win_w / 2)
+		j = -1;
+		while (++j < game->conf.win_w && spot > 0 - game->conf.win_w / 2
+				&& spot < game->conf.win_w + game->conf.win_w / 2)
 		{
-			if (j >= spot - game->spr[i].length / 2 && j < spot + game->spr[i].length / 2
-					&& game->spr[i].dist < game->wall[j].dist)
+			if (j >= spot - game->spr[i].length / 2 && j < spot + game->spr[i].\
+					length / 2 && game->spr[i].dist < game->wall[j].dist)
 				draw_vert_spr_line(game, i, j, spot - game->spr[i].length / 2);
-			j++;
 		}
-		i++;
 	}
 }
 
@@ -127,11 +127,8 @@ void	ready_to_draw_sprite(t_game *game)
 
 void	check_sprite_in_fov(t_game *game, t_chk_pnt *check)
 {
-		if (game->map[check->mapx][check->mapy] == '2')
-		{
-			game->spr_in_fov[check->mapx * game->conf.map_y + check->mapy] = '2';
-//			printf("wow!! %c\n", game->spr_in_fov[check->mapx * game->conf.map_y + check->mapy]);
-		}
-		else if (game->map[check->mapx][check->mapy] == '3')
-			game->spr_in_fov[check->mapx * game->conf.map_y + check->mapy] = '3';
+	if (game->map[check->mapx][check->mapy] == '2')
+		game->spr_in_fov[check->mapx * game->conf.map_y + check->mapy] = '2';
+	else if (game->map[check->mapx][check->mapy] == '3')
+		game->spr_in_fov[check->mapx * game->conf.map_y + check->mapy] = '3';
 }

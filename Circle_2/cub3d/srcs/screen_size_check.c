@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 17:28:58 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/25 18:56:34 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/29 22:14:25 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 void	screen_size_check(t_game *game)
 {
-	mlx_get_screen_size(game->mlx, &game->conf.display_w, &game->conf.display_h);
+	mlx_get_screen_size(game->mlx, &game->conf.display_w,
+			&game->conf.display_h);
 }

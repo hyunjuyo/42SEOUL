@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 15:30:27 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/28 17:21:31 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/29 22:15:01 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int		fade_color(int color, double dist, t_game *game, double weight)
 	color = color / (0x10 * 0x10);
 	rgb.r = color % (0x10 * 0x10);
 	fade_setting(&rgb, dist, game, weight);
-	fade_color = rgb.r * 0x10 * 0x10 * 0x10 * 0x10 + rgb.g * 0x10 * 0x10 + rgb.b;
+	fade_color = rgb.r * 0x10 * 0x10 * 0x10 * 0x10 + rgb.g * 0x10 * 0x10
+		+ rgb.b;
 	return (fade_color);
 }
 

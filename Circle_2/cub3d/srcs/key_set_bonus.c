@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_set.c                                          :+:      :+:    :+:   */
+/*   key_set_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/30 17:37:05 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:28:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void	key_set_more_and_more(int keycode, t_game *game)
 		game->player.th -= ROT_SPEED_RAD;
 	else if (keycode == KEY_ESC)
 		exit(0);
+	else if (keycode == KEY_SPACE && game->player.jh == 0.0)
+		game->player.jh = 0.25;
+	else if (keycode == KEY_SPACE && game->player.jh != 0.0)
+		game->player.jh = 0.0;
 	rotate_check(game);
 //	printf("(%f, %f) %f deg\n", game->player.x, game->player.y,
 //			rad_to_deg(game->player.th));

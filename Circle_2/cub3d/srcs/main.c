@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/30 15:10:56 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:21:42 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		main(int argc, char *argv[])
 	ft_memset(&game.conf, 0, sizeof(t_conf));
 	screen_size_check(&game);
 	printf("display R : %d %d\n", game.conf.display_w, game.conf.display_h); // test
+	ft_memset(&game.player, 0, sizeof(t_pla));
 	map_parsing(map_file, &game);
 	game_init(&game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_set, &game);

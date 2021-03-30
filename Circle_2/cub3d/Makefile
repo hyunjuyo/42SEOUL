@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/03/29 22:02:00 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/03/30 17:37:56 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ MATH_FLAGS	= -lm
 LIBFT_FLAGS	= -L./Libft -lft
 MLX_MMS_LIB	= ./libmlx.dylib
 
-SRCS	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
+SRCS	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c \
+		  ./srcs/key_set.c \
 		  ./srcs/screen_size_check.c \
 		  ./srcs/parsing/map_parsing.c \
 		  ./srcs/parsing/get_next_line.c \
@@ -34,8 +35,10 @@ SRCS	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
 		  ./srcs/draw_fov/check_n_draw_sprite.c \
 		  ./srcs/draw_fov/draw_vert_spr_line.c \
 		  ./srcs/draw_minimap/draw_minimap.c \
-		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c
-SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
+		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c \
+		  ./srcs/do_jump.c
+SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c \
+		  ./srcs/key_set_bonus.c \
 		  ./srcs/screen_size_check.c \
 		  ./srcs/parsing/map_parsing.c \
 		  ./srcs/parsing/get_next_line.c \
@@ -50,7 +53,8 @@ SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c ./srcs/key_set.c \
 		  ./srcs/draw_fov/check_n_draw_sprite.c \
 		  ./srcs/draw_fov/draw_vert_spr_line_bonus.c \
 		  ./srcs/draw_minimap/draw_minimap.c \
-		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c
+		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c \
+		  ./srcs/do_jump.c
 
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)

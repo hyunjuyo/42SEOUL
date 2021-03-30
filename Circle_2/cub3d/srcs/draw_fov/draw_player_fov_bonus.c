@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/29 21:08:50 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:29:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	int		space;
 	int		h;
 	t_img	w_img;
+	int		jump;
 
+	jump = 0;
 	get_wall_texture_file(i, game, &w_img);
 	line_len = get_vert_line_length(wdist, game);
 	w_img.invisible = 0.0;
@@ -80,10 +82,13 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 		w_img.invisible = (double)abs(space) / (double)line_len;
 		space = 0;
 	}
+	if (game->player.jh != 0.0)
+		jump = space_during_jump(i, line_len, game);
+//	printf("space : %d\n", space);
 	h = 0;
-	while (h < line_len && h < game->conf.win_h)
+	while (h < line_len && h + space / 2 + jump < game->conf.win_h)
 	{
-		game->img1.data[(space / 2 + h) * game->conf.win_w + i]
+		game->img1.data[(space / 2 + jump + h) * game->conf.win_w + i]
 			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img),
 					wdist, game, 1.5);
 		h++;

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/29 21:16:46 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:51:07 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ typedef struct		s_game
 	t_sprite	spr[SPR_MAX_IN_FOV];
 	t_conf		conf;
 	char		map[MAPX_MAX][MAPY_MAX];
+	int			cubsize;
 	char		*spr_in_fov;
 //	int			map[MAP_X][MAP_Y];
 }					t_game;

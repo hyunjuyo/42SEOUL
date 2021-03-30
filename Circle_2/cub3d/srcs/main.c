@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/29 21:00:29 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/30 15:10:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	game_init(t_game *game)
 			game->conf.win_h);
 	game->img1.data = (int *)mlx_get_data_addr(game->img1.img, &game->img1.bpp,
 			&game->img1.size_l, &game->img1.endian);
+	if (game->conf.win_w < 50 || game->conf.win_h < 50)
+	{
+		printf("Error\nwin_size is too small\n");
+		exit (1);
+	}
 //	game->player.x = 1.5;
 //	game->player.y = 1.5;
 //	game->player.th = deg_to_rad(90.0, 1);

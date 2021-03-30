@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:11:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/29 22:08:12 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:50:24 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	draw_using_xstep(int i, int px, int py, t_game *game, t_ray *ray)
 {
 	ray->rx = px + ray->xstep;
-	while (ray->xstep == 1 && ray->rx < (int)(game->wall[i].x * CUBE_SIZE))
+	while (ray->xstep == 1 && ray->rx < (int)(game->wall[i].x * game->cubsize))
 	{
 		ray->ry = tan(game->player.ray_th) * (ray->rx - px) + py;
 		game->img1.data[(ray->h - 1 - ray->ry) * ray->w + ray->rx] = 0x207030;
 		ray->rx += ray->xstep;
 	}
-	while (ray->xstep == -1 && ray->rx > (int)(game->wall[i].x * CUBE_SIZE))
+	while (ray->xstep == -1 && ray->rx > (int)(game->wall[i].x * game->cubsize))
 	{
 		ray->ry = tan(game->player.ray_th) * (ray->rx - px) + py;
 		game->img1.data[(ray->h - 1 - ray->ry) * ray->w + ray->rx] = 0x207030;
@@ -32,13 +32,13 @@ void	draw_using_xstep(int i, int px, int py, t_game *game, t_ray *ray)
 void	draw_using_ystep(int i, int px, int py, t_game *game, t_ray *ray)
 {
 	ray->ry = py + ray->ystep;
-	while (ray->ystep == 1 && ray->ry < (int)(game->wall[i].y * CUBE_SIZE))
+	while (ray->ystep == 1 && ray->ry < (int)(game->wall[i].y * game->cubsize))
 	{
 		ray->rx = 1 / tan(game->player.ray_th) * (ray->ry - py) + px;
 		game->img1.data[(ray->h - 1 - ray->ry) * ray->w + ray->rx] = 0x207030;
 		ray->ry += ray->ystep;
 	}
-	while (ray->ystep == -1 && ray->ry > (int)(game->wall[i].y * CUBE_SIZE))
+	while (ray->ystep == -1 && ray->ry > (int)(game->wall[i].y * game->cubsize))
 	{
 		ray->rx = 1 / tan(game->player.ray_th) * (ray->ry - py) + px;
 		game->img1.data[(ray->h - 1 - ray->ry) * ray->w + ray->rx] = 0x207030;
@@ -53,7 +53,7 @@ void	draw_one_ray(int i, int px, int py, t_game *game)
 
 	tan_th = tan(game->player.ray_th);
 	ray.w = game->conf.win_w;
-	ray.h = game->conf.map_y * CUBE_SIZE;
+	ray.h = game->conf.map_y * game->cubsize;
 	check_steps(game->player.ray_th, &ray.xstep, &ray.ystep);
 	if (tan_th <= 1.05 && tan_th >= -1.05)
 		draw_using_xstep(i, px, py, game, &ray);
@@ -70,9 +70,9 @@ void	draw_fov_rays_on_minimap(t_game *game)
 	int		ray_num;
 
 	total_w = game->conf.win_w;
-	px = (int)(game->player.x * CUBE_SIZE);
-	py = (int)(game->player.y * CUBE_SIZE);
-	game->img1.data[(game->conf.map_y * CUBE_SIZE - 1 - py) * total_w + px]
+	px = (int)(game->player.x * game->cubsize);
+	py = (int)(game->player.y * game->cubsize);
+	game->img1.data[(game->conf.map_y * game->cubsize - 1 - py) * total_w + px]
 		= BLUE;
 	i = 0;
 	ray_num = MINIMAP_RAY_NUM;

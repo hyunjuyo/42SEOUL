@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 17:36:03 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:01:52 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,12 +201,6 @@ typedef struct		s_ray
 	int				h;
 }					t_ray;
 
-typedef struct		s_space
-{
-	int				c;
-	int				f;
-}					t_space;
-
 typedef struct		s_bmp
 {
 	int				fd;
@@ -251,8 +245,6 @@ void				map_parsing_wall_check(t_game *game);
 void				screen_size_check(t_game *game);
 void				texture_ceil_n_floor(t_game *game);
 int					check_color_area(int color, int refer_color, int area);
-void				do_jump(t_game *game);
-int					during_down(int i, int line_len, t_game *game);
 void				check_saving_bmp_file(t_game *game);
 
 #endif

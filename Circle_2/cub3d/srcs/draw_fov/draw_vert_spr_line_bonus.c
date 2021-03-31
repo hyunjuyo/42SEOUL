@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 14:38:13 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 16:42:50 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 17:57:04 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,8 @@ void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
 	int		color;
 	double	invisible;
 	int		line_len;
-	int		vh;
 
 	line_len = game->spr[idx].length;
-	vh = 0;
-	if (game->player.view_h != 0.0)
-		vh = line_len * game->player.view_h;
 	invisible = 0.0;
 	space = (game->conf.win_h - line_len);
 	if (game->conf.win_h - line_len < 0)
@@ -52,7 +48,7 @@ void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
 		color = get_sprite_pixel_color(idx, h + line_len * invisible / 2, j,
 				game, start_spot);
 		if (check_color_area(color, BLUE, 0x87) != 111)
-			game->img1.data[(space / 2 + h + vh) * game->conf.win_w + j]
+			game->img1.data[(space / 2 + h) * game->conf.win_w + j]
 				= fade_color(color, game->spr[idx].dist, game, 1.5);
 		h++;
 	}

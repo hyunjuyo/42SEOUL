@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:46:14 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 14:56:44 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 15:25:34 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,13 @@ void	save_bmp_file(t_game *game)
 	save_img(game, &bmp);
 	free(bmp.img);
 	close(bmp.fd);
+}
+
+void	check_saving_bmp_file(t_game *game)
+{
+	if (game->save_flag && ft_strncmp(game->save_flag, "--save", 7) == 0)
+	{
+		save_bmp_file(game);
+		exit (1);
+	}
 }

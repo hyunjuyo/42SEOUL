@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 13:14:46 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 15:27:51 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, char *argv[])
 
 	if (argc < 2 || argc > 3)
 	{
-		printf("Error\ninvalid argc\n");
+		printf("Error\ninvalid argc : argc is %d\n", argc);
 		exit (1);
 	}
 	game.save_flag = argv[2];

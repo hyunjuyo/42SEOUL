@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/30 19:28:27 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 16:48:22 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,23 @@ void	key_set_more_and_more(int keycode, t_game *game)
 		game->player.th -= ROT_SPEED_RAD;
 	else if (keycode == KEY_ESC)
 		exit(0);
-	else if (keycode == KEY_SPACE && game->player.jh == 0.0)
-		game->player.jh = 0.25;
-	else if (keycode == KEY_SPACE && game->player.jh != 0.0)
-		game->player.jh = 0.0;
+	else if (keycode == KEY_SHIFT && game->player.view_h == 0.0)
+		game->player.view_h = -0.25;
+	else if (keycode == KEY_SHIFT && game->player.view_h != 0.0)
+		game->player.view_h = 0.0;
+	if (game->player.jump != 0)
+	{
+		game->player.jump++;
+		game->player.view_h = sin((M_PI / 7) * game->player.jump) * 0.35;
+		if (game->player.jump == 7)
+			game->player.jump = 0;
+	}
+	else if (keycode == KEY_SPACE)
+	{
+		game->player.jump = 1;
+		game->player.view_h = sin((M_PI / 7) * game->player.jump) * 0.35;
+		printf("[jump %d] view_h : %f\n", game->player.jump, game->player.view_h);
+	}
 	rotate_check(game);
 //	printf("(%f, %f) %f deg\n", game->player.x, game->player.y,
 //			rad_to_deg(game->player.th));

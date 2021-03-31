@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 14:00:21 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 17:47:40 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	int		space;
 	int		h;
 	t_img	w_img;
-	int		jump;
+	int		vh;
 
-	jump = 0;
+	vh = 0;
 	get_wall_texture_file(i, game, &w_img);
 	line_len = get_vert_line_length(wdist, game);
 	w_img.invisible = 0.0;
@@ -82,13 +82,13 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 		w_img.invisible = (double)abs(space) / (double)line_len;
 		space = 0;
 	}
-	if (game->player.jh != 0.0)
-		jump = space_during_jump(i, line_len, game);
+	if (game->player.view_h != 0.0)
+		vh = during_down(i, line_len, game);
 //	printf("space : %d\n", space);
 	h = 0;
-	while (h < line_len && h + space / 2 + jump < game->conf.win_h)
+	while (h < line_len && h + space / 2 < game->conf.win_h)
 	{
-		game->img1.data[(space / 2 + jump + h) * game->conf.win_w + i]
+		game->img1.data[(space / 2 + vh + h) * game->conf.win_w + i]
 			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img),
 					wdist, game, 1.5);
 		h++;
@@ -115,11 +115,7 @@ int		draw_player_fov(t_game *game)
 	}
 	texture_ceil_n_floor(game);
 	ready_to_draw_sprite(game);
-	if (game->save_flag && ft_strncmp(game->save_flag, "--save", 7) == 0)
-	{
-		save_bmp_file(game);
-		exit (1);
-	}
+	check_saving_bmp_file(game);
 	free(game->wall);
 	free(game->spr_in_fov);
 	draw_minimap(game);

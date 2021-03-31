@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/30 19:21:42 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 13:14:46 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ int		main(int argc, char *argv[])
 {
 	t_game	game;
 	char	*map_file;
-	int		a;
 
-	a = argc;
+	if (argc < 2 || argc > 3)
+	{
+		printf("Error\ninvalid argc\n");
+		exit (1);
+	}
+	game.save_flag = argv[2];
 	map_file = argv[1];
 	ft_memset(&game.conf, 0, sizeof(t_conf));
 	screen_size_check(&game);

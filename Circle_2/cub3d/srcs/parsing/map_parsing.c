@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/28 17:04:20 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 11:57:28 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	map_file_open_n_read(int *fd, char *map_file, t_game *game)
 	
 	if ((*fd = open(map_file, O_RDONLY)) == -1)
 	{
-		printf("open() failed\nError\n");
+		printf("Error\n[map]open() failed\n");
 		exit(1);
 	}
 	game->conf.ceil = -1;

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:24:36 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/30 19:15:07 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 13:03:18 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	do_jump(t_game *game)
 	{
 		game->player.jh = sin(i) * jump_height * game->conf.win_h;
 		printf("game->player.jh : %f\n", game->player.jh);
-		draw_player_fov(game);
+//		draw_player_fov(game);
 		i += jump_speed;
 	}
 	game->player.jh = 0.0;

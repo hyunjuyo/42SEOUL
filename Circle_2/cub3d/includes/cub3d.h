@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/30 18:56:16 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 13:16:23 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct		s_game
 	char		map[MAPX_MAX][MAPY_MAX];
 	int			cubsize;
 	char		*spr_in_fov;
+	char		*save_flag;
 //	int			map[MAP_X][MAP_Y];
 }					t_game;
 
@@ -236,5 +237,6 @@ void				texture_ceil_n_floor(t_game *game);
 int					check_color_area(int color, int refer_color, int area);
 void				do_jump(t_game *game);
 int					space_during_jump(int i, int line_len, t_game *game);
+void				save_bmp_file(t_game *game);
 
 #endif

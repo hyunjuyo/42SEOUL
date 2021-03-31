@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 11:57:28 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:58:54 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,18 @@ void	store_rotated_map(t_game *game)
 	int	j;
 
 	ft_memset(game->map, 0, sizeof(char) * MAPX_MAX * MAPY_MAX);
+	i = 0;
+	while (i < game->conf.map_x)     // need to check NULL at the last index
+	{
+		j = 0;
+		while (j < game->conf.map_y)     // need to check NULL at the last index
+		{
+			printf("%d ", game->map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 	ft_memset(&game->player, 0, sizeof(t_pla));
 	i = 0;
 	while (i < game->conf.map_x)     // need to check NULL at the last index
@@ -111,6 +123,8 @@ void	store_rotated_map(t_game *game)
 		{
 			game->map[i][j]
 				= game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
+			if (game->map[i][j] == ' ')
+				game->map[i][j] = '@';
 			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
 					|| game->map[i][j] == 'W' || game->map[i][j] == 'E')
 				save_player_info(game, i, j, game->map[i][j]);

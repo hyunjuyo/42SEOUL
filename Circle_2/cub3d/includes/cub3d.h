@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 13:16:23 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/03/31 15:00:57 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,51 +70,51 @@ typedef enum		e_bool
 
 typedef struct		s_conf
 {
-	int			display_w;
-	int			display_h;
-	int			win_w;
-	int			win_h;
-	int			map_x;
-	int			map_y;
-	char		wall_no[PATH_LEN];
-	char		wall_so[PATH_LEN];
-	char		wall_we[PATH_LEN];
-	char		wall_ea[PATH_LEN];
-	char		sprite[SPR_TYPE][PATH_LEN];
-	int			ceil;
-	int			floor;
-	int			chk_complete;
-	int			map_lines;
-	char		**temp_map_addr;
+	int				display_w;
+	int				display_h;
+	int				win_w;
+	int				win_h;
+	int				map_x;
+	int				map_y;
+	char			wall_no[PATH_LEN];
+	char			wall_so[PATH_LEN];
+	char			wall_we[PATH_LEN];
+	char			wall_ea[PATH_LEN];
+	char			sprite[SPR_TYPE][PATH_LEN];
+	int				ceil;
+	int				floor;
+	int				chk_complete;
+	int				map_lines;
+	char			**temp_map_addr;
 }					t_conf;
 
 typedef struct		s_img
 {
-	void		*img;
-	int			*data;
-	int			width;
-	int			height;
-	int			bpp;
-	int			size_l;
-	int			endian;
-	double		invisible;
+	void			*img;
+	int				*data;
+	int				width;
+	int				height;
+	int				bpp;
+	int				size_l;
+	int				endian;
+	double			invisible;
 }					t_img;
 
 typedef struct		s_color
 {
-	int			r;
-	int			g;
-	int			b;
+	int				r;
+	int				g;
+	int				b;
 }					t_color;
 
 typedef struct		s_pla
 {
-	double		x;
-	double		y;
-	double		th;
-	double		ray_th;
-	double		jh;
-	double		jh_w;
+	double			x;
+	double			y;
+	double			th;
+	double			ray_th;
+	double			jh;
+	double			jh_w;
 }					t_pla;
 
 typedef enum		e_dir
@@ -127,45 +127,44 @@ typedef enum		e_dir
 
 typedef struct		s_wall
 {
-	double		x;
-	double		y;
-	double		dist;
-	t_dir		dir;
+	double			x;
+	double			y;
+	double			dist;
+	t_dir			dir;
 }					t_wall;
 
 typedef struct		s_sprite
 {
-	void		*img;
-	int			*data;
-	int			width;
-	int			height;
-	int			bpp;
-	int			size_l;
-	int			endian;
-	double		x;
-	double		y;
-	double		th;
-	double		dist;
-	int			length;
+	void			*img;
+	int				*data;
+	int				width;
+	int				height;
+	int				bpp;
+	int				size_l;
+	int				endian;
+	double			x;
+	double			y;
+	double			th;
+	double			dist;
+	int				length;
 }					t_sprite;
 
 typedef struct		s_game
 {
-	void		*mlx;
-	void		*win;
-	t_img		img1;
-	t_img		img2;
-	t_img		c_img;
-	t_img		f_img;
-	t_pla		player;
-	t_wall		*wall;
-	t_sprite	spr[SPR_MAX_IN_FOV];
-	t_conf		conf;
-	char		map[MAPX_MAX][MAPY_MAX];
-	int			cubsize;
-	char		*spr_in_fov;
-	char		*save_flag;
-//	int			map[MAP_X][MAP_Y];
+	void			*mlx;
+	void			*win;
+	t_img			img1;
+	t_img			img2;
+	t_img			c_img;
+	t_img			f_img;
+	t_pla			player;
+	t_wall			*wall;
+	t_sprite		spr[SPR_MAX_IN_FOV];
+	t_conf			conf;
+	char			map[MAPX_MAX][MAPY_MAX];
+	int				cubsize;
+	char			*spr_in_fov;
+	char			*save_flag;
 }					t_game;
 
 typedef enum		e_line
@@ -176,30 +175,40 @@ typedef enum		e_line
 
 typedef struct		s_chk_pnt
 {
-	double		px;
-	double		py;
-	double		nx;
-	double		ny;
-	double		f_nx;
-	double		g_ny;
-	t_line		line;
-	int			mapx;
-	int			mapy;
-	int			xstep;
-	int			ystep;
-	t_bool		hit_wall;
+	double			px;
+	double			py;
+	double			nx;
+	double			ny;
+	double			f_nx;
+	double			g_ny;
+	t_line			line;
+	int				mapx;
+	int				mapy;
+	int				xstep;
+	int				ystep;
+	t_bool			hit_wall;
 
 }					t_chk_pnt;
 
 typedef struct		s_ray
 {
-	int			rx;
-	int			ry;
-	int			xstep;
-	int			ystep;
-	int			w;
-	int			h;
+	int				rx;
+	int				ry;
+	int				xstep;
+	int				ystep;
+	int				w;
+	int				h;
 }					t_ray;
+
+typedef struct		s_bmp
+{
+	int				fd;
+	int				pad;
+	int				file_size;
+	unsigned char	file_hd[14];
+	unsigned char	info_hd[40];
+	unsigned char	*img;
+}					t_bmp;
 
 int					key_set(int keycode, t_game *game);
 int					draw_minimap(t_game *game);

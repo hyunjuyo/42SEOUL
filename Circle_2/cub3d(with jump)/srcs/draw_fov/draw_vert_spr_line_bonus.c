@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 14:38:13 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 16:42:50 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/01 17:16:52 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,32 @@ int		get_sprite_pixel_color(int idx, int h, int j, t_game *game, int start)
 void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
 {
 	int		h;
-	int		space;
+	t_space	space;
 	int		color;
-	double	invisible;
+	double	invisible_c;
 	int		line_len;
 	int		vh;
 
 	line_len = game->spr[idx].length;
+	space.line_len = line_len;
 	vh = 0;
 	if (game->player.view_h != 0.0)
 		vh = line_len * game->player.view_h;
-	invisible = 0.0;
-	space = (game->conf.win_h - line_len);
-	if (game->conf.win_h - line_len < 0)
+	invisible_c = 0.0;
+	space.c = (game->conf.win_h - line_len) / 2 + vh;
+	if (space.c < 0)
 	{
-		invisible = (double)abs(space) / (double)line_len;
-		space = 0;
+		space.line_len += space.c;
+		invisible_c = (double)abs(space.c) / (double)line_len;
+		space.c = 0;
 	}
 	h = 0;
-	while (h < line_len && h < game->conf.win_h)
+	while (h < space.line_len && space.c + h < game->conf.win_h)
 	{
-		color = get_sprite_pixel_color(idx, h + line_len * invisible / 2, j,
+		color = get_sprite_pixel_color(idx, h + line_len * invisible_c, j,
 				game, start_spot);
 		if (check_color_area(color, BLUE, 0x87) != 111)
-			game->img1.data[(space / 2 + h + vh) * game->conf.win_w + j]
+			game->img1.data[(space.c + h) * game->conf.win_w + j]
 				= fade_color(color, game->spr[idx].dist, game, 1.5);
 		h++;
 	}

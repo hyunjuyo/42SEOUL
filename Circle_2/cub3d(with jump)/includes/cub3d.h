@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 17:36:03 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/01 17:13:32 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct		s_img
 	int				bpp;
 	int				size_l;
 	int				endian;
-	double			invisible;
+	double			invisible_c;
 }					t_img;
 
 typedef struct		s_color
@@ -205,6 +205,7 @@ typedef struct		s_space
 {
 	int				c;
 	int				f;
+	int				line_len;
 }					t_space;
 
 typedef struct		s_bmp

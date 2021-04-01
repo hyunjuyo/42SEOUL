@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/01 17:13:32 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/01 18:44:33 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,9 @@ typedef struct		s_ray
 
 typedef struct		s_space
 {
-	int				c;
-	int				f;
+	int				vh;
+	int				ceil;
+	int				floor;
 	int				line_len;
 }					t_space;
 

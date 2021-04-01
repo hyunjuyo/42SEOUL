@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 15:25:28 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/01 19:00:53 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,23 @@ void	get_wall_texture_file(int i, t_game *game, t_img *w_img)
 void	draw_one_vert_line(int i, double wdist, t_game *game)
 {
 	int		line_len;
-	int		space;
+	int		space_ceil;
 	int		h;
 	t_img	w_img;
 
 	get_wall_texture_file(i, game, &w_img);
 	line_len = get_vert_line_length(wdist, game);
-	w_img.invisible = 0.0;
-	space = game->conf.win_h - line_len;
-	if (game->conf.win_h - line_len < 0)
+	w_img.invisible_c = 0.0;
+	space_ceil = (game->conf.win_h - line_len) / 2;
+	if (space_ceil < 0)
 	{
-		w_img.invisible = (double)abs(space) / (double)line_len;
-		space = 0;
+		w_img.invisible_c = (double)abs(space_ceil) / (double)line_len;
+		space_ceil = 0;
 	}
 	h = 0;
-	while (h < line_len && h < game->conf.win_h)
+	while (h < line_len && space_ceil + h < game->conf.win_h)
 	{
-		game->img1.data[(space / 2 + h) * game->conf.win_w + i]
+		game->img1.data[(space_ceil + h) * game->conf.win_w + i]
 			= get_texture_pixel_color(i, h, line_len, game, &w_img);
 		h++;
 	}

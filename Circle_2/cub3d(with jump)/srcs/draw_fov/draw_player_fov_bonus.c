@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/01 17:32:02 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/01 18:49:49 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,27 +70,26 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 	t_space	space;
 	int		h;
 	t_img	w_img;
-	int		vh;
 
 	get_wall_texture_file(i, game, &w_img);
 	line_len = get_vert_line_length(wdist, game);
 	space.line_len = line_len;
-	vh = 0;
+	space.vh = 0;
 	if (game->player.view_h != 0.0)
-		vh = line_len * game->player.view_h;
+		space.vh = line_len * game->player.view_h;
 	w_img.invisible_c = 0.0;
-	space.c = (game->conf.win_h - line_len) / 2 + vh;
-	if (space.c < 0)
+	space.ceil = (game->conf.win_h - line_len) / 2 + space.vh;
+	if (space.ceil < 0)
 	{
-		space.line_len += space.c;
-		w_img.invisible_c = (double)abs(space.c) / (double)line_len;
-		space.c = 0;
+		space.line_len += space.ceil;
+		w_img.invisible_c = (double)abs(space.ceil) / (double)line_len;
+		space.ceil = 0;
 	}
 //	printf("space : %d\n", space);
 	h = 0;
-	while (h < space.line_len && space.c + h < game->conf.win_h)
+	while (h < space.line_len && space.ceil + h < game->conf.win_h)
 	{
-		game->img1.data[(space.c + h) * game->conf.win_w + i]
+		game->img1.data[(space.ceil + h) * game->conf.win_w + i]
 			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img),
 					wdist, game, 1.5);
 		h++;

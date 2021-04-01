@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 15:15:02 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/01 18:10:03 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/01 18:48:20 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist_ceil,
 		double min_dist_floor, t_game *game)
 {
 	int		j;
-//	int		area_len;
 	t_space	space;
 	double	h;
 	double	t_dist;
@@ -71,10 +70,10 @@ void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist_ceil,
 	vh = 0;
 	if (game->player.view_h != 0.0)
 		vh = wall_len * game->player.view_h;
-	space.c = (game->conf.win_h - wall_len) / 2 + vh;
-	space.f = (game->conf.win_h - wall_len) / 2 - vh;
+	space.ceil = (game->conf.win_h - wall_len) / 2 + vh;
+	space.floor = (game->conf.win_h - wall_len) / 2 - vh;
 	j = -1;
-	while (++j < space.c)
+	while (++j < space.ceil)
 	{
 		h = (double)j / (double)game->conf.win_h;
 		t_dist = min_dist_ceil / (1 - 2 * h);
@@ -83,7 +82,7 @@ void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist_ceil,
 					game, 2.0);
 	}
 	j = -1;
-	while (++j < space.f)
+	while (++j < space.floor)
 	{
 		h = (double)j / (double)game->conf.win_h;
 		t_dist = min_dist_floor / (1 - 2 * h);

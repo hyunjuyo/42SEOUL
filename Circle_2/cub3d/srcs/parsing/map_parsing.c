@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 18:58:54 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/01 14:20:10 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	save_conf_info(char *line, t_game *game)
 	printf("conf.map_lines : %d\n", game->conf.map_lines); // test
 	free(temp);
 }
-
+/*
 void	fill_with_spaces(t_game *game)
 {
 	int	i;
@@ -66,7 +66,7 @@ void	fill_with_spaces(t_game *game)
 		i++;
 	}
 }
-
+*/
 void	map_file_open_n_read(int *fd, char *map_file, t_game *game)
 {
 	char	*line;
@@ -93,7 +93,7 @@ void	map_file_open_n_read(int *fd, char *map_file, t_game *game)
 	}
 	else
 		free(line);
-	fill_with_spaces(game);
+//	fill_with_spaces(game);
 }
 
 void	store_rotated_map(t_game *game)
@@ -102,46 +102,41 @@ void	store_rotated_map(t_game *game)
 	int	j;
 
 	ft_memset(game->map, 0, sizeof(char) * MAPX_MAX * MAPY_MAX);
-	i = 0;
-	while (i < game->conf.map_x)     // need to check NULL at the last index
-	{
-		j = 0;
-		while (j < game->conf.map_y)     // need to check NULL at the last index
-		{
-			printf("%d ", game->map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
 	ft_memset(&game->player, 0, sizeof(t_pla));
-	i = 0;
-	while (i < game->conf.map_x)     // need to check NULL at the last index
+	i = -1;
+	while (++i < game->conf.map_x)
 	{
-		j = 0;
-		while (j < game->conf.map_y)     // need to check NULL at the last index
+		j = -1;
+		while (++j < game->conf.map_y)
 		{
+			if (i >= (int)ft_strlen(game->conf.temp_map_addr[game->conf.map_y - 1 - j]))
+				continue;
 			game->map[i][j]
 				= game->conf.temp_map_addr[game->conf.map_y - 1 - j][i];
-			if (game->map[i][j] == ' ')
-				game->map[i][j] = '@';
 			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
 					|| game->map[i][j] == 'W' || game->map[i][j] == 'E')
 				save_player_info(game, i, j, game->map[i][j]);
-			j++;
 		}
-		i++;
 	}
 	i = -1; // test
 	while (++i < game->conf.map_x) // test
-		printf("%s\n", game->map[i]); // test
+	{
+		j = -1;
+		while (++j < game->conf.map_y)
+		{
+			if (game->map[i][j] == 0)
+				printf(" ");
+			else
+				printf("%c", game->map[i][j]);
+		}
+		printf("\n");
+	}
 	i = -1;
 	while (++i < game->conf.map_y)
 	{
 		printf("Here~~ free!!\n");
 		free(game->conf.temp_map_addr[i]);
 	}
-
 }
 
 void	map_parsing(char *map_file, t_game *game)

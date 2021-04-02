@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/01 18:49:49 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/02 15:40:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int		draw_player_fov(t_game *game)
 	int			i;
 	double		wdist;
 
+	player_jumping_check(game);
 	clear_screen(game, game->conf.ceil, game->conf.floor);
 	game->spr_in_fov = (char *)ft_calloc(game->conf.map_x * game->conf.map_y,
 			sizeof(char));

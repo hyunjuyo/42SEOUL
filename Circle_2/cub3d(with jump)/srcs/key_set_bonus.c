@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/01 18:20:17 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/02 15:16:41 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,10 @@ void	key_set_more_and_more(int keycode, t_game *game)
 		exit(0);
 	else if (keycode == KEY_SHIFT && game->player.view_h == 0.0)
 		game->player.view_h = -0.25;
-	else if (keycode == KEY_SHIFT && game->player.view_h != 0.0)
-		game->player.view_h = 0.0;
-	if (game->player.jump != 0)
-	{
-		game->player.jump++;
-		game->player.view_h = sin((M_PI / 9) * game->player.jump) * 0.3;
-		if (game->player.jump == 9)
-			game->player.jump = 0;
-//		printf("[jump %d] view_h : %f\n", game->player.jump, game->player.view_h);
-	}
 	else if (keycode == KEY_SPACE)
 	{
 		game->player.jump = 3;
-		game->player.view_h = sin((M_PI / 9) * game->player.jump) * 0.3;
+		game->player.view_h = sin((M_PI / 12) * game->player.jump) * 0.35;
 //		printf("[jump %d] view_h : %f\n", game->player.jump, game->player.view_h);
 	}
 	rotate_check(game);

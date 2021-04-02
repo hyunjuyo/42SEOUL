@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 15:27:51 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/02 18:08:36 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,19 @@ void	game_init(t_game *game)
 		printf("Error\nwin_size is too small\n");
 		exit (1);
 	}
-//	game->player.x = 1.5;
-//	game->player.y = 1.5;
-//	game->player.th = deg_to_rad(90.0, 1);
+	/*
+	if ((game->pid = fork()) == -1)
+	{
+		printf("Error\nfork() failed\n");
+		exit (1);
+	}
+	printf("pid : %d\n", game->pid);
+	if (game->pid == 0)
+	{
+		system("afplay ./bgm/bgm.mp3 -t 10");
+		atexit(bgm_control);
+	}
+	*/
 }
 
 int		main(int argc, char *argv[])
@@ -49,7 +59,9 @@ int		main(int argc, char *argv[])
 	ft_memset(&game.player, 0, sizeof(t_pla));
 	map_parsing(map_file, &game);
 	game_init(&game);
-	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, key_set, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L<<0, key_set, &game);
+	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 1L<<1, key_set2, &game);
+	mlx_hook(game.win, X_EVENT_EXIT, 0, exit_game, &game);
 	mlx_loop_hook(game.mlx, draw_player_fov, &game);
 	mlx_loop(game.mlx);
 	return (0);

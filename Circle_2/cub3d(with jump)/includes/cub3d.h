@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/01 18:44:33 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/02 18:05:52 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,9 @@
 # define CUBE_SIZE	5
 # define MINIMAP_RAY_NUM	50
 
-# define MOVE_SPEED	0.9
+# define MOVE_SPEED	0.75
 # define ROT_SPEED_RAD	0.09
 # define FOV	60
-
-# define WALL_NO	"./textures/wall_n.xpm"
-# define WALL_SO	"./textures/wall_s.xpm"
-# define WALL_WE	"./textures/wall_w.xpm"
-# define WALL_EA	"./textures/wall_e.xpm"
 
 # define WHITE	0xFFFFFF
 # define BLACK	0x000000
@@ -48,7 +43,9 @@
 # define CYAN	0x00FFFF
 # define MAGENTA	0xFF00FF
 
-# define X_EVENT_KEY_PRESS	2
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_EXIT			17
 # define KEY_A		0
 # define KEY_D		2
 # define KEY_S		1
@@ -58,6 +55,9 @@
 # define KEY_SHIFT	257
 # define KEY_SPACE	49
 # define KEY_ESC	53
+# define MLX_SYNC_IMAGE_WRITABLE	1
+# define MLX_SYNC_WIN_FLUSH_CMD		2
+# define MLX_SYNC_WIN_CMD_COMPLETED	3
 
 # define EPSILON	0.000001
 # define PATH_LEN	50
@@ -166,6 +166,7 @@ typedef struct		s_game
 	int				cubsize;
 	char			*spr_in_fov;
 	char			*save_flag;
+	int				pid;
 }					t_game;
 
 typedef enum		e_line
@@ -220,6 +221,7 @@ typedef struct		s_bmp
 }					t_bmp;
 
 int					key_set(int keycode, t_game *game);
+int					key_set2(int keycode, t_game *game);
 int					draw_minimap(t_game *game);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
@@ -253,8 +255,9 @@ void				map_parsing_wall_check(t_game *game);
 void				screen_size_check(t_game *game);
 void				texture_ceil_n_floor(t_game *game);
 int					check_color_area(int color, int refer_color, int area);
-void				do_jump(t_game *game);
-int					during_down(int i, int line_len, t_game *game);
 void				check_saving_bmp_file(t_game *game);
+void				player_jumping_check(t_game *game);
+int					exit_game(t_game *game);
+void				bgm_control();
 
 #endif

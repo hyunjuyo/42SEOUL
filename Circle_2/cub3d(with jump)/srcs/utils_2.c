@@ -6,11 +6,36 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 15:30:27 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 15:24:04 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/02 15:50:57 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	player_jumping_check(t_game *game)
+{
+	if (game->player.jump < 0)
+	{
+		game->player.jump--;
+		game->player.view_h = sin((M_PI / 5) * game->player.jump) * 0.15;
+		if (game->player.jump == -5)
+		{
+			game->player.jump = 0;
+			game->player.view_h = 0.0;
+		}
+
+	}
+	if (game->player.jump > 0)
+	{
+		game->player.jump++;
+		game->player.view_h = sin((M_PI / 12) * game->player.jump) * 0.35;
+		if (game->player.jump == 12)
+		{
+			game->player.jump = -1;
+			game->player.view_h = 0.0;
+		}
+	}
+}
 
 int		check_color_area(int color, int refer_color, int area)
 {

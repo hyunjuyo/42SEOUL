@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/03/31 12:40:43 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/04/02 16:34:25 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,10 @@ SRCS	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c \
 		  ./srcs/draw_fov/draw_vert_spr_line.c \
 		  ./srcs/draw_minimap/draw_minimap.c \
 		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c \
-		  ./srcs/do_jump.c
+		  ./srcs/exit_game.c
 SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c \
-		  ./srcs/key_set_bonus.c ./srcs/save_bmp_file.c \
+		  ./srcs/key_set_bonus.c ./srcs/key_set2_bonus.c \
+		  ./srcs/save_bmp_file.c \
 		  ./srcs/screen_size_check.c \
 		  ./srcs/parsing/map_parsing.c \
 		  ./srcs/parsing/get_next_line.c \
@@ -54,7 +55,7 @@ SRCS_B	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c \
 		  ./srcs/draw_fov/draw_vert_spr_line_bonus.c \
 		  ./srcs/draw_minimap/draw_minimap.c \
 		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c \
-		  ./srcs/do_jump.c
+		  ./srcs/exit_game.c
 
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/01 14:28:40 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:07:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	store_rotated_map(t_game *game)
 	i = -1;
 	while (++i < game->conf.map_y)
 	{
-		printf("Here~~ free!!\n"); // test
+		printf("Here~~ free!! %d / %d\n", i + 1, game->conf.map_y); // test
 		free(game->conf.temp_map_addr[i]);
 	}
 }

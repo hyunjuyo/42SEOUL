@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/02 18:05:52 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/04 17:54:20 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ void				texture_ceil_n_floor(t_game *game);
 int					check_color_area(int color, int refer_color, int area);
 void				check_saving_bmp_file(t_game *game);
 void				player_jumping_check(t_game *game);
+int					get_sky_color(t_game *game, int h, int w);
 int					exit_game(t_game *game);
-void				bgm_control();
 
 #endif

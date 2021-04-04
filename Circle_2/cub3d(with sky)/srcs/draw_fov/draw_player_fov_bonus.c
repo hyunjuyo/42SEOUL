@@ -6,35 +6,19 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/02 15:40:09 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/04 19:04:30 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		get_sky_color(t_game *game, int h, int w)
-{
-	int	color;
-	int	x;
-	int	y;
-	int	th_x;
-
-	th_x = (0.0 - game->player.th) / deg_to_rad(FOV, 0) * game->conf.win_w;
-	x = w / game->conf.win_w * (game->c_img.width / 6) + th_x;
-	y = h / (game->conf.win_h * 2 / 3) * game->c_img.height;
-	if (x > game->c_img.width)
-		x -= game->c_img.width;
-	if (x < game->c_img.width)
-		x += game->c_img.width;
-	color = game->c_img.data[y * game->c_img.width + x];
-	return (color);
-}
-
 void	clear_screen(t_game *game, int ceil_color, int floor_color)
 {
 	int	h;
 	int	w;
+	int	tmp;
 
+	tmp = ceil_color;
 	if (!(game->c_img.img = mlx_xpm_file_to_image(game->mlx,
 			"./textures/sky.xpm", &game->c_img.width, &game->c_img.height)))
 		printf("Error\n[sky]mlx_xpm_file_to_image() failed\n");
@@ -46,7 +30,7 @@ void	clear_screen(t_game *game, int ceil_color, int floor_color)
 		w = 0;
 		while (w < game->conf.win_w)
 		{
-			if (h < game->conf.win_h * 2 / 3)
+			if (h < game->conf.win_h / 2)
 				game->img1.data[h * game->conf.win_w + w] = get_sky_color(game, h, w);
 			else
 				game->img1.data[h * game->conf.win_w + w] = floor_color;
@@ -108,7 +92,6 @@ void	draw_one_vert_line(int i, double wdist, t_game *game)
 		w_img.invisible_c = (double)abs(space.ceil) / (double)line_len;
 		space.ceil = 0;
 	}
-//	printf("space : %d\n", space);
 	h = 0;
 	while (h < space.line_len && space.ceil + h < game->conf.win_h)
 	{
@@ -143,7 +126,7 @@ int		draw_player_fov(t_game *game)
 	check_saving_bmp_file(game);
 	free(game->wall);
 	free(game->spr_in_fov);
-	draw_minimap(game);
+	check_player_item_info(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img1.img, 0, 0);
 	return (0);
 }

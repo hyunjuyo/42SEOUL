@@ -16,6 +16,6 @@ int		exit_game(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
 	system("killall afplay");
-	exit (0);
+	exit(0);
 	return (0);
 }

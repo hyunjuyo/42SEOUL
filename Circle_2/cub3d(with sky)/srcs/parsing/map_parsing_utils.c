@@ -16,7 +16,8 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 {
 	if (type == 'w')
 	{
-		if ((game->conf.win_w = ft_atoi(w_ptr = get_next_word(l_ptr))) != 0)
+		w_ptr = get_next_word(l_ptr);
+		if ((game->conf.win_w = ft_atoi(w_ptr)) != 0)
 		{
 			if (game->conf.win_w > game->conf.display_w)
 				game->conf.win_w = game->conf.display_w;
@@ -25,7 +26,8 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 	}
 	else
 	{
-		if ((game->conf.win_h = ft_atoi(w_ptr = get_next_word(l_ptr))) != 0)
+		w_ptr = get_next_word(l_ptr);
+		if ((game->conf.win_h = ft_atoi(w_ptr)) != 0)
 		{
 			if (game->conf.win_h > game->conf.display_h)
 				game->conf.win_h = game->conf.display_h;
@@ -65,7 +67,7 @@ char	*get_next_word(char **l_ptr)
 	if ((*l_ptr)[i] == '\0')
 	{
 		w_ptr = ft_strdup(*l_ptr);
-        *l_ptr += i + 1;
+		*l_ptr += i + 1;
 		return (w_ptr);
 	}
 	(*l_ptr)[i] = '\0';

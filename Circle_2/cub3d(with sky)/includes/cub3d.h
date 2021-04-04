@@ -211,6 +211,26 @@ typedef struct		s_space
 	int				line_len;
 }					t_space;
 
+typedef struct		s_dist
+{
+	double			ceil;
+	double			floor;
+}					t_dist;
+
+typedef struct		s_info
+{
+	int				idx;
+	int				h;
+	int				line_len;
+	double			invisible;
+}					t_info;
+
+typedef struct		s_idx
+{
+	int				x;
+	int				y;
+}					t_idx;
+
 typedef struct		s_bmp
 {
 	int				fd;
@@ -233,8 +253,8 @@ double				rad_to_deg(double th);
 void				check_steps(double th, int *xstep, int *ystep);
 void				draw_fov_rays_on_minimap(t_game *game);
 int					draw_player_fov(t_game *game);
-int					get_texture_pixel_color(int i, int h, int pixels,
-		t_game *game, t_img *w_img);
+int					get_texture_pixel_color(t_info *info, t_game *game,
+		t_img *w_img);
 void				map_parsing(char *map_file, t_game *game);
 void				save_map_info(char *line, t_game *game);
 void				check_conf_type_1(char *line, t_game *game, char *l_ptr,

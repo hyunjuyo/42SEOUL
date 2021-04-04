@@ -89,6 +89,6 @@ void	check_saving_bmp_file(t_game *game)
 	{
 		save_bmp_file(game);
 		system("killall afplay");
-		exit (0);
+		exit(0);
 	}
 }

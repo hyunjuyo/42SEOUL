@@ -58,8 +58,8 @@ int		get_ceil_n_floor_texture(int i, double t_dist, t_game *game, char type)
 	}
 }
 
-void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist_ceil,
-		double min_dist_floor, t_game *game)
+void	draw_vert_ceil_n_floor_line(int i, int wall_len, t_dist *min_dist,
+		t_game *game)
 {
 	int		j;
 	t_space	space;
@@ -71,14 +71,13 @@ void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist_ceil,
 	if (game->player.view_h != 0.0)
 		vh = wall_len * game->player.view_h;
 	space.floor = (game->conf.win_h - wall_len) / 2 - vh;
-	j = min_dist_ceil;
 	j = -1;
 	while (++j < space.floor)
 	{
 		h = (double)j / (double)game->conf.win_h;
-		t_dist = min_dist_floor / (1 - 2 * h);
-		game->img1.data[(game->conf.win_h - 1 - j) * game->conf.win_w + i]
-			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'F'), t_dist,
+		t_dist = min_dist->floor / (1 - 2 * h);
+		game->img1.data[(game->conf.win_h - 1 - j) * game->conf.win_w + i] =
+			fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'F'), t_dist,
 					game, 2.0);
 	}
 }
@@ -87,19 +86,19 @@ void	texture_ceil_n_floor(t_game *game)
 {
 	int		i;
 	int		wall_len;
-	double	min_dist_floor;
+	t_dist	min_dist;
 
 	if (!(game->f_img.img = mlx_xpm_file_to_image(game->mlx,
-			"./textures/floor.xpm", &game->f_img.width, &game->f_img.height)))
+				"./textures/floor.xpm", &game->f_img.width, &game->f_img.height)))
 		printf("[floor]mlx_xpm_file_to_image() failed\nError\n");
 	game->f_img.data = (int *)mlx_get_data_addr(game->f_img.img,
 			&game->f_img.bpp, &game->f_img.size_l, &game->f_img.endian);
-	min_dist_floor = get_min_dist_in_fov(game, 'F');
+	min_dist.floor = get_min_dist_in_fov(game, 'F');
 	i = 0;
 	while (i < game->conf.win_w)
 	{
 		wall_len = get_vert_line_length(game->wall[i].dist, game);
-		draw_vert_ceil_n_floor_line(i, wall_len, 0, min_dist_floor, game);
+		draw_vert_ceil_n_floor_line(i, wall_len, &min_dist, game);
 		i++;
 	}
 }

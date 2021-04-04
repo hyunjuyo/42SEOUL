@@ -16,14 +16,14 @@ void	play_bgm(t_game *game)
 {
 	if ((game->pid = fork()) == -1)
 	{
-		printf("Error\nfork() failed\n");
-		exit (1);
+		printf("Error\n[bgm]fork() failed\n");
+		exit(1);
 	}
 	if (game->pid == 0)
 	{
 		game->pid = getpid();
 		system("afplay ./bgm/bgm.mp3");
-		exit (0);
+		exit(0);
 	}
 }
 
@@ -39,7 +39,7 @@ void	game_init(t_game *game)
 	if (game->conf.win_w < 50 || game->conf.win_h < 50)
 	{
 		printf("Error\nwin_size is too small\n");
-		exit (1);
+		exit(1);
 	}
 	play_bgm(game);
 }
@@ -52,7 +52,7 @@ int		main(int argc, char *argv[])
 	if (argc < 2 || argc > 3)
 	{
 		printf("Error\ninvalid argc : argc is %d\n", argc);
-		exit (1);
+		exit(1);
 	}
 	game.save_flag = argv[2];
 	map_file = argv[1];
@@ -62,8 +62,8 @@ int		main(int argc, char *argv[])
 	ft_memset(&game.player, 0, sizeof(t_pla));
 	map_parsing(map_file, &game);
 	game_init(&game);
-	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L<<0, key_set, &game);
-	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 1L<<1, key_set2, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L << 0, key_set, &game);
+	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 1L << 1, key_set2, &game);
 	mlx_hook(game.win, X_EVENT_EXIT, 0, exit_game, &game);
 	mlx_loop_hook(game.mlx, draw_player_fov, &game);
 	mlx_loop(game.mlx);

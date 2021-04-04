@@ -31,7 +31,8 @@ void	clear_screen(t_game *game, int ceil_color, int floor_color)
 		while (w < game->conf.win_w)
 		{
 			if (h < game->conf.win_h / 2)
-				game->img1.data[h * game->conf.win_w + w] = get_sky_color(game, h, w);
+				game->img1.data[h * game->conf.win_w + w] =
+					get_sky_color(game, h, w);
 			else
 				game->img1.data[h * game->conf.win_w + w] = floor_color;
 			w++;
@@ -73,33 +74,30 @@ void	get_wall_texture_file(int i, t_game *game, t_img *w_img)
 
 void	draw_one_vert_line(int i, double wdist, t_game *game)
 {
-	int		line_len;
+	t_info	inf;
 	t_space	space;
-	int		h;
 	t_img	w_img;
 
 	get_wall_texture_file(i, game, &w_img);
-	line_len = get_vert_line_length(wdist, game);
-	space.line_len = line_len;
+	inf.line_len = get_vert_line_length(wdist, game);
+	space.line_len = inf.line_len;
 	space.vh = 0;
 	if (game->player.view_h != 0.0)
-		space.vh = line_len * game->player.view_h;
+		space.vh = inf.line_len * game->player.view_h;
 	w_img.invisible_c = 0.0;
-	space.ceil = (game->conf.win_h - line_len) / 2 + space.vh;
+	space.ceil = (game->conf.win_h - inf.line_len) / 2 + space.vh;
 	if (space.ceil < 0)
 	{
 		space.line_len += space.ceil;
-		w_img.invisible_c = (double)abs(space.ceil) / (double)line_len;
+		w_img.invisible_c = (double)abs(space.ceil) / (double)inf.line_len;
 		space.ceil = 0;
 	}
-	h = 0;
-	while (h < space.line_len && space.ceil + h < game->conf.win_h)
-	{
-		game->img1.data[(space.ceil + h) * game->conf.win_w + i]
-			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img),
-					wdist, game, 1.5);
-		h++;
-	}
+	inf.idx = i;
+	inf.h = -1;
+	while (++inf.h < space.line_len && space.ceil + inf.h < game->conf.win_h)
+		game->img1.data[(space.ceil + inf.h) * game->conf.win_w + inf.idx] =
+			fade_color(get_texture_pixel_color(&inf, game, &w_img), wdist,
+					game, 1.5);
 }
 
 int		draw_player_fov(t_game *game)

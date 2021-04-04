@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	store_one_sprite_info(t_game *game, int i, char spr_type,  int x, int y)
+void	store_one_sprite_info(t_game *game, int i, char spr_type, t_idx *idx)
 {
 	char	*spr_path;
 	double	delta_x;
@@ -29,8 +29,8 @@ void	store_one_sprite_info(t_game *game, int i, char spr_type,  int x, int y)
 		printf("[sprite]mlx_xpm_file_to_image() failed\nError\n");
 	game->spr[i].data = (int *)mlx_get_data_addr(game->spr[i].img,
 			&game->spr[i].bpp, &game->spr[i].size_l, &game->spr[i].endian);
-	game->spr[i].x = (double)x + 0.5;
-	game->spr[i].y = (double)y + 0.5;
+	game->spr[i].x = (double)idx->x + 0.5;
+	game->spr[i].y = (double)idx->y + 0.5;
 	delta_x = game->spr[i].x - game->player.x;
 	delta_y = game->spr[i].y - game->player.y;
 	if ((game->spr[i].th = atan2(delta_y, delta_x)) < 0.0)
@@ -100,21 +100,20 @@ void	draw_sprites_in_order(t_game *game, int cnt)
 void	ready_to_draw_sprite(t_game *game)
 {
 	int		i;
-	int		x;
-	int		y;
+	t_idx	idx;
 	char	spr_type;
 
 	i = 0;
-	x = -1;
-	while (++x < game->conf.map_x)
+	idx.x = -1;
+	while (++idx.x < game->conf.map_x)
 	{
-		y = -1;
-		while (++y < game->conf.map_y)
+		idx.y = -1;
+		while (++idx.y < game->conf.map_y)
 		{
-			spr_type = game->spr_in_fov[x * game->conf.map_y + y];
+			spr_type = game->spr_in_fov[idx.x * game->conf.map_y + idx.y];
 			if (spr_type == '2' || spr_type == '3' || spr_type == '4')
 			{
-				store_one_sprite_info(game, i, spr_type, x, y);
+				store_one_sprite_info(game, i, spr_type, &idx);
 //				printf("game->spr[%d] (%f, %f)\n", i, game->spr[i].x, game->spr[i].y);
 //				printf("gmae->spr[%d] dist : %f\n", i, game->spr[i].dist);
 //				printf("gmae->spr[%d] length : %d\n", i, game->spr[i].length);
@@ -125,7 +124,6 @@ void	ready_to_draw_sprite(t_game *game)
 	sort_sprites(game, i);
 	draw_sprites_in_order(game, i);
 }
-
 
 void	check_sprite_in_fov(t_game *game, t_chk_pnt *check)
 {

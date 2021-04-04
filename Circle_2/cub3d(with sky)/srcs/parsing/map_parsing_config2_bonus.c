@@ -17,7 +17,7 @@ void	check_conf_type_6(char *line, t_game *game, char *w_ptr)
 	if (w_ptr[0] == '1')
 	{
 		free(w_ptr);
-        save_map_info(line, game);
+		save_map_info(line, game);
 	}
 	else
 	{

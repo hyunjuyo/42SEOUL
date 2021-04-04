@@ -49,7 +49,7 @@ void	go_start_point(t_game *game)
 
 void	left_side_wall_checking(t_game *game, t_pla *start_point)
 {
-	while (game->player.x > 0 && game->player.y > 0 && game->player.x 
+	while (game->player.x > 0 && game->player.y > 0 && game->player.x
 			< game->conf.map_x && game->player.y < game->conf.map_y)
 	{
 		game->player.th += deg_to_rad(90.0, 0);

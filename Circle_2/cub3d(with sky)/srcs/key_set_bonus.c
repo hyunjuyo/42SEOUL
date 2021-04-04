@@ -82,10 +82,10 @@ void	key_set_more(int keycode, t_game *game)
 		game->player.y += MOVE_SPEED * sin(game->player.th + deg_to_rad(90, 0));
 		if (hit_wall_check(game, 1) == 1)
 		{
-			game->player.x
-				-= MOVE_SPEED * cos(game->player.th + deg_to_rad(90, 0));
-			game->player.y
-				-= MOVE_SPEED * sin(game->player.th + deg_to_rad(90, 0));
+			game->player.x -= MOVE_SPEED * cos(game->player.th
+					+ deg_to_rad(90, 0));
+			game->player.y -= MOVE_SPEED * sin(game->player.th
+					+ deg_to_rad(90, 0));
 		}
 	}
 	else if (keycode == KEY_D)
@@ -94,10 +94,10 @@ void	key_set_more(int keycode, t_game *game)
 		game->player.y += MOVE_SPEED * sin(game->player.th - deg_to_rad(90, 0));
 		if (hit_wall_check(game, 1) == 1)
 		{
-			game->player.x
-				-= MOVE_SPEED * cos(game->player.th - deg_to_rad(90, 0));
-			game->player.y
-				-= MOVE_SPEED * sin(game->player.th - deg_to_rad(90, 0));
+			game->player.x -= MOVE_SPEED * cos(game->player.th
+					- deg_to_rad(90, 0));
+			game->player.y -= MOVE_SPEED * sin(game->player.th
+					- deg_to_rad(90, 0));
 		}
 	}
 	key_set_more_and_more(keycode, game);
@@ -118,11 +118,11 @@ int		key_set(int keycode, t_game *game)
 	else if (keycode == KEY_S)
 	{
 		game->player.x -= MOVE_SPEED * cos(game->player.th);
-		game->player.y -= MOVE_SPEED * sin(game->player.th);;
+		game->player.y -= MOVE_SPEED * sin(game->player.th);
 		if (hit_wall_check(game, 1) == 1)
 		{
 			game->player.x += MOVE_SPEED * cos(game->player.th);
-			game->player.y += MOVE_SPEED * sin(game->player.th);;
+			game->player.y += MOVE_SPEED * sin(game->player.th);
 		}
 	}
 	key_set_more(keycode, game);

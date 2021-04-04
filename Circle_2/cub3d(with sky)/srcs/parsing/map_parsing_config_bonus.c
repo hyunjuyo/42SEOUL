@@ -37,21 +37,21 @@ void	check_conf_type_5(char *line, t_game *game, char *l_ptr, char *w_ptr)
 void	check_conf_type_4(char *line, t_game *game, char *l_ptr, char *w_ptr)
 {
 	if (ft_strncmp(w_ptr, "C", 2) == 0)
-    {
+	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.ceil = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
 		free(w_ptr);
-    }
+	}
 	else if (ft_strncmp(w_ptr, "F", 2) == 0)
-    {
+	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
 		free(w_ptr);
-    }
+	}
 	else
 		check_conf_type_5(line, game, l_ptr, w_ptr);
 }

@@ -23,7 +23,6 @@ void	player_jumping_check(t_game *game)
 			game->player.jump = 0;
 			game->player.view_h = 0.0;
 		}
-
 	}
 	if (game->player.jump > 0)
 	{

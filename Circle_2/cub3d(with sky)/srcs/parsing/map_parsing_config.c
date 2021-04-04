@@ -15,17 +15,17 @@
 void	check_conf_type_5(char *line, t_game *game, char *l_ptr, char *w_ptr)
 {
 	if (ft_strncmp(w_ptr, "F", 2) == 0)
-    {
+	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
 		free(w_ptr);
-    }
+	}
 	else if (w_ptr[0] == '1')
 	{
 		free(w_ptr);
-        save_map_info(line, game);
+		save_map_info(line, game);
 	}
 	else
 	{
@@ -46,13 +46,13 @@ void	check_conf_type_4(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "C", 2) == 0)
-    {
+	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.ceil = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
 		free(w_ptr);
-    }
+	}
 	else
 		check_conf_type_5(line, game, l_ptr, w_ptr);
 }
@@ -106,14 +106,16 @@ void	check_conf_type_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
 	if (ft_strncmp(w_ptr, "R", 2) == 0)
 	{
 		free(w_ptr);
-		if ((game->conf.win_w = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
+		w_ptr = get_next_word(&l_ptr);
+		if ((game->conf.win_w = ft_atoi(w_ptr)) != 0)
 		{
 			if (game->conf.win_w > game->conf.display_w)
 				game->conf.win_w = game->conf.display_w;
 			game->conf.chk_complete++;
 		}
 		free(w_ptr);
-		if ((game->conf.win_h = ft_atoi(w_ptr = get_next_word(&l_ptr))) != 0)
+		w_ptr = get_next_word(&l_ptr);
+		if ((game->conf.win_h = ft_atoi(w_ptr)) != 0)
 		{
 			if (game->conf.win_h > game->conf.display_h)
 				game->conf.win_h = game->conf.display_h;

@@ -66,26 +66,26 @@ void	get_wall_texture_file(int i, t_game *game, t_img *w_img)
 
 void	draw_one_vert_line(int i, double wdist, t_game *game)
 {
-	int		line_len;
+	t_info	info;
 	int		space_ceil;
-	int		h;
 	t_img	w_img;
 
 	get_wall_texture_file(i, game, &w_img);
-	line_len = get_vert_line_length(wdist, game);
+	info.line_len = get_vert_line_length(wdist, game);
 	w_img.invisible_c = 0.0;
-	space_ceil = (game->conf.win_h - line_len) / 2;
+	space_ceil = (game->conf.win_h - info.line_len) / 2;
 	if (space_ceil < 0)
 	{
-		w_img.invisible_c = (double)abs(space_ceil) / (double)line_len;
+		w_img.invisible_c = (double)abs(space_ceil) / (double)info.line_len;
 		space_ceil = 0;
 	}
-	h = 0;
-	while (h < line_len && space_ceil + h < game->conf.win_h)
+	info.idx = i;
+	info.h = 0;
+	while (info.h < info.line_len && space_ceil + info.h < game->conf.win_h)
 	{
-		game->img1.data[(space_ceil + h) * game->conf.win_w + i]
-			= get_texture_pixel_color(i, h, line_len, game, &w_img);
-		h++;
+		game->img1.data[(space_ceil + info.h) * game->conf.win_w + i] =
+			get_texture_pixel_color(&info, game, &w_img);
+		info.h++;
 	}
 }
 

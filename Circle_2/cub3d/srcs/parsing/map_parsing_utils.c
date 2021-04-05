@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:17:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 13:38:59 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 19:11:52 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 				game->conf.win_w = game->conf.display_w;
 			game->conf.chk_complete++;
 		}
+		free(w_ptr);
 	}
 	else
 	{
@@ -33,6 +34,7 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 				game->conf.win_h = game->conf.display_h;
 			game->conf.chk_complete++;
 		}
+		free(w_ptr);
 	}
 }
 
@@ -117,10 +119,12 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 		num = ft_atoi(color_info[i]);
 		if (num < 0 || num > 255)
 		{
-			printf("Parsing Error : incorrect RGB color(num : %d)\n", num);
+			printf("Error\nParsing failed : incorrect RGB color(num : %d)\n",
+				num);
 			exit(1);
 		}
 		rgb += num;
 	}
+	free(w_ptr);
 	return (rgb);
 }

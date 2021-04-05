@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:03:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/28 16:27:57 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 19:04:38 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	check_conf_type_5(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
-		free(w_ptr);
 	}
 	else if (w_ptr[0] == '1')
 	{
@@ -51,7 +50,6 @@ void	check_conf_type_4(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.ceil = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
-		free(w_ptr);
 	}
 	else
 		check_conf_type_5(line, game, l_ptr, w_ptr);

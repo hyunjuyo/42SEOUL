@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/04/05 17:01:50 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/04/05 19:34:45 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,18 +67,32 @@ OBJS_B	= $(SRCS_B:.c=.o)
 	gcc $(CFLAGS) -c $< -o $@ -I./includes/ -I./mlx/ -I./Libft/
 
 $(NAME) : $(OBJS)
+	make bonus -C ./Libft/
+	make -C ./mlx/
+	make -C ./mlx_mms/
+	cp ./mlx_mms/libmlx.dylib .
 	gcc $(MLX_FLAGS) $(MATH_FLAGS) $(LIBFT_FLAGS) $(OBJS) $(MLX_MMS_LIB) -o $(NAME)
 
 all : $(NAME)
 
 bonus : $(OBJS_B)
+	make bonus -C ./Libft/
+	make -C ./mlx/
+	make -C ./mlx_mms/
+	cp ./mlx_mms/libmlx.dylib .
 	gcc $(MLX_FLAGS) $(MATH_FLAGS) $(LIBFT_FLAGS) $(OBJS_B) $(MLX_MMS_LIB) -o $(NAME)
 
 clean :
-	rm -f $(OBJS) $(OBJS_B)
+	rm -f $(OBJS) $(OBJS_B) $(MLX_MMS_LIB)
+	make clean -C ./Libft/
+	make clean -C ./mlx/
+	make clean -C ./mlx_mms/
 
 fclean : clean
 	rm -f $(NAME)
+	make fclean -C ./Libft/
+	make clean -C ./mlx/
+	make clean -C ./mlx_mms/
 
 re : fclean all
 

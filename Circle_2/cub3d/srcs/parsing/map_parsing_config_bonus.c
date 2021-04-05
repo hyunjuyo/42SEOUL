@@ -6,11 +6,11 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:03:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/04 18:49:05 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 19:14:36 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	check_conf_type_5(char *line, t_game *game, char *l_ptr, char *w_ptr)
 {
@@ -42,7 +42,6 @@ void	check_conf_type_4(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.ceil = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
-		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "F", 2) == 0)
 	{
@@ -50,7 +49,6 @@ void	check_conf_type_4(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		w_ptr = get_next_word(&l_ptr);
 		if ((game->conf.floor = get_rgb_color(l_ptr, w_ptr)) > -1)
 			game->conf.chk_complete++;
-		free(w_ptr);
 	}
 	else
 		check_conf_type_5(line, game, l_ptr, w_ptr);
@@ -106,9 +104,7 @@ void	check_conf_type_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
 	{
 		free(w_ptr);
 		save_conf_resolution(game, &l_ptr, w_ptr, 'w');
-		free(w_ptr);
 		save_conf_resolution(game, &l_ptr, w_ptr, 'h');
-		free(w_ptr);
 	}
 	else if (ft_strncmp(w_ptr, "NO", 2) == 0)
 	{

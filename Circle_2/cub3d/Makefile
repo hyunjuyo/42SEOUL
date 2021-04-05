@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/04/05 13:51:24 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/04/05 15:24:30 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRCS_B	= ./srcs/main_bonus.c ./srcs/utils_1.c ./srcs/utils_2.c \
 		  ./srcs/draw_fov/draw_player_fov_bonus.c \
 		  ./srcs/draw_fov/cast_single_ray.c \
 		  ./srcs/draw_fov/get_texture_pixel_color.c \
-		  ./srcs/draw_fov/texture_ceil_n_floor_bonus.c \
+		  ./srcs/draw_fov/texture_floor_bonus.c \
 		  ./srcs/draw_fov/check_n_draw_sprite.c \
 		  ./srcs/draw_fov/draw_vert_spr_line_bonus.c \
 		  ./srcs/draw_fov/get_sky_color.c \

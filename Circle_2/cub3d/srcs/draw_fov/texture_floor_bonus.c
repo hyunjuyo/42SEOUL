@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 15:15:02 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 14:24:02 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:26:20 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ double	get_min_dist_in_fov(t_game *game)
 	return (min_dist);
 }
 
-int		get_floor_texture(int i, double t_dist, t_game *game)
+int		get_floor_texture(int i, double tx_dist, t_game *game)
 {
 	double	tx_ratio;
 	double	ty_ratio;
@@ -34,7 +34,7 @@ int		get_floor_texture(int i, double t_dist, t_game *game)
 	int		tx;
 	int		ty;
 
-	dist_ratio = t_dist / game->wall[i].dist;
+	dist_ratio = tx_dist / game->wall[i].dist;
 	tx_ratio = (game->wall[i].x - game->player.x) * dist_ratio + game->player.x;
 	tx_ratio -= floor(tx_ratio);
 	ty_ratio = (game->wall[i].y - game->player.y) * dist_ratio + game->player.y;
@@ -50,7 +50,7 @@ void	draw_vert_floor_line(int i, int wall_len, t_dist *min_dist,
 	int		j;
 	t_space	space;
 	double	h;
-	double	t_dist;
+	double	tx_dist;
 	int		vh;
 
 	vh = 0;
@@ -61,13 +61,13 @@ void	draw_vert_floor_line(int i, int wall_len, t_dist *min_dist,
 	while (++j < space.floor)
 	{
 		h = (double)j / (double)game->conf.win_h;
-		t_dist = min_dist->floor / (1 - 2 * h);
+		tx_dist = min_dist->floor / (1 - 2 * h);
 		game->img1.data[(game->conf.win_h - 1 - j) * game->conf.win_w + i] =
-			fade_color(get_floor_texture(i, t_dist, game), t_dist, game, 2.0);
+			fade_color(get_floor_texture(i, tx_dist, game), tx_dist, game, 2.0);
 	}
 }
 
-void	texture_ceil_n_floor(t_game *game)
+void	texture_floor(t_game *game)
 {
 	int		i;
 	int		wall_len;

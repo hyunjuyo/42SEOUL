@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 11:59:07 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:24:00 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,7 @@ void				save_player_info(t_game *game, int i, int j, char c);
 int					hit_wall_check(t_game *game, int type);
 void				map_parsing_wall_check(t_game *game);
 void				screen_size_check(t_game *game);
-void				texture_ceil_n_floor(t_game *game);
+void				texture_floor(t_game *game);
 int					check_color_area(int color, int refer_color, int area);
 void				check_saving_bmp_file(t_game *game);
 void				player_jumping_check(t_game *game);

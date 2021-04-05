@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 13:35:27 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:24:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int		draw_player_fov(t_game *game)
 		draw_one_vert_line(i, wdist, game);
 		i++;
 	}
-	texture_ceil_n_floor(game);
+	texture_floor(game);
 	ready_to_draw_sprite(game);
 	check_saving_bmp_file(game);
 	free(game->wall);

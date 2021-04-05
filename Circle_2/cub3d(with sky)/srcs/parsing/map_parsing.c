@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/04 18:47:14 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 11:38:01 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	store_rotated_map(t_game *game)
 	int	j_rev;
 
 	ft_memset(game->map, 0, sizeof(char) * MAPX_MAX * MAPY_MAX);
-	ft_memset(&game->player, 0, sizeof(t_pla));
+//	ft_memset(&game->player, 0, sizeof(t_pla));
 	i = -1;
 	while (++i < game->conf.map_x)
 	{

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 18:01:52 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 11:59:07 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,16 @@
 
 # define MAPX_MAX	1000
 # define MAPY_MAX	1000
-# define SPR_TYPE	2
+# define SPR_TYPE	3
 # define SPR_MAX_IN_FOV	100
 # define MAP_X	20
 # define MAP_Y	12
 # define CUBE_SIZE	5
 # define MINIMAP_RAY_NUM	50
 
-# define MOVE_SPEED	0.9
+# define MOVE_SPEED	0.75
 # define ROT_SPEED_RAD	0.09
 # define FOV	60
-
-# define WALL_NO	"./textures/wall_n.xpm"
-# define WALL_SO	"./textures/wall_s.xpm"
-# define WALL_WE	"./textures/wall_w.xpm"
-# define WALL_EA	"./textures/wall_e.xpm"
 
 # define WHITE	0xFFFFFF
 # define BLACK	0x000000
@@ -48,7 +43,9 @@
 # define CYAN	0x00FFFF
 # define MAGENTA	0xFF00FF
 
-# define X_EVENT_KEY_PRESS	2
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_EXIT			17
 # define KEY_A		0
 # define KEY_D		2
 # define KEY_S		1
@@ -58,6 +55,9 @@
 # define KEY_SHIFT	257
 # define KEY_SPACE	49
 # define KEY_ESC	53
+# define MLX_SYNC_IMAGE_WRITABLE	1
+# define MLX_SYNC_WIN_FLUSH_CMD		2
+# define MLX_SYNC_WIN_CMD_COMPLETED	3
 
 # define EPSILON	0.000001
 # define PATH_LEN	50
@@ -83,6 +83,7 @@ typedef struct		s_conf
 	char			sprite[SPR_TYPE][PATH_LEN];
 	int				ceil;
 	int				floor;
+	int				parsing_complete;
 	int				chk_complete;
 	int				map_lines;
 	char			**temp_map_addr;
@@ -97,7 +98,7 @@ typedef struct		s_img
 	int				bpp;
 	int				size_l;
 	int				endian;
-	double			invisible;
+	double			invisible_c;
 }					t_img;
 
 typedef struct		s_color
@@ -116,6 +117,7 @@ typedef struct		s_pla
 	double			view_h;
 	int				jump;
 	double			jh_w;
+	int				item[2];
 }					t_pla;
 
 typedef enum		e_dir
@@ -166,6 +168,7 @@ typedef struct		s_game
 	int				cubsize;
 	char			*spr_in_fov;
 	char			*save_flag;
+	int				pid;
 }					t_game;
 
 typedef enum		e_line
@@ -201,6 +204,35 @@ typedef struct		s_ray
 	int				h;
 }					t_ray;
 
+typedef struct		s_space
+{
+	int				vh;
+	int				ceil;
+	int				floor;
+	int				line_len;
+}					t_space;
+
+typedef struct		s_dist
+{
+	double			ceil;
+	double			floor;
+}					t_dist;
+
+typedef struct		s_info
+{
+	int				idx;
+	int				h;
+	int				line_len;
+	double			invisible;
+	int				start;
+}					t_info;
+
+typedef struct		s_idx
+{
+	int				x;
+	int				y;
+}					t_idx;
+
 typedef struct		s_bmp
 {
 	int				fd;
@@ -212,6 +244,7 @@ typedef struct		s_bmp
 }					t_bmp;
 
 int					key_set(int keycode, t_game *game);
+int					key_set2(int keycode, t_game *game);
 int					draw_minimap(t_game *game);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
@@ -222,12 +255,13 @@ double				rad_to_deg(double th);
 void				check_steps(double th, int *xstep, int *ystep);
 void				draw_fov_rays_on_minimap(t_game *game);
 int					draw_player_fov(t_game *game);
-int					get_texture_pixel_color(int i, int h, int pixels,
-		t_game *game, t_img *w_img);
+int					get_texture_pixel_color(t_info *info, t_game *game,
+		t_img *w_img);
 void				map_parsing(char *map_file, t_game *game);
 void				save_map_info(char *line, t_game *game);
 void				check_conf_type_1(char *line, t_game *game, char *l_ptr,
 		char *w_ptr);
+void				check_conf_type_6(char *line, t_game *game, char *w_ptr);
 void				save_conf_resolution(t_game *game, char **l_ptr,
 		char *w_ptr, char type);
 int					get_rgb_color(char *l_ptr, char *w_ptr);
@@ -246,5 +280,9 @@ void				screen_size_check(t_game *game);
 void				texture_ceil_n_floor(t_game *game);
 int					check_color_area(int color, int refer_color, int area);
 void				check_saving_bmp_file(t_game *game);
+void				player_jumping_check(t_game *game);
+int					get_sky_color(t_game *game, int h, int w);
+void				check_player_item_info(t_game *game);
+int					exit_game(t_game *game);
 
 #endif

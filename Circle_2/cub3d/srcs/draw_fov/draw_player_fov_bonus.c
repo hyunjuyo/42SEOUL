@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 17:54:17 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:35:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,14 @@ void	clear_screen(t_game *game, int ceil_color, int floor_color)
 {
 	int	h;
 	int	w;
+	int	tmp;
 
+	tmp = ceil_color;
+	if (!(game->c_img.img = mlx_xpm_file_to_image(game->mlx,
+			"./textures/sky.xpm", &game->c_img.width, &game->c_img.height)))
+		printf("Error\n[sky]mlx_xpm_file_to_image() failed\n");
+	game->c_img.data = (int *)mlx_get_data_addr(game->c_img.img,
+			&game->c_img.bpp, &game->c_img.size_l, &game->c_img.endian);
 	h = 0;
 	while (h < game->conf.win_h)
 	{
@@ -24,7 +31,8 @@ void	clear_screen(t_game *game, int ceil_color, int floor_color)
 		while (w < game->conf.win_w)
 		{
 			if (h < game->conf.win_h / 2)
-				game->img1.data[h * game->conf.win_w + w] = ceil_color;
+				game->img1.data[h * game->conf.win_w + w] =
+					get_sky_color(game, h, w);
 			else
 				game->img1.data[h * game->conf.win_w + w] = floor_color;
 			w++;
@@ -59,36 +67,37 @@ void	get_wall_texture_file(int i, t_game *game, t_img *w_img)
 		img_path = game->conf.wall_ea;
 	if (!(w_img->img = mlx_xpm_file_to_image(game->mlx, img_path, &w_img->width,
 			&w_img->height)))
-		printf("[wall]mlx_xpm_file_to_image() failed\nError\n");
+		printf("Error\n[wall]mlx_xpm_file_to_image() failed\n");
 	w_img->data = (int *)mlx_get_data_addr(w_img->img, &w_img->bpp,
 			&w_img->size_l, &w_img->endian);
 }
 
 void	draw_one_vert_line(int i, double wdist, t_game *game)
 {
-	int		line_len;
-	int		space;
-	int		h;
+	t_info	inf;
+	t_space	space;
 	t_img	w_img;
 
 	get_wall_texture_file(i, game, &w_img);
-	line_len = get_vert_line_length(wdist, game);
-	w_img.invisible = 0.0;
-	space = game->conf.win_h - line_len;
-	if (game->conf.win_h - line_len < 0)
+	inf.line_len = get_vert_line_length(wdist, game);
+	space.line_len = inf.line_len;
+	space.vh = 0;
+	if (game->player.view_h != 0.0)
+		space.vh = inf.line_len * game->player.view_h;
+	w_img.invisible_c = 0.0;
+	space.ceil = (game->conf.win_h - inf.line_len) / 2 + space.vh;
+	if (space.ceil < 0)
 	{
-		w_img.invisible = (double)abs(space) / (double)line_len;
-		space = 0;
+		space.line_len += space.ceil;
+		w_img.invisible_c = (double)abs(space.ceil) / (double)inf.line_len;
+		space.ceil = 0;
 	}
-//	printf("space : %d\n", space);
-	h = 0;
-	while (h < line_len && h + space / 2 < game->conf.win_h)
-	{
-		game->img1.data[(space / 2 + h) * game->conf.win_w + i]
-			= fade_color(get_texture_pixel_color(i, h, line_len, game, &w_img),
-					wdist, game, 1.5);
-		h++;
-	}
+	inf.idx = i;
+	inf.h = -1;
+	while (++inf.h < space.line_len && space.ceil + inf.h < game->conf.win_h)
+		game->img1.data[(space.ceil + inf.h) * game->conf.win_w + inf.idx] =
+			fade_color(get_texture_pixel_color(&inf, game, &w_img), wdist,
+					game, 1.5);
 }
 
 int		draw_player_fov(t_game *game)
@@ -96,7 +105,8 @@ int		draw_player_fov(t_game *game)
 	int			i;
 	double		wdist;
 
-	clear_screen(game, game->conf.ceil, game->conf.floor);
+	player_jumping_check(game);
+	clear_screen(game, -1, game->conf.floor);
 	game->spr_in_fov = (char *)ft_calloc(game->conf.map_x * game->conf.map_y,
 			sizeof(char));
 	game->wall = (t_wall *)ft_calloc(game->conf.win_w, sizeof(t_wall));
@@ -114,7 +124,7 @@ int		draw_player_fov(t_game *game)
 	check_saving_bmp_file(game);
 	free(game->wall);
 	free(game->spr_in_fov);
-	draw_minimap(game);
+	check_player_item_info(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img1.img, 0, 0);
 	return (0);
 }

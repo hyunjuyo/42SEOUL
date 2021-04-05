@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 15:25:33 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/29 21:43:27 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:36:37 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	get_next_point(double ray_th, double *px, double *py, t_chk_pnt *check)
 		dist_v = INFINITY;
 	if ((dist_h = get_dist(*px, *py, check->g_ny, check->ny)) == 0.0)
 		dist_h = INFINITY;
-//	printf("tan(th) : %f, 1 / tan(th) : %f\n", tan(ray_th), 1.0 / tan(ray_th));
-//	printf("dist_v : %f(%f, %f), dist_h : %f(%f, %f)\n", dist_v, check->nx, check->f_nx, dist_h, check->g_ny, check->ny);
 	if (dist_v < dist_h)
 	{
 		*px = check->nx;
@@ -121,7 +119,6 @@ double	cast_single_ray(int i, t_game *game, int ray_num)
 	ray_th = (game->player.th + fov_h / 2) - (fov_h / (ray_num - 1)) * i;
 	game->player.ray_th = ray_th;
 	get_wall_point(i, ray_th, game);
-//	printf("ray : %d, ray_th : %f, wall : (%f, %f)\n", i, rad_to_deg(ray_th), game->wall[i].x, game->wall[i].y);
 	dist = get_dist(game->player.x, game->player.y, game->wall[i].x,
 			game->wall[i].y);
 	return (dist);

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 15:25:28 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:35:12 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,33 +59,33 @@ void	get_wall_texture_file(int i, t_game *game, t_img *w_img)
 		img_path = game->conf.wall_ea;
 	if (!(w_img->img = mlx_xpm_file_to_image(game->mlx, img_path, &w_img->width,
 			&w_img->height)))
-		printf("[wall]mlx_xpm_file_to_image() failed\nError\n");
+		printf("Error\n[wall]mlx_xpm_file_to_image() failed\n");
 	w_img->data = (int *)mlx_get_data_addr(w_img->img, &w_img->bpp,
 			&w_img->size_l, &w_img->endian);
 }
 
 void	draw_one_vert_line(int i, double wdist, t_game *game)
 {
-	int		line_len;
-	int		space;
-	int		h;
+	t_info	info;
+	int		space_ceil;
 	t_img	w_img;
 
 	get_wall_texture_file(i, game, &w_img);
-	line_len = get_vert_line_length(wdist, game);
-	w_img.invisible = 0.0;
-	space = game->conf.win_h - line_len;
-	if (game->conf.win_h - line_len < 0)
+	info.line_len = get_vert_line_length(wdist, game);
+	w_img.invisible_c = 0.0;
+	space_ceil = (game->conf.win_h - info.line_len) / 2;
+	if (space_ceil < 0)
 	{
-		w_img.invisible = (double)abs(space) / (double)line_len;
-		space = 0;
+		w_img.invisible_c = (double)abs(space_ceil) / (double)info.line_len;
+		space_ceil = 0;
 	}
-	h = 0;
-	while (h < line_len && h < game->conf.win_h)
+	info.idx = i;
+	info.h = 0;
+	while (info.h < info.line_len && space_ceil + info.h < game->conf.win_h)
 	{
-		game->img1.data[(space / 2 + h) * game->conf.win_w + i]
-			= get_texture_pixel_color(i, h, line_len, game, &w_img);
-		h++;
+		game->img1.data[(space_ceil + info.h) * game->conf.win_w + i] =
+			get_texture_pixel_color(&info, game, &w_img);
+		info.h++;
 	}
 }
 

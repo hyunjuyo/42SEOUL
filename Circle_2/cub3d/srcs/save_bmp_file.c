@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:46:14 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 15:25:34 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:28:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	save_bmp_file(t_game *game)
 	bmp.pad = (4 - (game->conf.win_w * 3) % 4) % 4;
 	img_size = (3 * game->conf.win_w + bmp.pad) * game->conf.win_h;
 	bmp.file_size = 14 + 40 + img_size;
-//	printf("file_size : %d, img_size : %d\n", bmp.file_size, img_size);
 	bmp.img = (unsigned char *)ft_calloc(img_size, sizeof(char));
 	if ((bmp.fd = open("image.bmp", O_WRONLY | O_CREAT | O_TRUNC, 0644)) == -1)
 	{
@@ -88,6 +87,7 @@ void	check_saving_bmp_file(t_game *game)
 	if (game->save_flag && ft_strncmp(game->save_flag, "--save", 7) == 0)
 	{
 		save_bmp_file(game);
-		exit (1);
+		system("killall afplay");
+		exit(0);
 	}
 }

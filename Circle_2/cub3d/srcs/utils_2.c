@@ -6,11 +6,35 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 15:30:27 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 15:24:04 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:28:42 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	player_jumping_check(t_game *game)
+{
+	if (game->player.jump < 0)
+	{
+		game->player.jump--;
+		game->player.view_h = sin((M_PI / 5) * game->player.jump) * 0.15;
+		if (game->player.jump == -5)
+		{
+			game->player.jump = 0;
+			game->player.view_h = 0.0;
+		}
+	}
+	if (game->player.jump > 0)
+	{
+		game->player.jump++;
+		game->player.view_h = sin((M_PI / 12) * game->player.jump) * 0.45;
+		if (game->player.jump == 12)
+		{
+			game->player.jump = -1;
+			game->player.view_h = 0.0;
+		}
+	}
+}
 
 int		check_color_area(int color, int refer_color, int area)
 {
@@ -47,7 +71,7 @@ void	fade_setting(t_color *rgb, double dist, t_game *game, double weight)
 	double	fade_ratio;
 
 	dark_dist = get_dist(1.0, 1.0, game->conf.map_x - 1, game->conf.map_y - 1);
-	fade_dist = dark_dist * 0.3;
+	fade_dist = dark_dist * 0.1;
 	if (dist > fade_dist)
 	{
 		fade_ratio = 1.0 - ((dist - fade_dist) / (dark_dist - fade_dist))

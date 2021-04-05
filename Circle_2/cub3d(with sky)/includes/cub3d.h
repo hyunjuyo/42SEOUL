@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/04 19:29:59 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 11:59:07 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct		s_conf
 	char			sprite[SPR_TYPE][PATH_LEN];
 	int				ceil;
 	int				floor;
+	int				parsing_complete;
 	int				chk_complete;
 	int				map_lines;
 	char			**temp_map_addr;
@@ -223,6 +224,7 @@ typedef struct		s_info
 	int				h;
 	int				line_len;
 	double			invisible;
+	int				start;
 }					t_info;
 
 typedef struct		s_idx

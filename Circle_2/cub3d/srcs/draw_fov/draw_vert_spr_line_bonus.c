@@ -6,50 +6,64 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 14:38:13 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 17:57:04 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 11:20:44 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		get_sprite_pixel_color(int idx, int h, int j, t_game *game, int start)
+int		get_sprite_pixel_color(t_info *info, int j, t_game *game)
 {
 	double	h_ratio;
 	double	w_ratio;
 	int		spr_w;
 	int		spr_h;
+	int		h;
 
-	w_ratio = (double)(j - start) / (double)game->spr[idx].length;
-	h_ratio = (double)h / (double)game->spr[idx].length;
-	spr_w = game->spr[idx].width * w_ratio;
-	spr_h = game->spr[idx].height * h_ratio;
-	return(game->spr[idx].data[spr_h * game->spr[idx].width + spr_w]);
+	h = info->h + info->line_len * info->invisible;
+	w_ratio = (double)(j - info->start) / (double)game->spr[info->idx].length;
+	h_ratio = (double)h / (double)game->spr[info->idx].length;
+	spr_w = game->spr[info->idx].width * w_ratio;
+	spr_h = game->spr[info->idx].height * h_ratio;
+	return (game->spr[info->idx].data[spr_h * game->spr[info->idx].width
+			+ spr_w]);
+}
+
+void	do_draw_line(t_info *info, t_space *space, t_game *game, int j)
+{
+	int	color;
+
+	info->h = 0;
+	while (info->h < space->line_len && space->ceil + info->h
+			< game->conf.win_h)
+	{
+		color = get_sprite_pixel_color(info, j, game);
+		if (check_color_area(color, BLUE, 0x87) != 111)
+			game->img1.data[(space->ceil + info->h) * game->conf.win_w + j] =
+				fade_color(color, game->spr[info->idx].dist, game, 1.5);
+		info->h++;
+	}
 }
 
 void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
 {
-	int		h;
-	int		space;
-	int		color;
-	double	invisible;
-	int		line_len;
+	t_info	info;
+	t_space	space;
 
-	line_len = game->spr[idx].length;
-	invisible = 0.0;
-	space = (game->conf.win_h - line_len);
-	if (game->conf.win_h - line_len < 0)
+	info.line_len = game->spr[idx].length;
+	space.line_len = info.line_len;
+	space.vh = 0;
+	if (game->player.view_h != 0.0)
+		space.vh = info.line_len * game->player.view_h;
+	info.invisible = 0.0;
+	space.ceil = (game->conf.win_h - info.line_len) / 2 + space.vh;
+	if (space.ceil < 0)
 	{
-		invisible = (double)abs(space) / (double)line_len;
-		space = 0;
+		space.line_len += space.ceil;
+		info.invisible = (double)abs(space.ceil) / (double)info.line_len;
+		space.ceil = 0;
 	}
-	h = 0;
-	while (h < line_len && h < game->conf.win_h)
-	{
-		color = get_sprite_pixel_color(idx, h + line_len * invisible / 2, j,
-				game, start_spot);
-		if (check_color_area(color, BLUE, 0x87) != 111)
-			game->img1.data[(space / 2 + h) * game->conf.win_w + j]
-				= fade_color(color, game->spr[idx].dist, game, 1.5);
-		h++;
-	}
+	info.idx = idx;
+	info.start = start_spot;
+	do_draw_line(&info, &space, game, j);
 }

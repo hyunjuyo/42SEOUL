@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:07:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/28 17:04:12 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:52:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		error_check(char *line, t_game *game)
 {
 	int	i;
 
-	if (game->conf.chk_complete < 10)
+	if (game->conf.chk_complete < 11)
 	{
 		printf("Error\nParsing failed : insufficient info before map\n");
 		exit(1);
@@ -24,7 +24,8 @@ int		error_check(char *line, t_game *game)
 	i = 0;
 	while (line[i] && (line[i] == '1' || line[i] == '2' || line[i] == '0'
 				|| line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
-				|| line[i] == 'E' || line[i] == ' ' || line[i] == '3'))
+				|| line[i] == 'E' || line[i] == ' ' || line[i] == '3'
+				|| line[i] == '4'))
 		i++;
 	if (i == 0 || i != (int)ft_strlen(line))
 	{
@@ -40,11 +41,10 @@ character\n", line[i]);
 
 void	save_map_info(char *line, t_game *game)
 {
-	int			i;
 	int			x_len;
 	static char	*map_info[MAPY_MAX];
 
-	game->conf.temp_map_addr = map_info; // for free() after save_map_info()
+	game->conf.temp_map_addr = map_info;
 	if (error_check(line, game) == 0)
 		game->conf.map_lines++;
 	game->conf.map_y = game->conf.map_lines;
@@ -57,9 +57,4 @@ void	save_map_info(char *line, t_game *game)
 		exit(1);
 	}
 	ft_strlcpy(map_info[game->conf.map_y - 1], line, x_len + 1);
-	printf("MAP_X : %d, MAP_Y : %d\n", game->conf.map_x, game->conf.map_y); // test
-	i = -1; // test
-	while (++i < game->conf.map_y) // test
-		printf("%s\n", map_info[i]); // test
-	printf("save_map_info process ..ing\n"); // test
 }

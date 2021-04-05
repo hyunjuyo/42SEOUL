@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 15:15:02 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 17:55:47 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 14:24:02 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ double	get_min_dist_in_fov(t_game *game)
 
 	fov_vert = deg_to_rad(FOV * game->conf.win_h / game->conf.win_w, 0);
 	half_wall_len = 0.5;
+	if (game->player.view_h != 0.0)
+		half_wall_len += game->player.view_h;
 	min_dist = half_wall_len / tan(fov_vert / 2.0);
 	return (min_dist);
 }
 
-int		get_ceil_n_floor_texture(int i, double t_dist, t_game *game, char type)
+int		get_floor_texture(int i, double t_dist, t_game *game)
 {
 	double	tx_ratio;
 	double	ty_ratio;
@@ -37,46 +39,31 @@ int		get_ceil_n_floor_texture(int i, double t_dist, t_game *game, char type)
 	tx_ratio -= floor(tx_ratio);
 	ty_ratio = (game->wall[i].y - game->player.y) * dist_ratio + game->player.y;
 	ty_ratio -= floor(ty_ratio);
-	if (type == 'C')
-	{
-		tx = (int)(game->c_img.width * tx_ratio);
-		ty = (int)(game->c_img.height * ty_ratio);
-		return (game->c_img.data[ty * game->c_img.width + tx]);
-	}
-	else
-	{
-		tx = (int)(game->f_img.width * tx_ratio);
-		ty = (int)(game->f_img.height * ty_ratio);
-		return (game->f_img.data[ty * game->f_img.width + tx]);
-	}
+	tx = (int)(game->f_img.width * tx_ratio);
+	ty = (int)(game->f_img.height * ty_ratio);
+	return (game->f_img.data[ty * game->f_img.width + tx]);
 }
 
-void	draw_vert_ceil_n_floor_line(int i, int wall_len, double min_dist,
+void	draw_vert_floor_line(int i, int wall_len, t_dist *min_dist,
 		t_game *game)
 {
 	int		j;
-	int		area_len;
+	t_space	space;
 	double	h;
 	double	t_dist;
+	int		vh;
 
-	area_len = (game->conf.win_h - wall_len) / 2;
+	vh = 0;
+	if (game->player.view_h != 0.0)
+		vh = wall_len * game->player.view_h;
+	space.floor = (game->conf.win_h - wall_len) / 2 - vh;
 	j = -1;
-	while (++j < area_len)
+	while (++j < space.floor)
 	{
 		h = (double)j / (double)game->conf.win_h;
-		t_dist = min_dist / (1 - 2 * h);
-		game->img1.data[j * game->conf.win_w + i]
-			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'C'), t_dist,
-					game, 2.0);
-	}
-	j = -1;
-	while (++j < area_len)
-	{
-		h = (double)j / (double)game->conf.win_h;
-		t_dist = min_dist / (1 - 2 * h);
-		game->img1.data[(game->conf.win_h - 1 - j) * game->conf.win_w + i]
-			= fade_color(get_ceil_n_floor_texture(i, t_dist, game, 'F'), t_dist,
-					game, 2.0);
+		t_dist = min_dist->floor / (1 - 2 * h);
+		game->img1.data[(game->conf.win_h - 1 - j) * game->conf.win_w + i] =
+			fade_color(get_floor_texture(i, t_dist, game), t_dist, game, 2.0);
 	}
 }
 
@@ -84,24 +71,20 @@ void	texture_ceil_n_floor(t_game *game)
 {
 	int		i;
 	int		wall_len;
-	double	min_dist;
+	t_dist	min_dist;
 
-	if (!(game->c_img.img = mlx_xpm_file_to_image(game->mlx,
-			"./textures/ceil.xpm", &game->c_img.width, &game->c_img.height)))
-		printf("[ceil]mlx_xpm_file_to_image() failed\nError\n");
-	game->c_img.data = (int *)mlx_get_data_addr(game->c_img.img,
-			&game->c_img.bpp, &game->c_img.size_l, &game->c_img.endian);
-	if (!(game->f_img.img = mlx_xpm_file_to_image(game->mlx,
-			"./textures/floor.xpm", &game->f_img.width, &game->f_img.height)))
-		printf("[floor]mlx_xpm_file_to_image() failed\nError\n");
+	game->f_img.img = mlx_xpm_file_to_image(game->mlx, "./textures/floor.xpm",
+			&game->f_img.width, &game->f_img.height);
+	if (!game->f_img.img)
+		printf("Error\n[floor]mlx_xpm_file_to_image() failed\n");
 	game->f_img.data = (int *)mlx_get_data_addr(game->f_img.img,
 			&game->f_img.bpp, &game->f_img.size_l, &game->f_img.endian);
-	min_dist = get_min_dist_in_fov(game);
+	min_dist.floor = get_min_dist_in_fov(game);
 	i = 0;
 	while (i < game->conf.win_w)
 	{
 		wall_len = get_vert_line_length(game->wall[i].dist, game);
-		draw_vert_ceil_n_floor_line(i, wall_len, min_dist, game);
+		draw_vert_floor_line(i, wall_len, &min_dist, game);
 		i++;
 	}
 }

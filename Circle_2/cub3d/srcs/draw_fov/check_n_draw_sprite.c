@@ -6,13 +6,13 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:38:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 13:18:20 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:36:15 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	store_one_sprite_info(t_game *game, int i, char spr_type,  int x, int y)
+void	store_one_sprite_info(t_game *game, int i, char spr_type, t_idx *idx)
 {
 	char	*spr_path;
 	double	delta_x;
@@ -20,15 +20,17 @@ void	store_one_sprite_info(t_game *game, int i, char spr_type,  int x, int y)
 
 	if (spr_type == '2')
 		spr_path = game->conf.sprite[0];
-	else
+	else if (spr_type == '3')
 		spr_path = game->conf.sprite[1];
+	else
+		spr_path = game->conf.sprite[2];
 	if (!(game->spr[i].img = mlx_xpm_file_to_image(game->mlx, spr_path,
 					&game->spr[i].width, &game->spr[i].height)))
-		printf("[sprite]mlx_xpm_file_to_image() failed\nError\n");
+		printf("Error\n[sprite]mlx_xpm_file_to_image() failed\n");
 	game->spr[i].data = (int *)mlx_get_data_addr(game->spr[i].img,
 			&game->spr[i].bpp, &game->spr[i].size_l, &game->spr[i].endian);
-	game->spr[i].x = (double)x + 0.5;
-	game->spr[i].y = (double)y + 0.5;
+	game->spr[i].x = (double)idx->x + 0.5;
+	game->spr[i].y = (double)idx->y + 0.5;
 	delta_x = game->spr[i].x - game->player.x;
 	delta_y = game->spr[i].y - game->player.y;
 	if ((game->spr[i].th = atan2(delta_y, delta_x)) < 0.0)
@@ -81,15 +83,12 @@ void	draw_sprites_in_order(t_game *game, int cnt)
 		else if (th > M_PI * 2.0)
 			th -= M_PI * 2.0;
 		spot = (th / fov_h) * game->conf.win_w;
-//		printf("game->player.th : %f\n", game->player.th);
-//		printf("game->spr[%d].th : %f\n", i, game->spr[i].th);
-//		printf("spot : %d, start_spot : %d\n", spot, spot - game->spr[i].length / 2);
 		j = -1;
 		while (++j < game->conf.win_w && spot > 0 - game->conf.win_w / 2
 				&& spot < game->conf.win_w + game->conf.win_w / 2)
 		{
 			if (j >= spot - game->spr[i].length / 2 && j < spot + game->spr[i].\
-					length / 2 && game->spr[i].dist < game->wall[j].dist)
+length / 2 && game->spr[i].dist < game->wall[j].dist)
 				draw_vert_spr_line(game, i, j, spot - game->spr[i].length / 2);
 		}
 	}
@@ -98,24 +97,20 @@ void	draw_sprites_in_order(t_game *game, int cnt)
 void	ready_to_draw_sprite(t_game *game)
 {
 	int		i;
-	int		x;
-	int		y;
+	t_idx	idx;
 	char	spr_type;
 
 	i = 0;
-	x = -1;
-	while (++x < game->conf.map_x)
+	idx.x = -1;
+	while (++idx.x < game->conf.map_x)
 	{
-		y = -1;
-		while (++y < game->conf.map_y)
+		idx.y = -1;
+		while (++idx.y < game->conf.map_y)
 		{
-			spr_type = game->spr_in_fov[x * game->conf.map_y + y];
-			if (spr_type == '2' || spr_type == '3')
+			spr_type = game->spr_in_fov[idx.x * game->conf.map_y + idx.y];
+			if (spr_type == '2' || spr_type == '3' || spr_type == '4')
 			{
-				store_one_sprite_info(game, i, spr_type, x, y);
-//				printf("game->spr[%d] (%f, %f)\n", i, game->spr[i].x, game->spr[i].y);
-//				printf("gmae->spr[%d] dist : %f\n", i, game->spr[i].dist);
-//				printf("gmae->spr[%d] length : %d\n", i, game->spr[i].length);
+				store_one_sprite_info(game, i, spr_type, &idx);
 				i++;
 			}
 		}
@@ -124,11 +119,12 @@ void	ready_to_draw_sprite(t_game *game)
 	draw_sprites_in_order(game, i);
 }
 
-
 void	check_sprite_in_fov(t_game *game, t_chk_pnt *check)
 {
 	if (game->map[check->mapx][check->mapy] == '2')
 		game->spr_in_fov[check->mapx * game->conf.map_y + check->mapy] = '2';
 	else if (game->map[check->mapx][check->mapy] == '3')
 		game->spr_in_fov[check->mapx * game->conf.map_y + check->mapy] = '3';
+	else if (game->map[check->mapx][check->mapy] == '4')
+		game->spr_in_fov[check->mapx * game->conf.map_y + check->mapy] = '4';
 }

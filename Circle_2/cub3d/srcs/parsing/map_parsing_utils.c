@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:17:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/28 17:21:47 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:38:59 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 {
 	if (type == 'w')
 	{
-		if ((game->conf.win_w = ft_atoi(w_ptr = get_next_word(l_ptr))) != 0)
+		w_ptr = get_next_word(l_ptr);
+		if ((game->conf.win_w = ft_atoi(w_ptr)) != 0)
 		{
 			if (game->conf.win_w > game->conf.display_w)
 				game->conf.win_w = game->conf.display_w;
@@ -25,7 +26,8 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 	}
 	else
 	{
-		if ((game->conf.win_h = ft_atoi(w_ptr = get_next_word(l_ptr))) != 0)
+		w_ptr = get_next_word(l_ptr);
+		if ((game->conf.win_h = ft_atoi(w_ptr)) != 0)
 		{
 			if (game->conf.win_h > game->conf.display_h)
 				game->conf.win_h = game->conf.display_h;
@@ -38,7 +40,6 @@ void	save_player_info(t_game *game, int i, int j, char c)
 {
 	if (game->player.x != 0.0 || game->player.y != 0.0)
 	{
-		printf("(%f, %f)\n", game->player.x, game->player.y); // test
 		printf("Error\nMap parsing failed : too many player's position(s)\n");
 		exit(1);
 	}
@@ -65,7 +66,7 @@ char	*get_next_word(char **l_ptr)
 	if ((*l_ptr)[i] == '\0')
 	{
 		w_ptr = ft_strdup(*l_ptr);
-        *l_ptr += i + 1;
+		*l_ptr += i + 1;
 		return (w_ptr);
 	}
 	(*l_ptr)[i] = '\0';
@@ -113,8 +114,6 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 		rgb *= 0x10 * 0x10;
 		if (!color_info[i])
 			return (-1);
-//		if (i == 2 && ft_strlen(color_info[i]) > 3)  // need to check
-//				color_info[i][3] = '\0';
 		num = ft_atoi(color_info[i]);
 		if (num < 0 || num > 255)
 		{
@@ -122,8 +121,6 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 			exit(1);
 		}
 		rgb += num;
-		printf("color_info[i] : %s\n", color_info[i]);  // test
-		printf("wow!! %d %#X\n", rgb, rgb);  // test
 	}
 	return (rgb);
 }

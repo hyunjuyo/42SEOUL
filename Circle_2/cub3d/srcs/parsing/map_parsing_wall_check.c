@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:56:58 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/25 14:07:48 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:32:40 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	go_start_point(t_game *game)
 			&& game->player.y >= 1.0 && game->player.x < game->conf.map_x
 			&& game->player.y < game->conf.map_y))
 		{
-			printf("Map parsing failed : The map must be closed by walls\n");
 			printf("Error\n");
+			printf("Map parsing failed : The map must be closed by walls\n");
 			exit(1);
 		}
 	}
@@ -49,7 +49,7 @@ void	go_start_point(t_game *game)
 
 void	left_side_wall_checking(t_game *game, t_pla *start_point)
 {
-	while (game->player.x > 0 && game->player.y > 0 && game->player.x 
+	while (game->player.x > 0 && game->player.y > 0 && game->player.x
 			< game->conf.map_x && game->player.y < game->conf.map_y)
 	{
 		game->player.th += deg_to_rad(90.0, 0);
@@ -63,7 +63,6 @@ void	left_side_wall_checking(t_game *game, t_pla *start_point)
 		forward_one_step(game);
 		if (hit_wall_check(game, 0) == 1)
 			back_one_step_n_rotate(game);
-//		printf("now~~~ (%f, %f) %f\n", game->player.x, game->player.y, game->player.th);  // test
 		if (fabs(game->player.x - start_point->x) < EPSILON
 			&& fabs(game->player.y - start_point->y) < EPSILON)
 			break ;
@@ -71,8 +70,7 @@ void	left_side_wall_checking(t_game *game, t_pla *start_point)
 	if (!(game->player.x > 0 && game->player.y > 0 && game->player.x
 				< game->conf.map_x && game->player.y < game->conf.map_y))
 	{
-		printf("Map parsing failed : The map must be closed by walls\n");
-		printf("Error\n");
+		printf("Error\nMap parsing failed : The map must be closed by walls\n");
 		exit(1);
 	}
 }

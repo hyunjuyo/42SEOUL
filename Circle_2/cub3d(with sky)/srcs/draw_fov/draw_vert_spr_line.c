@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 14:38:13 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/31 16:42:35 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 11:09:38 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		get_sprite_pixel_color(t_info *info, int j, t_game *game, int start)
 	h_ratio = (double)h / (double)game->spr[info->idx].length;
 	spr_w = game->spr[info->idx].width * w_ratio;
 	spr_h = game->spr[info->idx].height * h_ratio;
-	return (game->spr[info->idx].data[spr_h * game->spr[info->idx].width
-			+ spr_w]);
+	return (game->spr[info->idx].data[spr_h * game->spr[info->idx].width +
+			spr_w]);
 }
 
 void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
@@ -43,8 +43,9 @@ void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
 		info.invisible = (double)abs(space) / (double)info.line_len;
 		space = 0;
 	}
+	info.idx = idx;
 	info.h = 0;
-	while (info.h < info.line_len && info.h < game->conf.win_h)
+	while (info.h < info.line_len && space / 2 + info.h < game->conf.win_h)
 	{
 		color = get_sprite_pixel_color(&info, j, game, start_spot);
 		if (check_color_area(color, BLUE, 0x87) != 111)

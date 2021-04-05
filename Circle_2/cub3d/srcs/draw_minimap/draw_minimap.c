@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/30 15:05:05 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:38:15 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		draw_minimap(t_game *game)
 			|| game->conf.map_y * game->cubsize > game->conf.win_h / 2)
 	{
 		printf("Error\nwin_size is too small for the minimap\n");
-		exit (1);
+		exit(1);
 	}
 	draw_squares(game);
 	draw_fov_rays_on_minimap(game);

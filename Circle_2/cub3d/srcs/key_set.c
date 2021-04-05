@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/03/30 17:37:05 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 13:27:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	key_set_more_and_more(int keycode, t_game *game)
 	else if (keycode == KEY_ESC)
 		exit(0);
 	rotate_check(game);
-//	printf("(%f, %f) %f deg\n", game->player.x, game->player.y,
-//			rad_to_deg(game->player.th));
 }
 
 void	key_set_more(int keycode, t_game *game)
@@ -61,10 +59,10 @@ void	key_set_more(int keycode, t_game *game)
 		game->player.y += MOVE_SPEED * sin(game->player.th + deg_to_rad(90, 0));
 		if (hit_wall_check(game, 1) == 1)
 		{
-			game->player.x
-				-= MOVE_SPEED * cos(game->player.th + deg_to_rad(90, 0));
-			game->player.y
-				-= MOVE_SPEED * sin(game->player.th + deg_to_rad(90, 0));
+			game->player.x -= MOVE_SPEED * cos(game->player.th
+					+ deg_to_rad(90, 0));
+			game->player.y -= MOVE_SPEED * sin(game->player.th
+					+ deg_to_rad(90, 0));
 		}
 	}
 	else if (keycode == KEY_D)
@@ -73,10 +71,10 @@ void	key_set_more(int keycode, t_game *game)
 		game->player.y += MOVE_SPEED * sin(game->player.th - deg_to_rad(90, 0));
 		if (hit_wall_check(game, 1) == 1)
 		{
-			game->player.x
-				-= MOVE_SPEED * cos(game->player.th - deg_to_rad(90, 0));
-			game->player.y
-				-= MOVE_SPEED * sin(game->player.th - deg_to_rad(90, 0));
+			game->player.x -= MOVE_SPEED * cos(game->player.th
+					- deg_to_rad(90, 0));
+			game->player.y -= MOVE_SPEED * sin(game->player.th
+					- deg_to_rad(90, 0));
 		}
 	}
 	key_set_more_and_more(keycode, game);
@@ -97,11 +95,11 @@ int		key_set(int keycode, t_game *game)
 	else if (keycode == KEY_S)
 	{
 		game->player.x -= MOVE_SPEED * cos(game->player.th);
-		game->player.y -= MOVE_SPEED * sin(game->player.th);;
+		game->player.y -= MOVE_SPEED * sin(game->player.th);
 		if (hit_wall_check(game, 1) == 1)
 		{
 			game->player.x += MOVE_SPEED * cos(game->player.th);
-			game->player.y += MOVE_SPEED * sin(game->player.th);;
+			game->player.y += MOVE_SPEED * sin(game->player.th);
 		}
 	}
 	key_set_more(keycode, game);

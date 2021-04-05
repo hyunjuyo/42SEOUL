@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/04 19:59:03 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 12:00:57 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ int		main(int argc, char *argv[])
 	printf("display R : %d %d\n", game.conf.display_w, game.conf.display_h); // test
 	ft_memset(&game.player, 0, sizeof(t_pla));
 	map_parsing(map_file, &game);
+	game.conf.parsing_complete = 1;
 	game_init(&game);
-	game.player.item[1] = 0; // check
+//	game.player.item[1] = 0; // check
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L << 0, key_set, &game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 1L << 1, key_set2, &game);
 	mlx_hook(game.win, X_EVENT_EXIT, 0, exit_game, &game);

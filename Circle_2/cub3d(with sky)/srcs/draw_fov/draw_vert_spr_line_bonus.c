@@ -6,13 +6,13 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 14:38:13 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/04 18:45:47 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 11:20:44 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		get_sprite_pixel_color(t_info *info, int j, t_game *game, int start)
+int		get_sprite_pixel_color(t_info *info, int j, t_game *game)
 {
 	double	h_ratio;
 	double	w_ratio;
@@ -21,7 +21,7 @@ int		get_sprite_pixel_color(t_info *info, int j, t_game *game, int start)
 	int		h;
 
 	h = info->h + info->line_len * info->invisible;
-	w_ratio = (double)(j - start) / (double)game->spr[info->idx].length;
+	w_ratio = (double)(j - info->start) / (double)game->spr[info->idx].length;
 	h_ratio = (double)h / (double)game->spr[info->idx].length;
 	spr_w = game->spr[info->idx].width * w_ratio;
 	spr_h = game->spr[info->idx].height * h_ratio;
@@ -37,11 +37,11 @@ void	do_draw_line(t_info *info, t_space *space, t_game *game, int j)
 	while (info->h < space->line_len && space->ceil + info->h
 			< game->conf.win_h)
 	{
-		color = get_sprite_pixel_color(info, j, game, start_spot);
+		color = get_sprite_pixel_color(info, j, game);
 		if (check_color_area(color, BLUE, 0x87) != 111)
 			game->img1.data[(space->ceil + info->h) * game->conf.win_w + j] =
 				fade_color(color, game->spr[info->idx].dist, game, 1.5);
-		info.h++;
+		info->h++;
 	}
 }
 
@@ -64,5 +64,6 @@ void	draw_vert_spr_line(t_game *game, int idx, int j, int start_spot)
 		space.ceil = 0;
 	}
 	info.idx = idx;
+	info.start = start_spot;
 	do_draw_line(&info, &space, game, j);
 }

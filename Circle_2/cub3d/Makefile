@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/04/05 15:24:30 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/04/05 17:01:50 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS	= ./srcs/main.c ./srcs/utils_1.c ./srcs/utils_2.c \
 		  ./srcs/exit_game.c
 SRCS_B	= ./srcs/main_bonus.c ./srcs/utils_1.c ./srcs/utils_2.c \
 		  ./srcs/key_set_bonus.c ./srcs/key_set2_bonus.c \
+		  ./srcs/utils_3_bonus.c \
 		  ./srcs/save_bmp_file.c \
 		  ./srcs/screen_size_check.c \
 		  ./srcs/parsing/map_parsing.c \

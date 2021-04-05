@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 15:24:00 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 17:02:54 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define CUBE_SIZE	5
 # define MINIMAP_RAY_NUM	50
 
-# define MOVE_SPEED	0.75
+# define MOVE_SPEED	0.52
 # define ROT_SPEED_RAD	0.09
 # define FOV	60
 
@@ -115,6 +115,7 @@ typedef struct		s_pla
 	double			th;
 	double			ray_th;
 	double			view_h;
+	int				walk;
 	int				jump;
 	double			jh_w;
 	int				item[2];
@@ -280,6 +281,7 @@ void				screen_size_check(t_game *game);
 void				texture_floor(t_game *game);
 int					check_color_area(int color, int refer_color, int area);
 void				check_saving_bmp_file(t_game *game);
+void				player_walking(t_game *game);
 void				player_jumping_check(t_game *game);
 int					get_sky_color(t_game *game, int h, int w);
 void				check_player_item_info(t_game *game);

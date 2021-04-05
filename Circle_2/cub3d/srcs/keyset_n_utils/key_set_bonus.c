@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 17:32:38 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/05 20:07:41 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	key_set_more_and_more(int keycode, t_game *game)
 		game->player.jump = 3;
 		game->player.view_h = sin((M_PI / 12) * game->player.jump) * 0.45;
 	}
-	if (keycode == KEY_W || keycode == KEY_S || keycode == KEY_A
-		|| keycode == KEY_D)
+	if (game->player.view_h != -0.25 && (keycode == KEY_W || keycode == KEY_S
+		|| keycode == KEY_A || keycode == KEY_D))
 		player_walking(game);
 	rotate_check(game);
 }

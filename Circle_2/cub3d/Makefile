@@ -6,11 +6,11 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/04/06 17:02:42 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/04/06 19:28:25 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= Cub3D
+NAME	= cub3D
 
 CFLAGS	= -Wall -Wextra -Werror
 MLX_FLAGS	= -framework OpenGL -framework AppKit -L./mlx/ -lmlx
@@ -37,6 +37,7 @@ SRCS	= ./srcs/main.c \
 		  ./srcs/draw_fov/cast_single_ray.c \
 		  ./srcs/draw_fov/get_texture_pixel_color.c \
 		  ./srcs/draw_fov/sprite/check_n_draw_sprite.c \
+		  ./srcs/draw_fov/sprite/check_n_draw_sprite_utils.c \
 		  ./srcs/draw_fov/sprite/draw_vert_spr_line.c \
 		  ./srcs/keyset_n_utils/exit_game.c
 SRCS_B	= ./srcs/main_bonus.c \
@@ -58,7 +59,8 @@ SRCS_B	= ./srcs/main_bonus.c \
 		  ./srcs/draw_fov/cast_single_ray.c \
 		  ./srcs/draw_fov/get_texture_pixel_color.c \
 		  ./srcs/draw_fov/etc/texture_floor_bonus.c \
-		  ./srcs/draw_fov/sprite/check_n_draw_sprite.c \
+		  ./srcs/draw_fov/sprite/check_n_draw_sprite_bonus.c \
+		  ./srcs/draw_fov/sprite/check_n_draw_sprite_utils.c \
 		  ./srcs/draw_fov/sprite/draw_vert_spr_line_bonus.c \
 		  ./srcs/draw_fov/etc/get_sky_color.c \
 		  ./srcs/draw_fov/etc/check_player_item_info_bonus.c \

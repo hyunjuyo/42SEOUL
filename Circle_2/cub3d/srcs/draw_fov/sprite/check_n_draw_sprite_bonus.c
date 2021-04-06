@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_n_draw_sprite.c                              :+:      :+:    :+:   */
+/*   check_n_draw_sprite_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:38:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 19:25:09 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/06 19:28:55 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	store_one_sprite_info(t_game *game, int i, char spr_type, t_idx *idx)
 					&game->spr[i].width, &game->spr[i].height)))
 	{
 		printf("Error\n[sprite]mlx_xpm_file_to_image() failed\n");
+		system("killall afplay");
 		exit(1);
 	}
 	game->spr[i].data = (int *)mlx_get_data_addr(game->spr[i].img,

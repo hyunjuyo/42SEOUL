@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 13:35:12 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/06 19:10:53 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	get_wall_texture_file(int i, t_game *game, t_img *w_img)
 		img_path = game->conf.wall_ea;
 	if (!(w_img->img = mlx_xpm_file_to_image(game->mlx, img_path, &w_img->width,
 			&w_img->height)))
+	{
 		printf("Error\n[wall]mlx_xpm_file_to_image() failed\n");
+		exit(1);
+	}
 	w_img->data = (int *)mlx_get_data_addr(w_img->img, &w_img->bpp,
 			&w_img->size_l, &w_img->endian);
 }

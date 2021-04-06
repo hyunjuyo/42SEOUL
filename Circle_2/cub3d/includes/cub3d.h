@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 17:02:54 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/06 19:24:05 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,7 @@ char				*get_next_word(char **l_ptr);
 void				check_sprite_in_fov(t_game *game, t_chk_pnt *check);
 void				ready_to_draw_sprite(t_game *game);
 int					get_vert_line_length(double wdist, t_game *game);
+char				*get_spr_path(t_game *game, char spr_type);
 void				draw_vert_spr_line(t_game *game, int idx, int j,
 		int start_spot);
 int					fade_color(int color, double dist, t_game *game,

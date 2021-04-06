@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:46:14 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 12:26:01 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/06 12:23:59 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	check_saving_bmp_file(t_game *game)
 	if (game->save_flag && ft_strncmp(game->save_flag, "--save", 7) == 0)
 	{
 		save_bmp_file(game);
+		system("killall afplay");
 		exit(0);
 	}
 	if (game->save_flag && ft_strncmp(game->save_flag, "--save", 7) != 0)

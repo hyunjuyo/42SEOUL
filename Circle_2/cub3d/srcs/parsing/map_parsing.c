@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 18:41:05 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/06 12:50:03 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,16 @@ void	map_parsing(char *map_file, t_game *game)
 	int		fd;
 	double	temp_x;
 	double	temp_y;
+	double	temp_th;
 
 	map_file_open_n_read(&fd, map_file, game);
 	store_rotated_map(game);
 	temp_x = game->player.x;
 	temp_y = game->player.y;
+	temp_th = game->player.th;
 	map_parsing_wall_check(game);
 	game->player.x = temp_x;
 	game->player.y = temp_y;
+	game->player.th = temp_th;
 	close(fd);
 }

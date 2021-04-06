@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 16:08:22 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/06 12:10:20 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int		main(int argc, char *argv[])
 		printf("Error\ninvalid argc value : argc value is %d\n", argc);
 		exit(1);
 	}
-	game.save_flag = argv[2];
 	map_file = argv[1];
+	game.save_flag = NULL;
+	if (argc == 3)
+		game.save_flag = argv[2];
 	ft_memset(&game.conf, 0, sizeof(t_conf));
 	screen_size_check(&game);
 	ft_memset(&game.player, 0, sizeof(t_pla));

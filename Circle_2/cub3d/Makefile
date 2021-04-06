@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/04/05 19:59:35 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/04/06 12:27:44 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,11 @@ MATH_FLAGS	= -lm
 LIBFT_FLAGS	= -L./Libft -lft
 MLX_MMS_LIB	= ./libmlx.dylib
 
-SRCS	= ./srcs/main.c ./srcs/keyset_n_utils/utils_1.c ./srcs/keyset_n_utils/utils_2.c \
-		  ./srcs/keyset_n_utils/key_set.c ./srcs/keyset_n_utils/key_set2_bonus.c \
+SRCS	= ./srcs/main.c \
+		  ./srcs/keyset_n_utils/utils_1.c \
+		  ./srcs/keyset_n_utils/utils_2.c \
+		  ./srcs/keyset_n_utils/key_set.c \
+		  ./srcs/keyset_n_utils/key_set2_bonus.c \
 		  ./srcs/keyset_n_utils/save_bmp_file.c \
 		  ./srcs/keyset_n_utils/screen_size_check.c \
 		  ./srcs/parsing/map_parsing.c \
@@ -36,10 +39,13 @@ SRCS	= ./srcs/main.c ./srcs/keyset_n_utils/utils_1.c ./srcs/keyset_n_utils/utils
 		  ./srcs/draw_fov/sprite/check_n_draw_sprite.c \
 		  ./srcs/draw_fov/sprite/draw_vert_spr_line.c \
 		  ./srcs/keyset_n_utils/exit_game.c
-SRCS_B	= ./srcs/main_bonus.c ./srcs/keyset_n_utils/utils_1.c ./srcs/keyset_n_utils/utils_2.c \
-		  ./srcs/keyset_n_utils/key_set_bonus.c ./srcs/keyset_n_utils/key_set2_bonus.c \
+SRCS_B	= ./srcs/main_bonus.c \
+		  ./srcs/keyset_n_utils/utils_1.c \
+		  ./srcs/keyset_n_utils/utils_2.c \
+		  ./srcs/keyset_n_utils/key_set_bonus.c \
+		  ./srcs/keyset_n_utils/key_set2_bonus.c \
 		  ./srcs/keyset_n_utils/utils_3_bonus.c \
-		  ./srcs/keyset_n_utils/save_bmp_file.c \
+		  ./srcs/keyset_n_utils/save_bmp_file_bonus.c \
 		  ./srcs/keyset_n_utils/screen_size_check.c \
 		  ./srcs/parsing/map_parsing.c \
 		  ./srcs/parsing/get_next_line.c \
@@ -58,7 +64,7 @@ SRCS_B	= ./srcs/main_bonus.c ./srcs/keyset_n_utils/utils_1.c ./srcs/keyset_n_uti
 		  ./srcs/draw_fov/etc/check_player_item_info_bonus.c \
 		  ./srcs/draw_minimap/draw_minimap.c \
 		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c \
-		  ./srcs/keyset_n_utils/exit_game.c
+		  ./srcs/keyset_n_utils/exit_game_bonus.c
 
 OBJS	= $(SRCS:.c=.o)
 OBJS_B	= $(SRCS_B:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:17:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 12:38:18 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:59:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 	w_ptr = join_next_words(l_ptr, w_ptr, 4);
 	rgb = 0x0;
 	color_info = ft_split(w_ptr, ',');
+	free(w_ptr);
 	i = -1;
 	while (++i < 3)
 	{
@@ -117,6 +118,7 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 		if (!color_info[i])
 			return (-1);
 		num = ft_atoi(color_info[i]);
+		free(color_info[i]);
 		if (num < 0 || num > 255)
 		{
 			printf("Error\nParsing failed : incorrect RGB color(num : %d)\n",
@@ -125,6 +127,6 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 		}
 		rgb += num;
 	}
-	free(w_ptr);
+	free(color_info);
 	return (rgb);
 }

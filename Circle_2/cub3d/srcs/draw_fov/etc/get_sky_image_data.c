@@ -31,3 +31,16 @@ int		get_sky_color(t_game *game, int h, int w)
 	color = game->c_img.data[y * game->c_img.width + x];
 	return (color);
 }
+
+void	get_sky_image_data(t_game *game)
+{
+	if (!(game->c_img.img = mlx_xpm_file_to_image(game->mlx,
+			"./textures/sky.xpm", &game->c_img.width, &game->c_img.height)))
+	{
+		printf("Error\n[sky]mlx_xpm_file_to_image() failed\n");
+		system("killall afplay");
+		exit(1)
+	}
+	game->c_img.data = (int *)mlx_get_data_addr(game->c_img.img,
+			&game->c_img.bpp, &game->c_img.size_l, &game->c_img.endian);
+}

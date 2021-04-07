@@ -284,6 +284,7 @@ int					check_color_area(int color, int refer_color, int area);
 void				check_saving_bmp_file(t_game *game);
 void				player_walking(t_game *game);
 void				player_jumping_check(t_game *game);
+void				get_sky_image_data(t_game *game);
 int					get_sky_color(t_game *game, int h, int w);
 void				check_player_item_info(t_game *game);
 int					exit_game(t_game *game);

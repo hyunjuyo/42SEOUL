@@ -62,7 +62,7 @@ SRCS_B	= ./srcs/main_bonus.c \
 		  ./srcs/draw_fov/sprite/check_n_draw_sprite_bonus.c \
 		  ./srcs/draw_fov/sprite/check_n_draw_sprite_utils.c \
 		  ./srcs/draw_fov/sprite/draw_vert_spr_line_bonus.c \
-		  ./srcs/draw_fov/etc/get_sky_color.c \
+		  ./srcs/draw_fov/etc/get_sky_image_data.c \
 		  ./srcs/draw_fov/etc/check_player_item_info_bonus.c \
 		  ./srcs/draw_minimap/draw_minimap.c \
 		  ./srcs/draw_minimap/draw_fov_rays_on_minimap.c \

@@ -76,7 +76,11 @@ void	texture_floor(t_game *game)
 	game->f_img.img = mlx_xpm_file_to_image(game->mlx, "./textures/floor.xpm",
 			&game->f_img.width, &game->f_img.height);
 	if (!game->f_img.img)
+	{
 		printf("Error\n[floor]mlx_xpm_file_to_image() failed\n");
+		system("killall afplay");
+		exit(1);
+	}
 	game->f_img.data = (int *)mlx_get_data_addr(game->f_img.img,
 			&game->f_img.bpp, &game->f_img.size_l, &game->f_img.endian);
 	min_dist.floor = get_min_dist_in_fov(game);

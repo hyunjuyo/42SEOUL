@@ -25,8 +25,6 @@
 # define MAPY_MAX	1000
 # define SPR_TYPE	3
 # define SPR_MAX_IN_FOV	100
-# define MAP_X	20
-# define MAP_Y	12
 # define CUBE_SIZE	5
 # define MINIMAP_RAY_NUM	50
 
@@ -158,7 +156,6 @@ typedef struct		s_game
 	void			*mlx;
 	void			*win;
 	t_img			img1;
-	t_img			img2;
 	t_img			c_img;
 	t_img			f_img;
 	t_pla			player;

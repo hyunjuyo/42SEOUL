@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:03:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 19:04:38 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 18:03:00 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	check_conf_type_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
 	{
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		if ((game->conf.win_w = ft_atoi(w_ptr)) != 0)
+		if ((game->conf.win_w = atoi_n_check(w_ptr)) != 0)
 		{
 			if (game->conf.win_w > game->conf.display_w)
 				game->conf.win_w = game->conf.display_w;
@@ -113,13 +113,15 @@ void	check_conf_type_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		}
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		if ((game->conf.win_h = ft_atoi(w_ptr)) != 0)
+		if ((game->conf.win_h = atoi_n_check(w_ptr)) != 0)
 		{
 			if (game->conf.win_h > game->conf.display_h)
 				game->conf.win_h = game->conf.display_h;
 			game->conf.chk_complete++;
 		}
 		free(w_ptr);
+		if (*l_ptr != '\0')
+			print_parsing_error('R', "too many informations");
 	}
 	else
 		check_conf_type_2(line, game, l_ptr, w_ptr);

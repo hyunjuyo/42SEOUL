@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:17:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 16:59:27 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 17:38:51 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 	if (type == 'w')
 	{
 		w_ptr = get_next_word(l_ptr);
-		if ((game->conf.win_w = ft_atoi(w_ptr)) != 0)
+		if ((game->conf.win_w = atoi_n_check(w_ptr)) != 0)
 		{
 			if (game->conf.win_w > game->conf.display_w)
 				game->conf.win_w = game->conf.display_w;
@@ -28,7 +28,7 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 	else
 	{
 		w_ptr = get_next_word(l_ptr);
-		if ((game->conf.win_h = ft_atoi(w_ptr)) != 0)
+		if ((game->conf.win_h = atoi_n_check(w_ptr)) != 0)
 		{
 			if (game->conf.win_h > game->conf.display_h)
 				game->conf.win_h = game->conf.display_h;

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:03:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 19:14:36 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 18:04:01 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void	check_conf_type_1(char *line, t_game *game, char *l_ptr, char *w_ptr)
 		free(w_ptr);
 		save_conf_resolution(game, &l_ptr, w_ptr, 'w');
 		save_conf_resolution(game, &l_ptr, w_ptr, 'h');
+		if (*l_ptr != '\0')
+			print_parsing_error('R', "too many informations");
 	}
 	else if (ft_strncmp(w_ptr, "NO", 2) == 0)
 	{

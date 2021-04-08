@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/08 16:26:28 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 18:02:26 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ int					key_set2(int keycode, t_game *game);
 int					draw_minimap(t_game *game);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
+int					atoi_n_check(const char *str);
 double				cast_single_ray(int x, t_game *game, int n);
 double				get_dist(double x1, double y1, double x2, double y2);
 double				deg_to_rad(double th, int type);
@@ -287,6 +288,7 @@ int					get_sky_color(t_game *game, int h, int w);
 void				check_player_item_info(t_game *game);
 void				draw_gem_info(t_game *game, int info);
 void				draw_gem_info_last(t_game *game, t_img *gem);
+void				print_parsing_error(char type, char *message);
 int					exit_game(t_game *game);
 
 #endif

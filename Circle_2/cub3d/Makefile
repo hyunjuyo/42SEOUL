@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 10:49:12 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/04/08 16:25:18 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/04/08 17:44:15 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS	= ./srcs/main.c \
 		  ./srcs/parsing/get_next_line.c \
 		  ./srcs/parsing/map_parsing_config.c \
 		  ./srcs/parsing/map_parsing_utils.c \
+		  ./srcs/parsing/map_parsing_utils2.c \
 		  ./srcs/parsing/save_map_info.c \
 		  ./srcs/parsing/map_parsing_wall_check.c \
 		  ./srcs/draw_fov/draw_player_fov.c \
@@ -53,6 +54,7 @@ SRCS_B	= ./srcs/main_bonus.c \
 		  ./srcs/parsing/map_parsing_config_bonus.c \
 		  ./srcs/parsing/map_parsing_config2_bonus.c \
 		  ./srcs/parsing/map_parsing_utils.c \
+		  ./srcs/parsing/map_parsing_utils2.c \
 		  ./srcs/parsing/save_map_info_bonus.c \
 		  ./srcs/parsing/map_parsing_wall_check.c \
 		  ./srcs/draw_fov/draw_player_fov_bonus.c \

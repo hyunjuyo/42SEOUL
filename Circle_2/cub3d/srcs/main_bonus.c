@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 12:10:21 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 17:01:04 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	play_bgm(t_game *game)
 		printf("Error\nfork() failed\n");
 		exit(1);
 	}
+	game->pid_status = -1;
 	if (game->pid == 0)
 	{
 		game->pid = getpid();
@@ -41,6 +42,8 @@ void	game_init(t_game *game)
 		printf("Error\nwin_size is too small\n");
 		exit(1);
 	}
+	draw_player_fov(game);
+	check_saving_bmp_file(game);
 	play_bgm(game);
 }
 

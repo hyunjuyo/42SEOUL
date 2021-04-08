@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 19:24:24 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:26:28 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct		s_game
 	char			*spr_in_fov;
 	char			*save_flag;
 	int				pid;
+	int				pid_status;
 }					t_game;
 
 typedef enum		e_line
@@ -284,6 +285,8 @@ void				player_jumping_check(t_game *game);
 void				get_sky_image_data(t_game *game);
 int					get_sky_color(t_game *game, int h, int w);
 void				check_player_item_info(t_game *game);
+void				draw_gem_info(t_game *game, int info);
+void				draw_gem_info_last(t_game *game, t_img *gem);
 int					exit_game(t_game *game);
 
 #endif

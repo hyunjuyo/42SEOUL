@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:35:11 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 19:30:00 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:19:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void	get_wall_texture_file(int i, t_game *game, t_img *w_img)
 			&w_img->height)))
 	{
 		printf("Error\n[wall]mlx_xpm_file_to_image() failed\n");
-		system("killall afplay");
+		waitpid(game->pid, &game->pid_status, WNOHANG);
+		if (game->pid_status == -1)
+			system("killall afplay");
 		exit(1);
 	}
 	w_img->data = (int *)mlx_get_data_addr(w_img->img, &w_img->bpp,
@@ -121,7 +123,6 @@ int		draw_player_fov(t_game *game)
 	}
 	texture_floor(game);
 	ready_to_draw_sprite(game);
-	check_saving_bmp_file(game);
 	free(game->wall);
 	free(game->spr_in_fov);
 	check_player_item_info(game);

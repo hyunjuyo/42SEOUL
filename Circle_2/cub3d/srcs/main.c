@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:42:10 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 12:10:20 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 14:38:33 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	game_init(t_game *game)
 		printf("Error\nwin_size is too small\n");
 		exit(1);
 	}
+	draw_player_fov(game);
+	check_saving_bmp_file(game);
 }
 
 int		main(int argc, char *argv[])

@@ -6,11 +6,11 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:38:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/06 19:28:55 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:34:06 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	store_one_sprite_info(t_game *game, int i, char spr_type, t_idx *idx)
 {
@@ -23,7 +23,9 @@ void	store_one_sprite_info(t_game *game, int i, char spr_type, t_idx *idx)
 					&game->spr[i].width, &game->spr[i].height)))
 	{
 		printf("Error\n[sprite]mlx_xpm_file_to_image() failed\n");
-		system("killall afplay");
+		waitpid(game->pid, &game->pid_status, WNOHANG);
+		if (game->pid_status == -1)
+			system("killall afplay");
 		exit(1);
 	}
 	game->spr[i].data = (int *)mlx_get_data_addr(game->spr[i].img,

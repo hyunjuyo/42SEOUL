@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:01:29 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 20:07:41 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:59:47 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	key_set_more_and_more(int keycode, t_game *game)
 		game->player.th -= ROT_SPEED_RAD;
 	else if (keycode == KEY_ESC)
 	{
-		system("killall afplay");
+		waitpid(game->pid, &game->pid_status, WNOHANG);
+		if (game->pid_status != 0)
+			system("killall afplay");
 		exit(0);
 	}
 	else if (keycode == KEY_SHIFT)

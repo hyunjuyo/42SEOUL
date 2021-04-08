@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 18:59:36 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 17:31:41 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 14:14:53 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	draw_gem_info_more(t_game *game, int info, t_img *gem)
 {
 	if (info == 2)
 	{
-		if (!(gem.img = mlx_xpm_file_to_image(game->mlx,
-						"./textures/gem_2.xpm", &gem.width, &gem.height)))
+		if (!(gem->img = mlx_xpm_file_to_image(game->mlx,
+						"./textures/gem_2.xpm", &gem->width, &gem->height)))
 		{
 			printf("Error\n[gem]mlx_xpm_file_to_image() failed\n");
 			system("killall afplay");

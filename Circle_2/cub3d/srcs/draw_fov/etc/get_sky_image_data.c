@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_sky_color.c                                    :+:      :+:    :+:   */
+/*   get_sky_image_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 17:52:54 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 13:34:52 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/08 14:14:03 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	get_sky_image_data(t_game *game)
 	{
 		printf("Error\n[sky]mlx_xpm_file_to_image() failed\n");
 		system("killall afplay");
-		exit(1)
+		exit(1);
 	}
 	game->c_img.data = (int *)mlx_get_data_addr(game->c_img.img,
 			&game->c_img.bpp, &game->c_img.size_l, &game->c_img.endian);

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 16:07:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 13:48:34 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:16:45 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	save_map_info(char *line, t_game *game)
 	static char	*map_info[MAPY_MAX];
 
 	game->conf.temp_map_addr = map_info;
+	game->conf.chk_complete = game->conf.check.rw + game->conf.check.rh +
+		game->conf.check.no + game->conf.check.so + game->conf.check.we +
+		game->conf.check.ea + game->conf.check.s + game->conf.check.c +
+		game->conf.check.f;
+	printf("check!! : %d\n", game->conf.chk_complete);  //test
 	if (error_check(line, game) == 0)
 		game->conf.map_lines++;
 	game->conf.map_y = game->conf.map_lines;

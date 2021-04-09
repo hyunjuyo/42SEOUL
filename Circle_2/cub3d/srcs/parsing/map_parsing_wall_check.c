@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:56:58 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 13:32:40 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 16:39:36 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ void	left_side_wall_checking(t_game *game, t_pla *start_point)
 		forward_one_step(game);
 		if (hit_wall_check(game, 0) == 1)
 			back_one_step_n_rotate(game);
-		if (fabs(game->player.x - start_point->x) < EPSILON
-			&& fabs(game->player.y - start_point->y) < EPSILON)
+		if (game->map_check != 0 && fabs(game->player.x - start_point->x) <
+				EPSILON && fabs(game->player.y - start_point->y) < EPSILON)
 			break ;
+		game->map_check++;
 	}
 	if (!(game->player.x > 0 && game->player.y > 0 && game->player.x
 				< game->conf.map_x && game->player.y < game->conf.map_y))
@@ -82,5 +83,6 @@ void	map_parsing_wall_check(t_game *game)
 	go_start_point(game);
 	start_point.x = game->player.x;
 	start_point.y = game->player.y;
+	game->map_check = 0;
 	left_side_wall_checking(game, &start_point);
 }

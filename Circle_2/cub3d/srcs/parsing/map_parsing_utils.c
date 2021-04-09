@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:17:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/09 15:36:01 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:24:50 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 		{
 			if (game->conf.win_w > game->conf.display_w)
 				game->conf.win_w = game->conf.display_w;
-			game->conf.chk_complete++;
+			overlap_check(game, "Rw");
 		}
 		free(w_ptr);
 	}
@@ -32,7 +32,7 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 		{
 			if (game->conf.win_h > game->conf.display_h)
 				game->conf.win_h = game->conf.display_h;
-			game->conf.chk_complete++;
+			overlap_check(game, "Rh");
 		}
 		free(w_ptr);
 	}
@@ -116,7 +116,7 @@ int		get_rgb_color(char **l_ptr, char *w_ptr)
 	{
 		rgb *= 0x10 * 0x10;
 		if (!color_info[i])
-			return (-1);
+			print_parsing_error("C/F", "incorrect information");
 		num = atoi_n_check(color_info[i], "C/F");
 		free(color_info[i]);
 		check_rgb_range(num);

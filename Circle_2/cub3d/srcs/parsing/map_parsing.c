@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 12:21:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/08 17:25:36 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:05:05 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	save_conf_info(char *line, t_game *game)
 		return ;
 	}
 	w_ptr = get_next_word(&l_ptr);
+	printf("w_ptr : %s\n", w_ptr);  //test
 	check_conf_type_1(line, game, l_ptr, w_ptr);
 	free(temp_ptr);
 }
@@ -48,6 +49,7 @@ void	map_file_open_n_read(int *fd, char *map_file, t_game *game)
 	game->conf.floor = -1;
 	while (get_next_line(*fd, &line) == 1)
 	{
+		printf("line : %s\n", line);  //test
 		save_conf_info(line, game);
 		free(line);
 	}
@@ -89,10 +91,10 @@ void	store_rotated_map(t_game *game)
 
 void	map_parsing(char *map_file, t_game *game)
 {
-	int		fd;
-	double	temp_x;
-	double	temp_y;
-	double	temp_th;
+	int			fd;
+	double		temp_x;
+	double		temp_y;
+	double		temp_th;
 
 	map_file_open_n_read(&fd, map_file, game);
 	store_rotated_map(game);

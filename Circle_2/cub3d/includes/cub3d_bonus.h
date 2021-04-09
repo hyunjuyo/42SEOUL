@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/09 15:36:49 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 17:37:59 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,21 @@ typedef enum		e_bool
 	TRUE
 }					t_bool;
 
+typedef struct		s_parsing
+{
+	int				rw;
+	int				rh;
+	int				no;
+	int				so;
+	int				we;
+	int				ea;
+	int				s;
+	int				s2;
+	int				s3;
+	int				c;
+	int				f;
+}					t_parsing;
+
 typedef struct		s_conf
 {
 	int				display_w;
@@ -84,6 +99,7 @@ typedef struct		s_conf
 	int				parsing_complete;
 	int				chk_complete;
 	int				map_lines;
+	t_parsing		check;
 	char			**temp_map_addr;
 }					t_conf;
 
@@ -162,6 +178,7 @@ typedef struct		s_game
 	t_wall			*wall;
 	t_sprite		spr[SPR_MAX_IN_FOV];
 	t_conf			conf;
+	int				map_check;
 	char			map[MAPX_MAX][MAPY_MAX];
 	int				cubsize;
 	char			*spr_in_fov;
@@ -258,6 +275,7 @@ int					draw_player_fov(t_game *game);
 int					get_texture_pixel_color(t_info *info, t_game *game,
 		t_img *w_img);
 void				map_parsing(char *map_file, t_game *game);
+void				overlap_check(t_game *game, char *type);
 void				save_map_info(char *line, t_game *game);
 void				check_conf_type_1(char *line, t_game *game, char *l_ptr,
 		char *w_ptr);

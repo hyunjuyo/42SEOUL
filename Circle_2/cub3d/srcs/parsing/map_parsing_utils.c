@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:17:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/08 17:38:51 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:19:04 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 	if (type == 'w')
 	{
 		w_ptr = get_next_word(l_ptr);
-		if ((game->conf.win_w = atoi_n_check(w_ptr)) != 0)
+		if ((game->conf.win_w = atoi_n_check(w_ptr, "R")) != 0)
 		{
 			if (game->conf.win_w > game->conf.display_w)
 				game->conf.win_w = game->conf.display_w;
@@ -28,7 +28,7 @@ void	save_conf_resolution(t_game *game, char **l_ptr, char *w_ptr, char type)
 	else
 	{
 		w_ptr = get_next_word(l_ptr);
-		if ((game->conf.win_h = atoi_n_check(w_ptr)) != 0)
+		if ((game->conf.win_h = atoi_n_check(w_ptr, "R")) != 0)
 		{
 			if (game->conf.win_h > game->conf.display_h)
 				game->conf.win_h = game->conf.display_h;
@@ -68,7 +68,7 @@ char	*get_next_word(char **l_ptr)
 	if ((*l_ptr)[i] == '\0')
 	{
 		w_ptr = ft_strdup(*l_ptr);
-		*l_ptr += i + 1;
+		*l_ptr += i;
 		return (w_ptr);
 	}
 	(*l_ptr)[i] = '\0';
@@ -81,7 +81,7 @@ char	*get_next_word(char **l_ptr)
 	return (w_ptr);
 }
 
-char	*join_next_words(char *l_ptr, char *w_ptr, int max_count)
+char	*join_next_words(char **l_ptr, char *w_ptr, int max_count)
 {
 	int		i;
 	char	*temp1;
@@ -91,7 +91,7 @@ char	*join_next_words(char *l_ptr, char *w_ptr, int max_count)
 	while (i < max_count)
 	{
 		temp1 = w_ptr;
-		temp2 = get_next_word(&l_ptr);
+		temp2 = get_next_word(l_ptr);
 		w_ptr = ft_strjoin(temp1, temp2);
 		free(temp1);
 		free(temp2);
@@ -100,7 +100,7 @@ char	*join_next_words(char *l_ptr, char *w_ptr, int max_count)
 	return (w_ptr);
 }
 
-int		get_rgb_color(char *l_ptr, char *w_ptr)
+int		get_rgb_color(char **l_ptr, char *w_ptr)
 {
 	int		rgb;
 	char	**color_info;
@@ -117,12 +117,12 @@ int		get_rgb_color(char *l_ptr, char *w_ptr)
 		rgb *= 0x10 * 0x10;
 		if (!color_info[i])
 			return (-1);
-		num = ft_atoi(color_info[i]);
+		num = atoi_n_check(color_info[i], "C/F");
 		free(color_info[i]);
 		if (num < 0 || num > 255)
 		{
-			printf("Error\nParsing failed : incorrect RGB color(num : %d)\n",
-				num);
+			printf("Error\nParsing failed : RGB colors in range [0,255] \
+(num : %d)\n", num);
 			exit(1);
 		}
 		rgb += num;

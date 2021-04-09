@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/08 18:02:06 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 14:47:37 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ int					key_set2(int keycode, t_game *game);
 int					draw_minimap(t_game *game);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
-int					atoi_n_check(const char *str);
+int					atoi_n_check(const char *str, char *type);
 double				cast_single_ray(int x, t_game *game, int n);
 double				get_dist(double x1, double y1, double x2, double y2);
 double				deg_to_rad(double th, int type);
@@ -263,7 +263,7 @@ void				check_conf_type_1(char *line, t_game *game, char *l_ptr,
 void				check_conf_type_6(char *line, t_game *game, char *w_ptr);
 void				save_conf_resolution(t_game *game, char **l_ptr,
 		char *w_ptr, char type);
-int					get_rgb_color(char *l_ptr, char *w_ptr);
+int					get_rgb_color(char **l_ptr, char *w_ptr);
 char				*get_next_word(char **l_ptr);
 void				check_sprite_in_fov(t_game *game, t_chk_pnt *check);
 void				ready_to_draw_sprite(t_game *game);
@@ -284,7 +284,7 @@ void				player_walking(t_game *game);
 void				player_jumping_check(t_game *game);
 int					get_sky_color(t_game *game, int h, int w);
 void				check_player_item_info(t_game *game);
-void				print_parsing_error(char type, char *message);
+void				print_parsing_error(char *type, char *message);
 int					exit_game(t_game *game);
 
 #endif

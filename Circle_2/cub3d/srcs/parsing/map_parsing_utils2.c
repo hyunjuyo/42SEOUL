@@ -6,28 +6,28 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 17:32:53 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/08 18:01:42 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 14:47:23 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    print_parsing_error(char type, char *message)
+void    print_parsing_error(char *type, char *message)
 {
-	printf("Error\nParsing failed : [%c]%s\n", type, message);
+	printf("Error\nParsing failed : [%s]%s\n", type, message);
 	exit(1);
 }
 
-void    check_num(int i, const char *str)
+void    check_num(int i, const char *str, char *type)
 {
     if (i != (int)ft_strlen(str))
 	{
-		printf("Error\nParsing failed : [R]incorrect information\n");
+		printf("Error\nParsing failed : [%s]incorrect information\n", type);
 		exit(1);
 	}
 }
 
-int     atoi_n_check(const char *str)
+int     atoi_n_check(const char *str, char *type)
 {
 	int				i;
 	int				sign;
@@ -50,6 +50,6 @@ int     atoi_n_check(const char *str)
 		num += str[i] - '0';
 		i++;
 	}
-    check_num(i, str);
+    check_num(i, str, type);
 	return (num * sign);
 }

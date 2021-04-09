@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:17:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/09 15:19:04 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:36:01 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,7 @@ int		get_rgb_color(char **l_ptr, char *w_ptr)
 			return (-1);
 		num = atoi_n_check(color_info[i], "C/F");
 		free(color_info[i]);
-		if (num < 0 || num > 255)
-		{
-			printf("Error\nParsing failed : RGB colors in range [0,255] \
-(num : %d)\n", num);
-			exit(1);
-		}
+		check_rgb_range(num);
 		rgb += num;
 	}
 	free(color_info);

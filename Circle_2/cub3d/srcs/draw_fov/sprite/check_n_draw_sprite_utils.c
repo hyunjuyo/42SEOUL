@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:17:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/08 16:18:43 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:25:13 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ char	*get_spr_path(t_game *game, char spr_type)
 		spr_path = game->conf.sprite[1];
 	else
 		spr_path = game->conf.sprite[2];
-    return (spr_path);
+	return (spr_path);
 }

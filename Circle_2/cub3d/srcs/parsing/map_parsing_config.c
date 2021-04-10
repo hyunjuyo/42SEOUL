@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 12:03:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/09 18:09:32 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/10 11:43:06 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ void	check_conf_type_4(char *line, t_game *game, char *l_ptr, char *w_ptr)
 	}
 	else if (ft_strncmp(w_ptr, "C", 2) == 0)
 	{
-		printf("wow!! here~~!!!\n");  //test
 		free(w_ptr);
 		w_ptr = get_next_word(&l_ptr);
-		printf("w_ptr : %s\n", w_ptr);  //test
 		if ((game->conf.ceil = get_rgb_color(&l_ptr, w_ptr)) > -1)
 			overlap_check(game, "C");
 		if (*l_ptr != '\0')

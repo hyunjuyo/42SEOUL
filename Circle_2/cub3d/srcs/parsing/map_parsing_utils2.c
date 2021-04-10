@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 17:32:53 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/09 18:04:52 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/10 11:42:05 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	overlap_check(t_game *game, char *type)
 {
-	printf("type : %s, s : %d, c : %d, f : %d\n", type, game->conf.check.s, game->conf.check.c, game->conf.check.f);  //test
 	if (ft_strncmp(type, "Rw", 2) == 0 && game->conf.check.rw == 0)
 		game->conf.check.rw = 1;
 	else if (ft_strncmp(type, "Rh", 2) == 0 && game->conf.check.rh == 0)

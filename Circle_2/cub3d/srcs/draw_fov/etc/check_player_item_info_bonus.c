@@ -97,34 +97,31 @@ void	item_animation(t_game *game)
 {
 	char	*img_path;
 
-	if (game->player.get_map == 1)
+	img_path = get_ani_img_path(game);
+	if (!(game->player.ani.img = mlx_xpm_file_to_image(game->mlx, img_path,
+			&game->player.ani.width, &game->player.ani.height)))
 	{
-		img_path = get_ani_img_path(game);
-		if (!(game->player.ani.img = mlx_xpm_file_to_image(game->mlx, img_path,
-				&game->player.ani.width, &game->player.ani.height)))
-		{
-			printf("Error\n[map_ani]mlx_xpm_file_to_image() failed\n");
-			waitid(game->pid, &game->pid_status, WNOHANG);
-			if (game->pid_status == -1)
-				system("killall afplay");
-			exit(1);
-		}
-		game->player.ani.data = (int *)mlx_get_data_addr(game->player.ani.img,
-				&game->player.ani.bpp, &game->player.ani.size_l,
-				&game->player.ani.endian);
-		draw_one_animation_image(game);
-		game->player.get_map++;
-		if (game->player.get_map == 28)
-		{
-			game->player.get_map = 0;
-			game->player.item[0] = 1;
-		}
+		printf("Error\n[map_ani]mlx_xpm_file_to_image() failed\n");
+		waitid(game->pid, &game->pid_status, WNOHANG);
+		if (game->pid_status == -1)
+			system("killall afplay");
+		exit(1);
+	}
+	game->player.ani.data = (int *)mlx_get_data_addr(game->player.ani.img,
+			&game->player.ani.bpp, &game->player.ani.size_l,
+			&game->player.ani.endian);
+	draw_one_animation_image(game);
+	game->player.get_map++;
+	if (game->player.get_map == 28)
+	{
+		game->player.get_map = 0;
+		game->player.item[0] = 1;
 	}
 }
 
 void	check_player_item_info(t_game *game)
 {
-	if (game->player.get_map == 1)
+	if (game->player.get_map > 0)
 		item_animation(game);
 	if (game->player.item[0] == 1)
 		draw_minimap(game);

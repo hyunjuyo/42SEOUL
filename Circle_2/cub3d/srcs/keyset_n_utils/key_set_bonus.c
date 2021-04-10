@@ -39,7 +39,7 @@ int		hit_wall_check(t_game *game, int type)
 		return (1);
 	if (game->conf.parsing_complete == 1 && game->map[mapx][mapy] == '4')
 	{
-		game->player.item[0] = 1;
+		game->player.get_map = 1;
 		game->map[mapx][mapy] = '0';
 	}
 	if (game->conf.parsing_complete == 1 && game->map[mapx][mapy] == '3')

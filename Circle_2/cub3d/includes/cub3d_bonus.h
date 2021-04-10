@@ -133,6 +133,8 @@ typedef struct		s_pla
 	int				jump;
 	double			jh_w;
 	int				item[2];
+	int				get_map;
+	t_img			ani;
 }					t_pla;
 
 typedef enum		e_dir

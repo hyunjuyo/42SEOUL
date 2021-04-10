@@ -53,8 +53,79 @@ void	draw_gem_info_last(t_game *game, t_img *gem)
 	}
 }
 
+char	*get_ani_img_path(t_game *game)
+{
+	char	*img_path;
+	char	*temp_idx;
+	char	*temp_ptr;
+
+	temp_idx = ft_itoa(game->player.get_map);
+	temp_ptr = ft_strjoin("./textures/animation/map_ani_", temp_idx);
+	free(temp_idx);
+	img_path = ft_strjoin(temp_ptr, ".xpm");
+	free(temp_ptr);
+	return (img_path);
+}
+
+void	draw_one_animation_image(t_game *game)
+{
+	int		i;
+	int		j;
+	double	w_ratio;
+	double	h_ratio;
+	int		color;
+
+	w_ratio = (double)game->player.ani.width / (double)game->conf_win_w;
+	h_ratio = (double)game->player.ani.height / (double)game->conf.win_h;
+	j = 0;
+	while (j < game->conf.win_h)
+	{
+		i = 0;
+		while (i < game->conf.win_w)
+		{
+			color = game->player.ani.data[j * h_ratio * game->player.ani.width
+				+ i * w_ratio];
+			if (check_color_area(color, BLUE, 0x87) != 111)
+				game->img1.data[j * game->conf.win_w + i] = color;
+			i++;
+		}
+		j++;
+	}
+}
+
+void	item_animation(t_game *game)
+{
+	char	*img_path;
+
+	if (game->player.get_map == 1)
+	{
+		img_path = get_ani_img_path(game);
+		if (!(game->player.ani.img = mlx_xpm_file_to_image(game->mlx, img_path,
+				&game->player.ani.width, &game->player.ani.height)))
+		{
+			printf("Error\n[map_ani]mlx_xpm_file_to_image() failed\n");
+			waitid(game->pid, &game->pid_status, WNOHANG);
+			if (game->pid_status == -1)
+				system("killall afplay");
+			exit(1);
+		}
+		game->player.ani.data = (int *)mlx_get_data_addr(game->player.ani.img,
+				&game->player.ani.bpp, &game->player.ani.size_l,
+				&game->player.ani.endian);
+		draw_one_animation_image(game);
+		game->player.get_map++;
+		if (game->player.get_map == 28)
+		{
+			game->player.get_map = 0;
+			game->player.item[0] = 1;
+		}
+	}
+}
+
 void	check_player_item_info(t_game *game)
 {
+	if (game->player.get_map == 1)
+		item_animation(game);
 	if (game->player.item[0] == 1)
 		draw_minimap(game);
 	if (game->player.item[1] == 0)

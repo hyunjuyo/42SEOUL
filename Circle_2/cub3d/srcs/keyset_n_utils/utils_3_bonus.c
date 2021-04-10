@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 17:00:53 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 17:32:58 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:41:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	player_walking(t_game *game)
 	if (game->player.walk >= 0)
 	{
 		game->player.walk++;
-		game->player.view_h = sin((M_PI / 8) * game->player.walk) * 0.025;
+		game->player.view_h = sin((M_PI / 8) * game->player.walk) * 0.03;
 		if (game->player.walk == 8)
 		{
 			game->player.walk = -1;

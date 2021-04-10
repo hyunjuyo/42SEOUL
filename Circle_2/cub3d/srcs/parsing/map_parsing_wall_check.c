@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:56:58 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/09 16:39:36 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:15:11 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	back_one_step_n_rotate(t_game *game)
 		game->player.th += M_PI * 2;
 }
 
-void	go_start_point(t_game *game)
+void	go_start_point(t_game *game, double deg_th)
 {
 	game->player.x = floor(game->player.x);
 	game->player.y = floor(game->player.y);
-	game->player.th = deg_to_rad(180.0, 0);
+	game->player.th = deg_to_rad(deg_th, 0);
 	while (hit_wall_check(game, 0) != 1)
 	{
 		forward_one_step(game);
@@ -79,8 +79,21 @@ void	left_side_wall_checking(t_game *game, t_pla *start_point)
 void	map_parsing_wall_check(t_game *game)
 {
 	t_pla	start_point;
+	double	temp_x;
+	double	temp_y;
 
-	go_start_point(game);
+	temp_x = game->player.x;
+	temp_y = game->player.y;
+	go_start_point(game, 90.0);
+	game->player.x = temp_x;
+	game->player.y = temp_y;
+	go_start_point(game, 0.0);
+	game->player.x = temp_x;
+	game->player.y = temp_y;
+	go_start_point(game, 270.0);
+	game->player.x = temp_x;
+	game->player.y = temp_y;
+	go_start_point(game, 180.0);
 	start_point.x = game->player.x;
 	start_point.y = game->player.y;
 	game->map_check = 0;

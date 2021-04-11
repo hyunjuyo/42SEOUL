@@ -6,11 +6,11 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 17:23:20 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 13:38:15 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/11 16:44:52 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	draw_one_square(t_game *game, int x_start, int y_start, int color)
 {

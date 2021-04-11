@@ -6,11 +6,11 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:46:14 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/08 14:43:04 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/11 17:05:38 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	assign_int_to_char(unsigned char *start, int num)
 {

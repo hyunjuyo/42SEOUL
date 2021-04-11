@@ -6,11 +6,11 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 12:47:26 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/10 13:48:34 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/11 16:16:48 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	do_check(t_game *game, char *img_path, char *type)
 {

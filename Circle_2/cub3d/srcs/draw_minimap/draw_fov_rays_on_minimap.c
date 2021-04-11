@@ -6,11 +6,11 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 11:11:04 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/05 13:49:57 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/11 16:44:47 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	draw_using_xstep(int i, t_idx *idx, t_game *game, t_ray *ray)
 {

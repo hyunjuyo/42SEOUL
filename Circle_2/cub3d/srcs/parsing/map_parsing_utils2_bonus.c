@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_utils2.c                               :+:      :+:    :+:   */
+/*   map_parsing_utils2_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 17:32:53 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/11 17:04:18 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/11 17:01:40 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	overlap_check(t_game *game, char *type)
 {
@@ -28,6 +28,10 @@ void	overlap_check(t_game *game, char *type)
 		game->conf.check.ea = 1;
 	else if (ft_strncmp(type, "S", 2) == 0 && game->conf.check.s == 0)
 		game->conf.check.s = 1;
+	else if (ft_strncmp(type, "S2", 2) == 0 && game->conf.check.s2 == 0)
+		game->conf.check.s2 = 1;
+	else if (ft_strncmp(type, "S3", 2) == 0 && game->conf.check.s3 == 0)
+		game->conf.check.s3 = 1;
 	else if (ft_strncmp(type, "C", 2) == 0 && game->conf.check.c == 0)
 		game->conf.check.c = 1;
 	else if (ft_strncmp(type, "F", 2) == 0 && game->conf.check.f == 0)

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:57:42 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/10 13:08:39 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/11 15:45:29 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,6 +308,7 @@ void				player_jumping_check(t_game *game);
 void				get_sky_image_data(t_game *game);
 int					get_sky_color(t_game *game, int h, int w);
 void				check_player_item_info(t_game *game);
+void				item_animation(t_game *game);
 void				draw_gem_info(t_game *game, int info);
 void				draw_gem_info_last(t_game *game, t_img *gem);
 void				print_parsing_error(char *type, char *message);

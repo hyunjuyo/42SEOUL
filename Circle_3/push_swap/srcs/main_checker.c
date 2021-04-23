@@ -67,6 +67,6 @@ int		main(int argc, char *argv[])
 	i = -1; //test
 	while (++i < 5) //test
 		printf("[a] %lld,\t[b] %lld\n",stack.a[i], stack.b[i]); //test
-//    check_stack_sorted(&stack);
+    check_stack_sorted(&stack);
 	return (0);
 }

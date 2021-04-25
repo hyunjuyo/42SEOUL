@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:13:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/23 15:26:05 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/25 19:56:37 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,24 @@
 # define STACK_SIZE 100
 # define INST_COUNT 50
 # define OPER_LEN   3
-# define NOT_INT    10100100100
+# define EMPTY      10100100100
+
+typedef struct  s_num_info
+{
+    long long   num;
+    int         now;
+    int         dest;
+}               t_num_info;
 
 typedef struct  s_stack
 {
-    long long   a[STACK_SIZE];
-    long long   b[STACK_SIZE];
+    t_num_info  a[STACK_SIZE];
+    t_num_info  b[STACK_SIZE];
     int         a_count;
     int         b_count;
     char        inst[INST_COUNT][OPER_LEN + 1];
     int         inst_count;
+    int         debug_opt;
 }               t_stack;
 
 typedef struct  s_atoi_info
@@ -58,5 +66,10 @@ void	operations_rra(t_stack *stack);
 void	operations_rrb(t_stack *stack);
 void	operations_rrr(t_stack *stack);
 void    check_stack_sorted(t_stack *stack);
+void	save_now_n_dest_order(t_stack *stack);
+void	find_min_oper_for_sort(t_stack *stack);
+void	check_n_display_oper(t_stack *stack, int dest_order, int i_a, int i_b);
+void	write_n_save_status(char *oper, t_stack *stack);
+void	print_stack_status(t_stack *stack);
 
 #endif

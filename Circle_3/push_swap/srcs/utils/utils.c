@@ -6,11 +6,36 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:43:15 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/22 18:18:34 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/25 19:17:06 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	print_stack_status(t_stack *stack)
+{
+	int		i;
+	char	*num;
+
+	write(1, "[b] ", 4);
+	i = -1;
+	while (++i < stack->b_count)
+	{
+		num = ft_itoa(stack->b[i].num);
+		write(1, num, ft_strlen(num));
+		write(1, " ", 1);
+	}
+	write(1, "\n", 1);
+	write(1, "[a] ", 4);
+	i = -1;
+	while (++i < stack->a_count)
+	{
+		num = ft_itoa(stack->a[i].num);
+		write(1, num, ft_strlen(num));
+		write(1, " ", 1);
+	}
+	write(1, "\n", 1);
+}
 
 void	print_error(char *message, int type)
 {

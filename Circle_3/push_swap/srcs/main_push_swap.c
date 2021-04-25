@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_checker.c                                     :+:      :+:    :+:   */
+/*   main_push_swap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:12:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/25 16:49:29 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:44:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ int		main(int argc, char *argv[])
 	int     i;
     int     num;
 
-	if (argc == 1)
+	if (argc == 1 || (argc == 2 && ft_strncmp(argv[1], "-v", 3) == 0))
 		exit(0);
 	ft_memset(&stack, 0, sizeof(t_stack));
+    if (ft_strncmp(argv[1], "-v", 3) == 0)
+        stack.debug_opt = 1;
     init_stack(&stack);
 	i = 0;
 	while (i < argc - 1)
@@ -61,12 +63,11 @@ int		main(int argc, char *argv[])
 	i = -1;  //test
 	while (++i < argc - 1)  //test
 		printf("%lld ", stack.a[i].num);  //test
-    read_inst(&stack);
-    exec_inst(&stack);
+	save_now_n_dest_order(&stack);
+	find_min_oper_for_sort(&stack);
     printf("--------------------\n"); //test
 	i = -1; //test
-	while (++i < 5) //test
-		printf("[a] %lld,\t[b] %lld\n",stack.a[i].num, stack.b[i].num); //test
-    check_stack_sorted(&stack);
+	while (++i < stack.a_count) //test
+		printf("[a] %lld,\tnow : %d, dest : %d\n",stack.a[i].num, stack.a[i].now, stack.a[i].dest); //test
 	return (0);
 }

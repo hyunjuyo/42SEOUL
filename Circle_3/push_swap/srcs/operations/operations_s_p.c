@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:56:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/23 15:02:50 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:42:26 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 
 void	operations_sa(t_stack *stack)
 {
-	long long	temp;
+	t_stack	temp;
 
-	if (stack->a[0] == NOT_INT || stack->a[1] == NOT_INT)
+	if (stack->a[0].num == EMPTY || stack->a[1].num == EMPTY)
         return ;
-	temp = stack->a[0];
-	stack->a[0] = stack->a[1];
-	stack->a[1] = temp;
+	ft_memcpy(&temp, &stack->a[0], sizeof(t_stack));
+	ft_memcpy(&stack->a[0], &stack->a[1], sizeof(t_stack));
+	stack->a[0].now--;
+	ft_memcpy(&stack->a[1], &temp, sizeof(t_stack));
+	stack->a[1].now++;
 }
 
 void	operations_sb(t_stack *stack)
 {
 	long long	temp;
 
-	if (stack->b[0] == NOT_INT || stack->b[1] == NOT_INT)
+	if (stack->b[0].num == EMPTY || stack->b[1].num == EMPTY)
         return ;
-	temp = stack->b[0];
-	stack->b[0] = stack->b[1];
-	stack->b[1] = temp;
+	ft_memcpy(&temp, &stack->b[0], sizeof(t_stack));
+	ft_memcpy(&stack->b[0], &stack->b[1], sizeof(t_stack));
+	stack->b[0].now--;
+	ft_memcpy(&stack->b[1], &temp, sizeof(t_stack));
+	stack->b[1].now++;
 }
 
 void	operations_ss(t_stack *stack)
@@ -44,46 +48,50 @@ void	operations_pa(t_stack *stack)
 {
 	int	i;
 
-	if (stack->b[0] == NOT_INT)
+	if (stack->b[0].num == EMPTY)
         return ;
 	i = 0;
 	while (i < stack->a_count)
 	{
-		stack->a[stack->a_count - i] = stack->a[stack->a_count - i - 1];
+		ft_memcpy(&stack->a[stack->a_count - i],
+				&stack->a[stack->a_count - i - 1], sizeof(t_stack));
 		i++;
 	}
-	stack->a[0] = stack->b[0];
+	ft_memcpy(&stack->a[0], &stack->b[0], sizeof(t_stack));
 	stack->a_count++;
 	stack->b_count--;
 	i = 0;
 	while (i < stack->b_count)
 	{
-		stack->b[i] = stack->b[i + 1];
+		ft_memcpy(&stack->b[i], &stack->b[i + 1], sizeof(t_stack));
 		i++;
 	}
-	stack->b[i] = NOT_INT;
+	ft_memset(&stack->b[i], 0, sizeof(t_stack));
+	stack->b[i].num = EMPTY;
 }
 
 void	operations_pb(t_stack *stack)
 {
 	int	i;
 
-	if (stack->a[0] == NOT_INT)
+	if (stack->a[0].num == EMPTY)
         return ;
 	i = 0;
 	while (i < stack->b_count)
 	{
-		stack->b[stack->b_count - i] = stack->b[stack->b_count - i - 1];
+		ft_memcpy(&stack->b[stack->b_count - i],
+				&stack->b[stack->b_count - i - 1], sizeof(t_stack));
 		i++;
 	}
-	stack->b[0] = stack->a[0];
+	ft_memcpy(&stack->b[0], &stack->a[0], sizeof(t_stack));
 	stack->b_count++;
 	stack->a_count--;
 	i = 0;
 	while (i < stack->a_count)
 	{
-		stack->a[i] = stack->a[i + 1];
+		ft_memcpy(&stack->a[i], &stack->a[i + 1], sizeof(t_stack));
 		i++;
 	}
-	stack->a[i] = NOT_INT;
+	ft_memset(&stack->a[i], 0, sizeof(t_stack));
+	stack->a[i].num = EMPTY;
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 16:50:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 13:42:48 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:08:01 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	find_min_oper_for_sort(t_stack *stack)
 {
 	t_idx	idx;
 	int		dest_order;
+//	int		i; //test
 
 	idx.a = -1;
 	idx.b = -1;
@@ -54,6 +55,9 @@ void	find_min_oper_for_sort(t_stack *stack)
 		if (idx.a == -1)
 			idx.b = get_dest_order_idx_b(stack, dest_order);
 		check_n_display_oper(stack, dest_order, &idx);
+//		i = -1; //test
+//		while (++i < stack->b_count) //test
+//			printf("[b] %lld,\tnow : %d, dest : %d\n",stack->b[i].num, stack->b[i].now, stack->b[i].dest); //test
 		dest_order--;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:12:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 14:15:46 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:11:56 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int		main(int argc, char *argv[])
     stack.a_count = i - stack.debug_opt;
 	save_now_n_dest_order(&stack);
 	find_min_oper_for_sort(&stack);
-    printf("\n--------------------\n"); //test
-	i = -1; //test
-	while (++i < stack.a_count) //test
-		printf("[a] %lld,\tnow : %d, dest : %d\n",stack.a[i].num, stack.a[i].now, stack.a[i].dest); //test
+//    printf("\n--------------------\n"); //test
+//	i = -1; //test
+//	while (++i < stack.a_count) //test
+//		printf("[a] %lld,\tnow : %d, dest : %d\n",stack.a[i].num, stack.a[i].now, stack.a[i].dest); //test
 	return (0);
 }

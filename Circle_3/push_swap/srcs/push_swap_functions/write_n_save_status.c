@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:57:08 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 14:07:21 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 17:53:08 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ void	write_n_save_status(char *oper, t_stack *stack)
 		if (stack->debug_opt == 1)
 			print_stack_status(stack);
 	}
-
-
-
+	else if (ft_strncmp(oper, "ss", OPER_LEN + 1) == 0)
+	{
+		write(1, "ss\n", 3);
+		operations_ss(stack);
+		if (stack->debug_opt == 1)
+			print_stack_status(stack);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:56:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 12:50:00 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 18:07:19 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	operations_sa(t_stack *stack)
 {
-	t_stack	temp;
+	t_num_info	temp;
 
 	if (stack->a[0].num == EMPTY || stack->a[1].num == EMPTY)
         return ;
@@ -27,15 +27,15 @@ void	operations_sa(t_stack *stack)
 
 void	operations_sb(t_stack *stack)
 {
-	long long	temp;
+	t_num_info	temp;
 
 	if (stack->b[0].num == EMPTY || stack->b[1].num == EMPTY)
         return ;
 	ft_memcpy(&temp, &stack->b[0], sizeof(t_num_info));
 	ft_memcpy(&stack->b[0], &stack->b[1], sizeof(t_num_info));
-	stack->b[0].now--;
+	stack->b[0].now++;
 	ft_memcpy(&stack->b[1], &temp, sizeof(t_num_info));
-	stack->b[1].now++;
+	stack->b[1].now--;
 }
 
 void	operations_ss(t_stack *stack)

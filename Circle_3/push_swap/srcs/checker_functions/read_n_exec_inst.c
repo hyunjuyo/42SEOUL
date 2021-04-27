@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:54:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 12:33:06 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:03:28 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	read_inst(t_stack *stack)
 	free(line);
 	line = NULL;
 	stack->inst_count = i;
-	i = -1;  //test
-	while (++i < stack->inst_count)  //test
-		printf("%s ", stack->inst[i]);  //test
-	printf("\n"); //test
-	i = -1; //test
-	while (++i < 5) //test
-		printf("[a] %lld,\t[b] %lld\n",stack->a[i].num, stack->b[i].num); //test
+//	i = -1;  //test
+//	while (++i < stack->inst_count)  //test
+//		printf("%s ", stack->inst[i]);  //test
+//	printf("\n"); //test
+//	i = -1; //test
+//	while (++i < stack->a_count) //test
+//		printf("[a] %lld,\t[b] %lld\n",stack->a[i].num, stack->b[i].num); //test
 }

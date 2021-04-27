@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:12:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 12:50:54 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:03:17 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ int		main(int argc, char *argv[])
 		i++;
 	}
     stack.a_count = i;
-	i = -1;  //test
-	while (++i < argc - 1)  //test
-		printf("%lld ", stack.a[i].num);  //test
+//	i = -1;  //test
+//	while (++i < argc - 1)  //test
+//		printf("%lld ", stack.a[i].num);  //test
     read_inst(&stack);
     exec_inst(&stack);
-    printf("--------------------\n"); //test
-	i = -1; //test
-	while (++i < 5) //test
-		printf("[a] %lld,\t[b] %lld\n",stack.a[i].num, stack.b[i].num); //test
+//    printf("--------------------\n"); //test
+//	i = -1; //test
+//	while (++i < stack.a_count) //test
+//		printf("[a] %lld,\t[b] %lld\n",stack.a[i].num, stack.b[i].num); //test
     check_stack_sorted(&stack);
 	return (0);
 }

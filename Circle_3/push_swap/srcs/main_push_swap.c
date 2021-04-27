@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:12:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/25 20:44:09 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:15:46 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    check_error_dup(t_stack *stack, int idx, int num)
 {
     int i;
 
-    i = 0;
+    i = 0 + stack->debug_opt;
     while (i < idx)
     {
         if (stack->a[i].num == num) //duplicate
@@ -51,21 +51,18 @@ int		main(int argc, char *argv[])
     if (ft_strncmp(argv[1], "-v", 3) == 0)
         stack.debug_opt = 1;
     init_stack(&stack);
-	i = 0;
+	i = 0 + stack.debug_opt;
 	while (i < argc - 1)
 	{
         num = atoi_error_check(argv[i + 1]);
         check_error_dup(&stack, i, num);
-		stack.a[i].num = num;
+		stack.a[i - stack.debug_opt].num = num;
 		i++;
 	}
-    stack.a_count = i;
-	i = -1;  //test
-	while (++i < argc - 1)  //test
-		printf("%lld ", stack.a[i].num);  //test
+    stack.a_count = i - stack.debug_opt;
 	save_now_n_dest_order(&stack);
 	find_min_oper_for_sort(&stack);
-    printf("--------------------\n"); //test
+    printf("\n--------------------\n"); //test
 	i = -1; //test
 	while (++i < stack.a_count) //test
 		printf("[a] %lld,\tnow : %d, dest : %d\n",stack.a[i].num, stack.a[i].now, stack.a[i].dest); //test

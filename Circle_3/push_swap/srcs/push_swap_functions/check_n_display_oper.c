@@ -6,21 +6,22 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:36:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/25 20:43:43 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:07:51 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_n_display_oper_2(t_stack *stack, int dest_order, int i_a, int i_b)
+void	check_n_display_oper_2(t_stack *stack, int dest_order, t_idx *idx)
 {
 	int	i;
 	int	now_order;
 
-	if (i_a > -1)
-		now_order = stack->a[i_a].now;
+	if (idx->a > -1)
+		now_order = stack->a[idx->a].now;
 	else
-		now_order = stack->b[i_b].now;
+		now_order = stack->b[idx->b].now;
+//	printf("now_order : %d\n", now_order); //test
 	if (dest_order == 2)
 	{
 		i = -1;
@@ -79,28 +80,31 @@ void	check_n_display_oper_2(t_stack *stack, int dest_order, int i_a, int i_b)
 			}
 			write_n_save_status("sa", stack);
 		}
+		else
+			return ;
 	}
 }
 
-void	check_n_display_oper(t_stack *stack, int dest_order, int i_a, int i_b)
+void	check_n_display_oper(t_stack *stack, int dest_order, t_idx *idx)
 {
 	int	i;
 
-	if (dest_order == stack->a_count)
+//	printf("dest_order : %d, idx : (%d, %d)\n", dest_order, idx->a, idx->b); //test
+	if (dest_order == stack->a_count + stack->b_count)
 	{
-		if (stack->a[i_a].now > stack->a_count / 2)
+		if (stack->a[idx->a].now > stack->a_count / 2)
 		{
 			i = -1;
-			while (++i < stack->a_count - stack->a[i_a].now)
+			while (++i < stack->a_count - stack->a[idx->a].now)
 				write_n_save_status("rra", stack);
 		}
 		else
 		{
 			i = -1;
-			while (++i < stack->a[i_a].now)
+			while (++i < stack->a[idx->a].now)
 				write_n_save_status("ra", stack);
 		}
 	}
 	else
-		check_n_display_oper_2(stack, dest_order, i_a, i_b);
+		check_n_display_oper_2(stack, dest_order, idx);
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:13:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/25 19:56:37 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:43:48 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # define INST_COUNT 50
 # define OPER_LEN   3
 # define EMPTY      10100100100
+
+typedef struct  s_idx
+{
+    int         a;
+    int         b;
+}               t_idx;
 
 typedef struct  s_num_info
 {
@@ -68,7 +74,7 @@ void	operations_rrr(t_stack *stack);
 void    check_stack_sorted(t_stack *stack);
 void	save_now_n_dest_order(t_stack *stack);
 void	find_min_oper_for_sort(t_stack *stack);
-void	check_n_display_oper(t_stack *stack, int dest_order, int i_a, int i_b);
+void	check_n_display_oper(t_stack *stack, int dest_order, t_idx *idx);
 void	write_n_save_status(char *oper, t_stack *stack);
 void	print_stack_status(t_stack *stack);
 

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:57:08 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/25 20:25:51 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:07:21 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,28 @@ void	write_n_save_status(char *oper, t_stack *stack)
 	else if (ft_strncmp(oper, "pa", OPER_LEN + 1) == 0)
 	{
 		write(1, "pa\n", 3);
-		operations_pb(stack);
+		operations_pa(stack);
 		if (stack->debug_opt == 1)
 			print_stack_status(stack);
 	}
 	else if (ft_strncmp(oper, "rb", OPER_LEN + 1) == 0)
 	{
 		write(1, "rb\n", 3);
-		operations_pb(stack);
+		operations_rb(stack);
 		if (stack->debug_opt == 1)
 			print_stack_status(stack);
 	}
 	else if (ft_strncmp(oper, "rrb", OPER_LEN + 1) == 0)
 	{
 		write(1, "rrb\n", 4);
-		operations_pb(stack);
+		operations_rrb(stack);
 		if (stack->debug_opt == 1)
 			print_stack_status(stack);
 	}
 	else if (ft_strncmp(oper, "sa", OPER_LEN + 1) == 0)
 	{
 		write(1, "sa\n", 3);
-		operations_pb(stack);
+		operations_sa(stack);
 		if (stack->debug_opt == 1)
 			print_stack_status(stack);
 	}

@@ -47,12 +47,12 @@ void	grouping_numbers(t_stack *stack)
 	int	j;
 	int	count;
 
-	scale = 3;
+	scale = 45;
 	i = 1;
 	while (scale * i < stack->a_count + stack->b_count)
 	{
 		count = stack->a_count;
-		printf("scale * i : %d, count : %d\n", scale * i, count); //test
+//		printf("scale * i : %d, count : %d\n", scale * i, count); //test
 		j = -1;
 		while (++j < count)
 		{
@@ -73,7 +73,7 @@ void	find_min_oper_for_sort(t_stack *stack)
 	int		dest_order;
 //	int		i; //test
 
-	if (stack->a_count >= 9)
+	if (stack->a_count >= 50)
 		grouping_numbers(stack);
 	save_now_n_dest_order(stack);
 	idx.a = -1;

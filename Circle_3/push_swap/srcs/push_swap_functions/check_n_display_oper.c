@@ -82,7 +82,7 @@ void	check_n_display_oper_2(t_stack *stack, int dest_order, t_idx *idx)
 		now_order = stack->a[idx->a].now;
 	else
 		now_order = stack->b[idx->b].now;
-//	printf("now_order : %d, stack->b_count : %d\n", now_order, stack->b_count); //test
+//	printf("now_order : %d, dest_order : %d, stack->b_count : %d\n", now_order, dest_order, stack->b_count); //test
 	if (dest_order == 2)
 	{
 		count = stack->b_count;
@@ -105,7 +105,7 @@ void	check_n_display_oper(t_stack *stack, int dest_order, t_idx *idx)
 	{
 		check_need_swap_max_n_second(stack, dest_order, idx->a);
 		idx->a = get_dest_order_idx_a(stack, dest_order);
-		printf("stack->a[%d].now : %d, stack->b_count : %d\n", idx->a, stack->a[idx->a].now, stack->b_count); //test
+//		printf("stack->a[%d].now : %d, stack->b_count : %d\n", idx->a, stack->a[idx->a].now, stack->b_count); //test
 		if (stack->a[idx->a].now - stack->b_count > stack->a_count / 2)
 		{
 			i = -1;

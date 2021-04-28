@@ -22,7 +22,7 @@ void	save_now_n_dest_order2(t_stack *stack)
 	i = 0;
 	while (i < stack->b_count)
 	{
-		now_order = stack->b_count;
+		now_order = stack->b_count - i;
 		stack->b[i].now = now_order;
 		dest_order = 1;
 		j = 0;

@@ -12,6 +12,31 @@
 
 #include "push_swap.h"
 
+void	save_now_n_dest_order2(t_stack *stack)
+{
+	int	i;
+	int	j;
+	int	now_order;
+	int	dest_order;
+
+	i = 0;
+	while (i < stack->b_count)
+	{
+		now_order = stack->b_count;
+		stack->b[i].now = now_order;
+		dest_order = 1;
+		j = 0;
+		while (j < stack->b_count)
+		{
+			if (stack->b[j].num < stack->b[i].num)
+				dest_order++;
+			j++;
+		}
+		stack->b[i].dest = dest_order;
+		i++;
+	}
+}
+
 void	save_now_n_dest_order(t_stack *stack)
 {
 	int	i;
@@ -22,9 +47,9 @@ void	save_now_n_dest_order(t_stack *stack)
 	i = 0;
 	while (i < stack->a_count)
 	{
-		now_order = i + 1;
+		now_order = i + 1 + stack->b_count;
 		stack->a[i].now = now_order;
-		dest_order = 1;
+		dest_order = 1 + stack->b_count;
 		j = 0;
 		while (j < stack->a_count)
 		{
@@ -35,4 +60,5 @@ void	save_now_n_dest_order(t_stack *stack)
 		stack->a[i].dest = dest_order;
 		i++;
 	}
+	save_now_n_dest_order2(stack);
 }

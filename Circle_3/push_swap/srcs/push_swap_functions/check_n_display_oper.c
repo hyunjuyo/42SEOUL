@@ -105,16 +105,17 @@ void	check_n_display_oper(t_stack *stack, int dest_order, t_idx *idx)
 	{
 		check_need_swap_max_n_second(stack, dest_order, idx->a);
 		idx->a = get_dest_order_idx_a(stack, dest_order);
-		if (stack->a[idx->a].now > stack->a_count / 2)
+		printf("stack->a[%d].now : %d, stack->b_count : %d\n", idx->a, stack->a[idx->a].now, stack->b_count); //test
+		if (stack->a[idx->a].now - stack->b_count > stack->a_count / 2)
 		{
 			i = -1;
-			while (++i < stack->a_count - stack->a[idx->a].now)
+			while (++i < stack->a_count - (stack->a[idx->a].now - stack->b_count))
 				write_n_save_status("rra", stack);
 		}
 		else
 		{
 			i = -1;
-			while (++i < stack->a[idx->a].now)
+			while (++i < stack->a[idx->a].now - stack->b_count)
 				write_n_save_status("ra", stack);
 		}
 	}

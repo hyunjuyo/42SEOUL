@@ -75,6 +75,7 @@ void	find_min_oper_for_sort(t_stack *stack)
 
 	if (stack->a_count >= 9)
 		grouping_numbers(stack);
+	save_now_n_dest_order(stack);
 	idx.a = -1;
 	idx.b = -1;
 	dest_order = stack->a_count + stack->b_count;

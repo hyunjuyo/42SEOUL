@@ -42,16 +42,16 @@ void    do_swap_max_n_second(t_stack *stack, int max_now)
 {
     int i;
 
-	if (max_now - 1 > stack->a_count / 2)
+	if ((max_now - stack->b_count) - 1 > stack->a_count / 2)
 	{
 		i = -1;
-		while (++i < stack->a_count - max_now + 1)
+		while (++i < stack->a_count - (max_now - stack->b_count) + 1)
 			write_n_save_status("rra", stack);
 	}
 	else
 	{
 		i = -1;
-		while (++i < max_now - 1)
+		while (++i < (max_now - stack->b_count) - 1)
 			write_n_save_status("ra", stack);
 	}
 	write_n_save_status("sa", stack);
@@ -65,10 +65,13 @@ void	check_need_swap_max_n_second(t_stack *stack, int dest_order, int idx)
 	int		temp;
 
 	sec.a = get_dest_order_idx_a(stack, dest_order - 1);
+	printf("idx : %d, sec.a : %d\n", idx, sec.a); //test
 	max_now = stack->a[idx].now;
 	sec_now = stack->a[sec.a].now;
+	printf("max_now : %d, sec_now : %d\n", max_now, sec_now); //test
 	if ((temp = max_now + 1) > stack->a_count + stack->b_count)
 		temp -= stack->a_count;
+	printf("sec_now : %d, temp : %d\n", sec_now, temp); //test
 	if (sec_now == temp)
-        do_swap_max_n_second(stack, max_now);
+		do_swap_max_n_second(stack, max_now);
 }

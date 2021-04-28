@@ -67,7 +67,7 @@ void	check_need_swap_max_n_second(t_stack *stack, int dest_order, int idx)
 	sec.a = get_dest_order_idx_a(stack, dest_order - 1);
 	max_now = stack->a[idx].now;
 	sec_now = stack->a[sec.a].now;
-	if ((temp = max_now + 1) > stack->a_count)
+	if ((temp = max_now + 1) > stack->a_count + stack->b_count)
 		temp -= stack->a_count;
 	if (sec_now == temp)
         do_swap_max_n_second(stack, max_now);

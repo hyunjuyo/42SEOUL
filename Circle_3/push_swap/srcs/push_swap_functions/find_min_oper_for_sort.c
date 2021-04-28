@@ -40,15 +40,44 @@ int		get_dest_order_idx_b(t_stack *stack, int dest_order)
 	return (-1);
 }
 
+void	grouping_numbers(t_stack *stack)
+{
+	int	scale;
+	int	i;
+	int	j;
+	int	count;
+
+	scale = 3;
+	i = 1;
+	while (scale * i < stack->a_count + stack->b_count)
+	{
+		count = stack->a_count;
+		printf("scale * i : %d, count : %d\n", scale * i, count); //test
+		j = -1;
+		while (++j < count)
+		{
+			if (stack->a[0].dest <= scale * i)
+				write_n_save_status("pb", stack);
+			else
+				write_n_save_status("ra", stack);
+			if (stack->b_count == scale * i)
+				break ;
+		}
+		i++;
+	}
+}
+
 void	find_min_oper_for_sort(t_stack *stack)
 {
 	t_idx	idx;
 	int		dest_order;
 //	int		i; //test
 
+	if (stack->a_count >= 9)
+		grouping_numbers(stack);
 	idx.a = -1;
 	idx.b = -1;
-	dest_order = stack->a_count;
+	dest_order = stack->a_count + stack->b_count;
 	while (dest_order > 1)
 	{
 		idx.a = get_dest_order_idx_a(stack, dest_order);

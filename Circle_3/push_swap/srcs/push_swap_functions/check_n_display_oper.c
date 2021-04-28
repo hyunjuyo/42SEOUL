@@ -6,13 +6,13 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:36:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 18:08:09 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:44:22 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	consider_already_pb_n_move(t_stack *stack, int count_num)
+void	consider_already_pb_n_move(t_stack *stack, int count_num, int now_order)
 {
     int i;
 
@@ -20,6 +20,8 @@ void	consider_already_pb_n_move(t_stack *stack, int count_num)
 	while (i < count_num)
     {
 		write_n_save_status("pb", stack);
+		if (now_order > (stack->a_count + stack->b_count) / 2)
+			check_n_do_ss(stack);
         i++;
     }
 	if (i > count_num) //consider already "pb"
@@ -27,6 +29,7 @@ void	consider_already_pb_n_move(t_stack *stack, int count_num)
 		while (i > count_num)
 		{
 			write_n_save_status("pa", stack);
+			check_n_do_ss(stack);
 			i--;
 		}
 	}
@@ -44,26 +47,28 @@ void	check_n_display_oper_3(t_stack *stack, int dest_order, int now_order)
 {
 	int	i;
 
+	i = -1;
 	if (now_order < dest_order - 1)
 	{
-		consider_already_pb_n_move(stack, dest_order);
+		consider_already_pb_n_move(stack, dest_order, now_order);
+		now_order = update_now_order(stack, dest_order);
 		if (now_order > dest_order / 2)
 		{
-			i = -1;
 			while (++i < dest_order - now_order)
 				write_n_save_status("rb", stack);
 		}
 		else
 		{
-			i = -1;
 			while (++i < now_order)
 				write_n_save_status("rrb", stack);
 		}
 	}
 	else if (now_order == dest_order - 1)
 	{
-		consider_already_pb_n_move(stack, now_order - 1);
-		check_n_do_swap(stack);
+		consider_already_pb_n_move(stack, now_order - 1, now_order);
+		now_order = update_now_order(stack, dest_order);
+		if (now_order == dest_order - 1)
+			check_n_do_swap(stack);
 	}
 }
 

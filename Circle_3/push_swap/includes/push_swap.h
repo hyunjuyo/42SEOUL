@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:13:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 19:02:52 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:24:57 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "get_next_line.h"
 
 # define STACK_SIZE 1000
-# define INST_COUNT 10000
+# define INST_COUNT 50000
 # define OPER_LEN   3
 # define EMPTY      10100100100
 
@@ -76,8 +76,11 @@ void	save_now_n_dest_order(t_stack *stack);
 void	find_min_oper_for_sort(t_stack *stack);
 void	check_n_display_oper(t_stack *stack, int dest_order, t_idx *idx);
 int		get_dest_order_idx_a(t_stack *stack, int dest_order);
+int		get_dest_order_idx_b(t_stack *stack, int dest_order);
 void	check_need_swap_max_n_second(t_stack *stack, int dest_order, int idx);
 void	write_n_save_status(char *oper, t_stack *stack);
+void	check_n_do_ss(t_stack *stack);
+int		update_now_order(t_stack *stack, int dest_order);
 void	print_stack_status(t_stack *stack);
 
 #endif

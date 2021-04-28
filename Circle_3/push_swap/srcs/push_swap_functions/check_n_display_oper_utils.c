@@ -6,11 +6,37 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 15:44:48 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 17:31:47 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:31:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int		update_now_order(t_stack *stack, int dest_order)
+{
+	t_idx	temp;
+	int		now_order;
+
+	temp.a = get_dest_order_idx_a(stack, dest_order);
+	if (temp.a == -1)
+		temp.b = get_dest_order_idx_b(stack, dest_order);
+	if (temp.a > -1)
+		now_order = stack->a[temp.a].now;
+	else
+		now_order = stack->b[temp.b].now;
+	return (now_order);
+}
+
+void	check_n_do_ss(t_stack *stack)
+{
+	if (stack->a[0].num > stack->a[1].num && stack->b[0].num < stack->b[1].num)
+	{
+		write(1, "ss\n", 3);
+		operations_ss(stack);
+		if (stack->debug_opt == 1)
+			print_stack_status(stack);
+	}
+}
 
 void    do_swap_max_n_second(t_stack *stack, int max_now)
 {

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 16:50:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/29 18:21:07 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:36:41 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		choose_scale(t_stack *stack)
 	if (stack->a_count + stack->b_count <= 30)
 		scale = 10;
 	else if (stack->a_count + stack->b_count <= 100)
-		scale = 18;
+		scale = 15;
 	else if (stack->a_count + stack->b_count <= 200)
 		scale = 30;
 	else

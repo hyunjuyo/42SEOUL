@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:12:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 18:11:56 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:46:11 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ int		main(int argc, char *argv[])
 	ft_memset(&stack, 0, sizeof(t_stack));
     if (ft_strncmp(argv[1], "-v", 3) == 0)
         stack.debug_opt = 1;
+    if (ft_strncmp(argv[argc - 1], "-v", 3) == 0)
+        stack.debug_opt2 = 1;
     init_stack(&stack);
 	i = 0 + stack.debug_opt;
-	while (i < argc - 1)
+	while (i < argc - 1 - stack.debug_opt2)
 	{
         num = atoi_error_check(argv[i + 1]);
         check_error_dup(&stack, i, num);
@@ -66,5 +68,9 @@ int		main(int argc, char *argv[])
 //	i = -1; //test
 //	while (++i < stack.a_count) //test
 //		printf("[a] %lld,\tnow : %d, dest : %d\n",stack.a[i].num, stack.a[i].now, stack.a[i].dest); //test
+//    i = -1; //test
+//    while (++i < stack.a_count) //test
+//        printf("%lld ", stack.a[i].num); //test
+//    printf("\n"); //test
 	return (0);
 }

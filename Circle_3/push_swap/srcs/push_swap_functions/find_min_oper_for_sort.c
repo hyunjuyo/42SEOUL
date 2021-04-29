@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 16:50:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/28 14:47:51 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:27:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ int		get_dest_order_idx_b(t_stack *stack, int dest_order)
 	return (-1);
 }
 
+int		choose_scale(t_stack *stack)
+{
+	int	scale;
+
+	if (stack->a_count + stack->b_count <= 30)
+		scale = 10;
+	else if (stack->a_count + stack->b_count <= 100)
+		scale = 18;
+	else if (stack->a_count + stack->b_count <= 200)
+		scale = 30;
+	else
+		scale = 45;
+	return (scale);
+}
+
 void	grouping_numbers(t_stack *stack)
 {
 	int	scale;
@@ -47,7 +62,7 @@ void	grouping_numbers(t_stack *stack)
 	int	j;
 	int	count;
 
-	scale = 45;
+	scale = choose_scale(stack);
 	i = 1;
 	while (scale * i < stack->a_count + stack->b_count)
 	{
@@ -65,6 +80,7 @@ void	grouping_numbers(t_stack *stack)
 		}
 		i++;
 	}
+//	printf("==================== total_count : %d, scale * i : %d \"Grouping complete\" ====================\n", stack->a_count + stack->b_count, scale * i); //test
 }
 
 void	find_min_oper_for_sort(t_stack *stack)
@@ -73,9 +89,15 @@ void	find_min_oper_for_sort(t_stack *stack)
 	int		dest_order;
 //	int		i; //test
 
-	if (stack->a_count >= 50)
+	if (stack->a_count >= 20)
 		grouping_numbers(stack);
 	save_now_n_dest_order(stack);
+//	i = -1; //test
+//	while (++i < stack->a_count) //test
+//		printf("[a] %lld,\tnow : %d, dest : %d\n",stack->a[i].num, stack->a[i].now, stack->a[i].dest); //test
+//	i = -1; //test
+//	while (++i < stack->b_count) //test
+//		printf("[b] %lld,\tnow : %d, dest : %d\n",stack->b[i].num, stack->b[i].now, stack->b[i].dest); //test
 	idx.a = -1;
 	idx.b = -1;
 	dest_order = stack->a_count + stack->b_count;

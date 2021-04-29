@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:13:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/28 16:24:57 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:40:06 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct  s_stack
     char        inst[INST_COUNT][OPER_LEN + 1];
     int         inst_count;
     int         debug_opt;
+    int         debug_opt2;
 }               t_stack;
 
 typedef struct  s_atoi_info

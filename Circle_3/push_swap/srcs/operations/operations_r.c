@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:59:25 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 13:11:05 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/29 14:43:17 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	operations_ra(t_stack *stack)
 		i++;
 	}
 	ft_memcpy(&stack->a[i], &temp, sizeof(t_num_info));
-	stack->a[i].now = stack->a_count;
+	stack->a[i].now = stack->a_count + stack->b_count;
 }
 
 void	operations_rb(t_stack *stack)

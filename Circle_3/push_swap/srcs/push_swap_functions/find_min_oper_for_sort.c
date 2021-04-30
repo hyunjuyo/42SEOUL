@@ -72,7 +72,19 @@ void	grouping_numbers(t_stack *stack)
 		while (++j < count)
 		{
 			if (stack->a[0].dest <= scale * i)
+			{
 				write_n_save_status("pb", stack);
+//				if (stack->b[1].num != EMPTY && stack->b[0].num < stack->b[1].num)
+//				{
+//					if (stack->b[0].num > stack->b[2].num)
+//					{
+//						if (stack->a[0].num > stack->a[1].num)
+//							write_n_save_status("ss", stack);
+//						else
+//							write_n_save_status("sb", stack);
+//					}
+//				}
+			}
 			else
 				write_n_save_status("ra", stack);
 			if (stack->b_count == scale * i)

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 15:44:48 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/29 20:23:28 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/30 16:32:21 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	check_n_do_swap(t_stack *stack)
 		write_n_save_status("sa", stack);
 }
 
-void    do_swap_max_n_second(t_stack *stack, int max_now)
+void	do_swap_max_n_second(t_stack *stack, int max_now)
 {
-    int i;
+	int	i;
 	int	count;
 
 	if ((max_now - stack->b_count) - 1 > stack->a_count / 2)
@@ -82,10 +82,8 @@ void	check_need_swap_max_n_second(t_stack *stack, int dest_order, int idx)
 	int		temp;
 
 	sec.a = get_dest_order_idx_a(stack, dest_order - 1);
-//	printf("idx : %d, sec.a : %d\n", idx, sec.a); //test
 	max_now = stack->a[idx].now;
 	sec_now = stack->a[sec.a].now;
-//	printf("max_now : %d, sec_now : %d\n", max_now, sec_now); //test
 	if (stack->a_count + stack->b_count > 3)
 	{
 		if ((temp = max_now + 2) > stack->a_count + stack->b_count)
@@ -97,10 +95,8 @@ void	check_need_swap_max_n_second(t_stack *stack, int dest_order, int idx)
 		max_now = stack->a[idx].now;
 		sec_now = stack->a[sec.a].now;
 	}
-//	printf("max_now : %d, sec_now : %d\n", max_now, sec_now); //test
 	if ((temp = max_now + 1) > stack->a_count + stack->b_count)
 		temp -= stack->a_count;
-//	printf("sec_now : %d, temp : %d\n", sec_now, temp); //test
 	if (sec_now == temp)
 		do_swap_max_n_second(stack, max_now);
 }

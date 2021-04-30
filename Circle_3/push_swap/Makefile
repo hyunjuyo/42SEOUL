@@ -6,12 +6,12 @@
 #    By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/21 15:44:48 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/04/27 15:56:23 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/04/30 16:04:27 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME1	= checker
-NAME2	= push_swap
+NAME	= push_swap
+CHECKER	= checker
 
 CFLAGS	= -Wall -Wextra -Werror
 LIBFT_FLAGS	= -L./Libft -lft
@@ -40,18 +40,18 @@ PUSH_SWAP_OBJS	= $(PUSH_SWAP_SRCS:.c=.o)
 %.o : %.c
 	gcc $(CFLAGS) -c $< -o $@ -I./includes/ -I./Libft/
 
-$(NAME1) : $(CHECKER_OBJS)
-	gcc $(CHECKER_OBJS) $(LIBFT_FLAGS) -o $(NAME1)
+$(NAME) : $(CHECKER_OBJS) $(PUSH_SWAP_OBJS)
+	make bonus -C ./Libft/
+	gcc $(CHECKER_OBJS) $(LIBFT_FLAGS) -o $(CHECKER)
+	gcc $(PUSH_SWAP_OBJS) $(LIBFT_FLAGS) -o $(NAME)
 
-$(NAME2) : $(CHECKER) $(PUSH_SWAP_OBJS)
-	gcc $(PUSH_SWAP_OBJS) $(LIBFT_FLAGS) -o $(NAME2)
-
-all : $(NAME1) $(NAME2)
+all : $(NAME)
 
 clean :
+	make clean -C ./Libft/
 	rm -f $(CHECKER_OBJS) $(PUSH_SWAP_OBJS)
 
 fclean : clean
-	rm -f $(NAME1) $(NAME2)
+	rm -f $(CHECKER) $(NAME)
 
 re : fclean all

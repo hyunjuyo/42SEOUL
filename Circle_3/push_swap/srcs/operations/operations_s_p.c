@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 19:56:37 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 18:07:19 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/30 16:33:17 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	operations_sa(t_stack *stack)
 	t_num_info	temp;
 
 	if (stack->a[0].num == EMPTY || stack->a[1].num == EMPTY)
-        return ;
+		return ;
 	ft_memcpy(&temp, &stack->a[0], sizeof(t_num_info));
 	ft_memcpy(&stack->a[0], &stack->a[1], sizeof(t_num_info));
 	stack->a[0].now--;
@@ -30,7 +30,7 @@ void	operations_sb(t_stack *stack)
 	t_num_info	temp;
 
 	if (stack->b[0].num == EMPTY || stack->b[1].num == EMPTY)
-        return ;
+		return ;
 	ft_memcpy(&temp, &stack->b[0], sizeof(t_num_info));
 	ft_memcpy(&stack->b[0], &stack->b[1], sizeof(t_num_info));
 	stack->b[0].now++;
@@ -49,7 +49,7 @@ void	operations_pa(t_stack *stack)
 	int	i;
 
 	if (stack->b[0].num == EMPTY)
-        return ;
+		return ;
 	i = 0;
 	while (i < stack->a_count)
 	{
@@ -75,7 +75,7 @@ void	operations_pb(t_stack *stack)
 	int	i;
 
 	if (stack->a[0].num == EMPTY)
-        return ;
+		return ;
 	i = 0;
 	while (i < stack->b_count)
 	{

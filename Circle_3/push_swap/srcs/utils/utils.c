@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:43:15 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/25 19:17:06 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/30 16:34:34 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	print_error(char *message, int type)
 	write(1, "\n", 1);
 	write(3, message, ft_strlen(message));
 	write(3, "\n", 1);
-    if (type == 1)
+	if (type == 1)
 		exit(1);
 }
 

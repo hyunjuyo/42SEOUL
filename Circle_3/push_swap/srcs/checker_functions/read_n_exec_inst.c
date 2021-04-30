@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:54:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/27 19:03:28 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/04/30 16:29:15 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,17 @@ void	read_inst(t_stack *stack)
 	i = 0;
 	while (get_next_line(0, &line) == 1)
 	{
-		if (ft_strlen(line) > OPER_LEN) //incorrectly formatted
+		if (ft_strlen(line) > OPER_LEN)
 			print_error("Error", 1);
 		ft_strlcpy(stack->inst[i], line, OPER_LEN + 1);
-		error_check_inst(stack, i); //incorrectly formatted
+		error_check_inst(stack, i);
 		free(line);
 		line = NULL;
 		i++;
 	}
-	if (i == 0 || ft_strlen(line) != 0)  //instruction don't exist or incorrectly formatted
-    	print_error("Error", 1);
+	if (i == 0 || ft_strlen(line) != 0)
+		print_error("Error", 1);
 	free(line);
 	line = NULL;
 	stack->inst_count = i;
-//	i = -1;  //test
-//	while (++i < stack->inst_count)  //test
-//		printf("%s ", stack->inst[i]);  //test
-//	printf("\n"); //test
-//	i = -1; //test
-//	while (++i < stack->a_count) //test
-//		printf("[a] %lld,\t[b] %lld\n",stack->a[i].num, stack->b[i].num); //test
 }

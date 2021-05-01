@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:54:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/30 16:29:15 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/01 14:45:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ void	read_inst(t_stack *stack)
 		line = NULL;
 		i++;
 	}
-	if (i == 0 || ft_strlen(line) != 0)
+	if (i == 0)
+	{
+		check_stack_sorted(stack);
+		exit (0);
+	}
+	if (ft_strlen(line) != 0)
 		print_error("Error", 1);
 	free(line);
 	line = NULL;

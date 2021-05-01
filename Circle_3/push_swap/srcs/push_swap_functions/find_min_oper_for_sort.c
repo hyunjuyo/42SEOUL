@@ -75,7 +75,7 @@ void	grouping_numbers(t_stack *stack)
 			if (stack->a[0].dest <= scale * i)
 			{
 				write_n_save_status("pb", stack);
-				check_n_do_rb_in_grouping_numbers(stack, scale, i);
+				sub_grouping_numbers_step1(stack, scale, i);
 			}
 			else
 				write_n_save_status("ra", stack);

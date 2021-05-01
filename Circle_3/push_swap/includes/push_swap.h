@@ -75,8 +75,7 @@ void			operations_rrr(t_stack *stack);
 void			check_stack_sorted(t_stack *stack);
 void			save_now_n_dest_order(t_stack *stack);
 void			find_min_oper_for_sort(t_stack *stack);
-void			check_n_do_rb_in_grouping_numbers(t_stack *stack, int scale,
-		int i);
+void			sub_grouping_numbers_step1(t_stack *stack, int scale, int i);
 void			check_n_display_oper(t_stack *stack, int dest_order,
 		t_idx *idx);
 int				get_dest_order_idx_a(t_stack *stack, int dest_order);

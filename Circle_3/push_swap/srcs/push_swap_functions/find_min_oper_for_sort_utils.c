@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	check_n_do_rb_in_grouping_numbers(t_stack *stack, int scale, int i)
+void	sub_grouping_numbers_step1(t_stack *stack, int scale, int i)
 {
 	if (stack->b[1].num != EMPTY && stack->b[0].dest <
 			scale / 3 + scale * (i - 1))

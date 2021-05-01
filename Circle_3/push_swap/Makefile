@@ -6,7 +6,7 @@
 #    By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/21 15:44:48 by hyunjuyo          #+#    #+#              #
-#    Updated: 2021/04/30 16:04:27 by hyunjuyo         ###   ########.fr        #
+#    Updated: 2021/05/01 16:46:58 by hyunjuyo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ PUSH_SWAP_SRCS	= ./srcs/main_push_swap.c ./srcs/utils/atoi_error_check.c \
 				  ./srcs/utils/utils.c \
 				  ./srcs/push_swap_functions/save_now_n_dest_order.c \
 				  ./srcs/push_swap_functions/find_min_oper_for_sort.c \
+				  ./srcs/push_swap_functions/find_min_oper_for_sort_utils.c \
 				  ./srcs/push_swap_functions/check_n_display_oper.c \
 				  ./srcs/push_swap_functions/check_n_display_oper_utils.c \
 				  ./srcs/push_swap_functions/write_n_save_status.c \

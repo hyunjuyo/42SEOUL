@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 16:50:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/30 15:49:31 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:35:15 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int		choose_scale(t_stack *stack)
 {
 	int	scale;
 
-	if (stack->a_count + stack->b_count <= 30)
-		scale = 10;
-	else if (stack->a_count + stack->b_count <= 100)
-		scale = 15;
-	else if (stack->a_count + stack->b_count <= 200)
+	if (stack->a_count + stack->b_count <= 50)
+		scale = 20;
+	else if (stack->a_count + stack->b_count <= 150)
 		scale = 30;
+	else if (stack->a_count + stack->b_count <= 300)
+		scale = 35;
 	else
-		scale = 45;
+		scale = 60;
 	return (scale);
 }
 
@@ -71,7 +71,10 @@ void	grouping_numbers(t_stack *stack)
 		while (++j < count)
 		{
 			if (stack->a[0].dest <= scale * i)
+			{
 				write_n_save_status("pb", stack);
+				check_n_do_rb_in_grouping_numbers(stack, scale, i);
+			}
 			else
 				write_n_save_status("ra", stack);
 			if (stack->b_count == scale * i)

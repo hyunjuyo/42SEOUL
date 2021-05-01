@@ -6,11 +6,22 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:57:08 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/29 16:49:08 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:07:37 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	write_n_save_status_last(char *oper, t_stack *stack)
+{
+	if (ft_strncmp(oper, "rr", OPER_LEN + 1) == 0)
+	{
+		write(1, "rr\n", 3);
+		operations_rr(stack);
+		if (stack->debug_opt == 1 || stack->debug_opt2 == 1)
+			print_stack_status(stack);
+	}
+}
 
 void	write_n_save_status3(char *oper, t_stack *stack)
 {
@@ -35,6 +46,8 @@ void	write_n_save_status3(char *oper, t_stack *stack)
 		if (stack->debug_opt == 1 || stack->debug_opt2 == 1)
 			print_stack_status(stack);
 	}
+	else
+		write_n_save_status_last(oper, stack);
 }
 
 void	write_n_save_status2(char *oper, t_stack *stack)

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:13:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/30 16:37:30 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:36:05 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void			operations_rrr(t_stack *stack);
 void			check_stack_sorted(t_stack *stack);
 void			save_now_n_dest_order(t_stack *stack);
 void			find_min_oper_for_sort(t_stack *stack);
+void			check_n_do_rb_in_grouping_numbers(t_stack *stack, int scale,
+		int i);
 void			check_n_display_oper(t_stack *stack, int dest_order,
 		t_idx *idx);
 int				get_dest_order_idx_a(t_stack *stack, int dest_order);

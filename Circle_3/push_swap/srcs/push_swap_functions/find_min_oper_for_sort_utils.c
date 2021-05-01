@@ -14,8 +14,8 @@
 
 void	check_n_do_rb_in_grouping_numbers(t_stack *stack, int scale, int i)
 {
-	if (stack->b[1].num != EMPTY && stack->b[0].dest >
-			scale / 2 + scale * (i - 1))
+	if (stack->b[1].num != EMPTY && stack->b[0].dest <
+			scale / 3 + scale * (i - 1))
 	{
 		if (stack->a[0].dest > scale * i)
 			write_n_save_status("rr", stack);

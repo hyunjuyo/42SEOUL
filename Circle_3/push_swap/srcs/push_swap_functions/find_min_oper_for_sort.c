@@ -45,13 +45,13 @@ int		choose_scale(t_stack *stack)
 	int	scale;
 
 	if (stack->a_count + stack->b_count <= 50)
-		scale = 20;
+		scale = 21;
 	else if (stack->a_count + stack->b_count <= 150)
-		scale = 30;
+		scale = 32;
 	else if (stack->a_count + stack->b_count <= 300)
-		scale = 35;
+		scale = 39;
 	else
-		scale = 60;
+		scale = 70;
 	return (scale);
 }
 
@@ -61,6 +61,8 @@ void	grouping_numbers(t_stack *stack)
 	int	i;
 	int	j;
 	int	count;
+	int	temp;
+	int	temp2;
 
 	scale = choose_scale(stack);
 	i = 1;
@@ -80,6 +82,27 @@ void	grouping_numbers(t_stack *stack)
 			if (stack->b_count == scale * i)
 				break ;
 		}
+		temp = 0;
+		temp2 = 0;
+		j = -1;
+		while (++j < scale * 2 / 3)
+		{
+			if (stack->b[0].dest > scale * 2 / 3 + scale * (i - 1))
+			{
+				write_n_save_status("pa", stack);
+				temp++;
+			}
+			else
+			{
+				write_n_save_status("rb", stack);
+				temp2++;
+			}
+			if (temp == scale / 3 || temp2 == scale / 3)
+				break ;
+		}
+		j = -1;
+		while (++j < temp)
+			write_n_save_status("pb", stack);
 		i++;
 	}
 }

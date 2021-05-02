@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:43:15 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/30 16:34:34 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/02 18:07:26 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_stack_status(t_stack *stack)
 	int		i;
 	char	*num;
 
-	write(1, "[b] ", 4);
+	write(1, "   [b] ", 7);
 	i = -1;
 	while (++i < stack->b_count)
 	{
@@ -26,7 +26,7 @@ void	print_stack_status(t_stack *stack)
 		write(1, " ", 1);
 	}
 	write(1, "\n", 1);
-	write(1, "[a] ", 4);
+	write(1, "   [a] ", 7);
 	i = -1;
 	while (++i < stack->a_count)
 	{

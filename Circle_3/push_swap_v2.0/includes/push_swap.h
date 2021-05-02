@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:13:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/02 16:39:37 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/02 18:06:27 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "get_next_line.h"
 
 # define STACK_SIZE 1000
-# define INST_COUNT 30000
+# define INST_COUNT 15000
 # define OPER_LEN   3
 # define EMPTY      10100100100
 

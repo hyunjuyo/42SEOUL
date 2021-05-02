@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 16:50:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/01 16:35:15 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/02 16:59:42 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		choose_scale(t_stack *stack)
 	if (stack->a_count + stack->b_count <= 50)
 		scale = 21;
 	else if (stack->a_count + stack->b_count <= 150)
-		scale = 32;
+		scale = 31;
 	else if (stack->a_count + stack->b_count <= 300)
 		scale = 39;
 	else
@@ -61,12 +61,10 @@ void	grouping_numbers(t_stack *stack)
 	int	i;
 	int	j;
 	int	count;
-	int	temp;
-	int	temp2;
 
 	scale = choose_scale(stack);
-	i = 1;
-	while (scale * i < stack->a_count + stack->b_count)
+	i = 0;
+	while (scale * (++i) < stack->a_count + stack->b_count)
 	{
 		count = stack->a_count;
 		j = -1;
@@ -82,28 +80,7 @@ void	grouping_numbers(t_stack *stack)
 			if (stack->b_count == scale * i)
 				break ;
 		}
-		temp = 0;
-		temp2 = 0;
-		j = -1;
-		while (++j < scale * 2 / 3)
-		{
-			if (stack->b[0].dest > scale * 2 / 3 + scale * (i - 1))
-			{
-				write_n_save_status("pa", stack);
-				temp++;
-			}
-			else
-			{
-				write_n_save_status("rb", stack);
-				temp2++;
-			}
-			if (temp == scale / 3 || temp2 == scale / 3)
-				break ;
-		}
-		j = -1;
-		while (++j < temp)
-			write_n_save_status("pb", stack);
-		i++;
+		sub_grouping_numbers_step2(stack, scale, i);
 	}
 }
 

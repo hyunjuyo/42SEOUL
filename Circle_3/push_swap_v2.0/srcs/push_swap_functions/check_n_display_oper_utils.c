@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 15:44:48 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/30 16:32:21 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/06 18:31:24 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void	check_need_swap_max_n_second(t_stack *stack, int dest_order, int idx)
 	}
 	if ((temp = max_now + 1) > stack->a_count + stack->b_count)
 		temp -= stack->a_count;
-	if (sec_now == temp)
+	if (sec_now == temp && stack->a_count + stack->b_count > 5)
 		do_swap_max_n_second(stack, max_now);
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 15:44:48 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/06 18:31:24 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/10 17:52:44 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,12 @@ void	do_swap_max_n_second(t_stack *stack, int max_now)
 {
 	int	i;
 	int	count;
+	int	optimize;
 
-	if ((max_now - stack->b_count) - 1 > stack->a_count / 2)
+	optimize = 1;
+	if (stack->a_count + stack->b_count > 3)
+		optimize = 2;
+	if ((max_now - stack->b_count) - optimize > stack->a_count / 2)
 	{
 		i = -1;
 		while (++i < stack->a_count - (max_now - stack->b_count) + 1)
@@ -97,6 +101,6 @@ void	check_need_swap_max_n_second(t_stack *stack, int dest_order, int idx)
 	}
 	if ((temp = max_now + 1) > stack->a_count + stack->b_count)
 		temp -= stack->a_count;
-	if (sec_now == temp && stack->a_count + stack->b_count > 5)
+	if (sec_now == temp && stack->a_count + stack->b_count > 2)
 		do_swap_max_n_second(stack, max_now);
 }

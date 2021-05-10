@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 17:43:15 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/02 18:07:26 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/10 14:55:40 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,8 @@ void	print_stack_status(t_stack *stack)
 
 void	print_error(char *message, int type)
 {
-	write(1, message, ft_strlen(message));
-	write(1, "\n", 1);
-	write(3, message, ft_strlen(message));
-	write(3, "\n", 1);
+	write(2, message, ft_strlen(message));
+	write(2, "\n", 1);
 	if (type == 1)
 		exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:36:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/04/30 16:31:10 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/10 18:15:28 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,13 @@ void	check_n_display_oper_2(t_stack *stack, int dest_order, t_idx *idx)
 void	check_n_display_oper(t_stack *stack, int dest_order, t_idx *idx)
 {
 	int	i;
+	int	idx2;
 
 	if (dest_order == stack->a_count + stack->b_count)
 	{
-		check_need_swap_max_n_second(stack, dest_order, idx->a);
+		idx2 = get_dest_order_idx_a(stack, dest_order - 1);
+		if (!(dest_order == stack->a[idx->a].now && stack->a[idx2].now < 3))
+			check_need_swap_max_n_second(stack, dest_order, idx->a);
 		idx->a = get_dest_order_idx_a(stack, dest_order);
 		if (stack->a[idx->a].now - stack->b_count > stack->a_count / 2)
 		{

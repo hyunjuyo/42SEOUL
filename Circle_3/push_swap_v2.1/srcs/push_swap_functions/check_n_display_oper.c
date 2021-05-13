@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:36:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/13 13:51:18 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/13 18:06:47 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,7 @@ void	check_n_display_oper_2(t_stack *stack, int dest_order, t_idx *idx)
 				stack->set_color = 1;
 			write_n_save_status("pa", stack);
 		}
-		if (now_order == 1)
-		{
-			stack->set_color = 1;
-			write_n_save_status("sa", stack);
-		}
+		display_after_color_setting_sa(stack, now_order);
 	}
 	else
 		check_n_display_oper_3(stack, dest_order, now_order);
@@ -114,7 +110,6 @@ void	check_n_display_oper_2(t_stack *stack, int dest_order, t_idx *idx)
 
 void	check_n_display_oper(t_stack *stack, int dest_order, t_idx *idx)
 {
-	int	i;
 	int	idx2;
 
 	if (dest_order == stack->a_count + stack->b_count)
@@ -123,19 +118,7 @@ void	check_n_display_oper(t_stack *stack, int dest_order, t_idx *idx)
 		if (!(dest_order == stack->a[idx->a].now && stack->a[idx2].now < 3))
 			check_need_swap_max_n_second(stack, dest_order, idx->a);
 		idx->a = get_dest_order_idx_a(stack, dest_order);
-		if (stack->a[idx->a].now - stack->b_count > stack->a_count / 2)
-		{
-			i = -1;
-			while (++i < stack->a_count -
-					(stack->a[idx->a].now - stack->b_count))
-				write_n_save_status("rra", stack);
-		}
-		else
-		{
-			i = -1;
-			while (++i < stack->a[idx->a].now - stack->b_count)
-				write_n_save_status("ra", stack);
-		}
+		display_after_color_setting_ra(stack, idx);
 	}
 	else
 		check_n_display_oper_2(stack, dest_order, idx);

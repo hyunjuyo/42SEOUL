@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:13:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/13 14:33:48 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/13 18:05:08 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include "libft.h"
 # include "get_next_line.h"
-# include <stdio.h> //test
 
 # define STACK_SIZE 1000
 # define INST_COUNT 15000
@@ -90,5 +89,7 @@ void			check_n_do_swap(t_stack *stack);
 void			check_n_do_ss(t_stack *stack);
 int				update_now_order(t_stack *stack, int dest_order);
 void			print_stack_status(t_stack *stack);
+void			display_after_color_setting_ra(t_stack *stack, t_idx *idx);
+void			display_after_color_setting_sa(t_stack *stack, int now_order);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:12:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/13 12:32:06 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/13 18:00:24 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	check_error_dup(t_stack *stack, int idx, int num)
 		i++;
 	}
 }
+
 /*
 void	check_option(char *argv[], t_stack *stack)
 {
@@ -45,6 +46,7 @@ void	check_option(char *argv[], t_stack *stack)
 
 }
 */
+
 int		main(int argc, char *argv[])
 {
 	t_stack	stack;

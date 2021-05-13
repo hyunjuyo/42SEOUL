@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 16:54:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/13 14:45:09 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/13 16:57:42 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ void	exec_inst(t_stack *stack)
 		do_exec(stack->inst[i], stack);
 }
 
+void	check_n_clear_color_setting(char **line)
+{
+	if (ft_strncmp(*line, "\033[1;32msa", ft_strlen(*line)) == 0)
+	{
+		free(*line);
+		*line = ft_strdup("sa");
+	}
+	else if (ft_strncmp(*line, "\033[1;32mpa", ft_strlen(*line)) == 0)
+	{
+		free(*line);
+		*line = ft_strdup("pa");
+	}
+}
+
 void	read_inst(t_stack *stack)
 {
 	char	*line;
@@ -55,16 +69,7 @@ void	read_inst(t_stack *stack)
 	i = 0;
 	while (get_next_line(0, &line) == 1)
 	{
-		if (ft_strncmp(line, "\033[1;32msa", ft_strlen(line)) == 0)
-		{
-			free(line);
-			line = ft_strdup("sa");
-		}
-		else if (ft_strncmp(line, "\033[1;32mpa", ft_strlen(line)) == 0)
-		{
-			free(line);
-			line = ft_strdup("pa");
-		}
+		check_n_clear_color_setting(&line);
 		if (ft_strlen(line) > OPER_LEN)
 			print_error("Error", 1);
 		ft_strlcpy(stack->inst[i], line, OPER_LEN + 1);

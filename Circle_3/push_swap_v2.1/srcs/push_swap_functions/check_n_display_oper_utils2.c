@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 17:09:52 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/13 18:13:41 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/14 12:03:09 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	display_after_color_setting_ra(t_stack *stack, t_idx *idx)
 		while (++i < stack->a_count -
 				(stack->a[idx->a].now - stack->b_count))
 		{
-			if (last_reverse_rotate_check(stack) == 1)
+			if (last_reverse_rotate_check(stack) == 1 &&
+					(stack->color_opt == 1 || stack->color_opt2 == 1))
 				stack->set_color = 1;
 			write_n_save_status("rra", stack);
 		}
@@ -88,7 +89,8 @@ void	display_after_color_setting_ra(t_stack *stack, t_idx *idx)
 		i = -1;
 		while (++i < stack->a[idx->a].now - stack->b_count)
 		{
-			if (last_rotate_check(stack) == 1)
+			if (last_rotate_check(stack) == 1 && (stack->color_opt == 1 ||
+						stack->color_opt2 == 1))
 				stack->set_color = 1;
 			write_n_save_status("ra", stack);
 		}
@@ -99,7 +101,8 @@ void	display_after_color_setting_sa(t_stack *stack, int now_order)
 {
 	if (now_order == 1)
 	{
-		stack->set_color = 1;
+		if (stack->color_opt == 1 || stack->color_opt2 == 1)
+			stack->set_color = 1;
 		write_n_save_status("sa", stack);
 	}
 }

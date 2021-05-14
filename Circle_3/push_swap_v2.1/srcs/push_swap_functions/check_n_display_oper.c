@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:36:03 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/13 18:06:47 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/14 11:53:28 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	check_n_display_oper_2(t_stack *stack, int dest_order, t_idx *idx)
 		i = -1;
 		while (++i < count)
 		{
-			if (i == count - 1 && now_order == 2)
+			if (i == count - 1 && now_order == 2 && (stack->color_opt == 1 ||
+					stack->color_opt2 == 1))
 				stack->set_color = 1;
 			write_n_save_status("pa", stack);
 		}

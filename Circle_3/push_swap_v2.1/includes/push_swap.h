@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:13:49 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/13 18:05:08 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/14 11:47:01 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct	s_stack
 	int			inst_count;
 	int			debug_opt;
 	int			debug_opt2;
+	int			color_opt;
+	int			color_opt2;
 	int			set_color;
 }				t_stack;
 

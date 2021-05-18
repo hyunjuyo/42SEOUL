@@ -6,7 +6,7 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:12:51 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/05/14 17:02:24 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/05/18 14:34:25 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,17 @@ void	check_error_dup(t_stack *stack, int idx, int num)
 
 void	check_options(int argc, char *argv[], t_stack *stack)
 {
-	if (ft_strncmp(argv[1], "-v", 3) == 0 ||
-			(ft_strncmp(argv[1], "-c", 3) == 0 &&
-			 ft_strncmp(argv[2], "-v", 3) == 0))
+	if (ft_strncmp(argv[1], "-v", 3) == 0 || (ft_strncmp(argv[1], "-c", 3) == 0
+				&& ft_strncmp(argv[2], "-v", 3) == 0))
 		stack->debug_opt = 1;
-	else if (ft_strncmp(argv[argc - 1], "-v", 3) == 0 ||
-			(ft_strncmp(argv[argc - 2], "-v", 3) == 0 &&
-			 ft_strncmp(argv[argc - 1], "-c", 3) == 0))
+	else if (ft_strncmp(argv[argc - 1], "-v", 3) == 0 || (ft_strncmp(argv\
+		[argc - 2], "-v", 3) == 0 && ft_strncmp(argv[argc - 1], "-c", 3) == 0))
 		stack->debug_opt2 = 1;
-	if (ft_strncmp(argv[1], "-c", 3) == 0 ||
-			(ft_strncmp(argv[1], "-v", 3) == 0 &&
-			 ft_strncmp(argv[2], "-c", 3) == 0))
+	if (ft_strncmp(argv[1], "-c", 3) == 0 || (ft_strncmp(argv[1], "-v", 3) == 0
+				&& ft_strncmp(argv[2], "-c", 3) == 0))
 		stack->color_opt = 1;
-	else if (ft_strncmp(argv[argc - 1], "-c", 3) == 0 ||
-			(ft_strncmp(argv[argc - 2], "-c", 3) == 0 &&
-			 ft_strncmp(argv[argc - 1], "-v", 3) == 0))
+	else if (ft_strncmp(argv[argc - 1], "-c", 3) == 0 || (ft_strncmp(argv\
+		[argc - 2], "-c", 3) == 0 && ft_strncmp(argv[argc - 1], "-v", 3) == 0))
 		stack->color_opt2 = 1;
 }
 

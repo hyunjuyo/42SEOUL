@@ -3,7 +3,7 @@ version: "3.8"
 services:
     mariadb:
         build:
-            context: .
+            context: ./requirements/mariadb/
             dockerfile: ./requirements/mariadb/Dockerfile
         volumes:
             - ~~~:

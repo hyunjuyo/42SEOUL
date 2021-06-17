@@ -1,11 +1,35 @@
-version: "3.8"
+version: "3"
 
 services:
     mariadb:
+        container_name: mariadb
         build:
-            context: ./requirements/mariadb/
+            context: .
             dockerfile: ./requirements/mariadb/Dockerfile
+        env_file: .env
         volumes:
-            - ~~~:
+            - ~/Desktop/test/mysql:/var/lib/mysql
 
+    wordpress:
+        container_name: wordpress
+        depends_on:
+            - mariadb
+        build:
+            context: .
+            dockerfile: ./requirements/wordpress/Dockerfile
+        env_file: .env
+        volumes:
+            - ~/Desktop/test/wordpress:/var/www/html
 
+    nginx:
+        container_name: nginx
+        depends_on:
+            - wordpress
+        build:
+            context: .
+            dockerfile: ./requirements/nginx/Dockerfile
+        ports:
+            - 443:443
+        env_file: .env
+        volumes:
+            - ~/Desktop/test/nginx:/etc/nginx/sites-available

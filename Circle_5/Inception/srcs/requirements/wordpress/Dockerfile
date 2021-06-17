@@ -12,5 +12,8 @@ RUN		wget https://wordpress.org/latest.tar.gz \
 RUN		chown -R www-data:www-data /wordpress/
 
 COPY	requirements/wordpress/conf/wp-config.php /wordpress/wp-config.php
+COPY	requirements/wordpress/conf/init.sh /tmp/init.sh
 
-# ENTRYPOINT	["/usr/bin/dumb-init"]
+ENTRYPOINT	["/usr/bin/dumb-init"]
+
+CMD		["bash", "/tmp/init.sh"]

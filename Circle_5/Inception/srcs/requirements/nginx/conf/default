@@ -18,13 +18,8 @@
 
 # Default server configuration
 #
-server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-
-	location / {
-		return 301 https://$host$request_uri;
-	}
+upstream server1 {
+	server localhost:9000;
 }
 
 server {
@@ -66,17 +61,28 @@ server {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
 		try_files $uri $uri/ =404;
+		proxy_pass https://server1;
 	}
 
 	# pass PHP scripts to FastCGI server
 	#
-	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
+	# location ~ \.php$ {
+	#	include snippets/fastcgi-php.conf;
 	#
 	#	# With php-fpm (or other unix sockets):
-		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+	#	fastcgi_pass unix:/run/php/php7.3-fpm.sock;
 	#	# With php-cgi (or other tcp sockets):
 	#	fastcgi_pass 127.0.0.1:9000;
+	#}
+
+	# pass the PHP scripts to FastCGI server listening on wordpress:9000
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass wordpress:9000;
+		fastcgi_index index.php;
+		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_param SCRIPT_NAME $fastcgi_script_name;
 	}
 
 	# deny access to .htaccess files, if Apache's document root

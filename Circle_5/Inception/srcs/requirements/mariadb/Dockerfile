@@ -7,10 +7,9 @@ RUN		apt-get install -y \
 		vim \
 		dumb-init
 
-RUN		service mysql start
-
+# COPY	conf/init.sh /tmp/init.sh
 COPY	requirements/mariadb/conf/init.sh /tmp/init.sh
 
-# ENTRYPOINT	["/usr/bin/dumb-init"]
+ENTRYPOINT	["/usr/bin/dumb-init"]
 
-CMD		["/bin/bash", "-c", "bash tmp/init.sh"]
+CMD		["bash", "tmp/init.sh"]

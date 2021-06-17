@@ -10,12 +10,13 @@ RUN		openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L
 RUN		mv localhost.dev.crt /etc/ssl/certs/ && mv localhost.dev.key /etc/ssl/private/ \
 		&& chmod 600 /etc/ssl/certs/localhost.dev.crt /etc/ssl/private/localhost.dev.key
 
+# COPY	conf/default /etc/nginx/sites-available/default
 COPY	requirements/nginx/conf/default /etc/nginx/sites-available/default
 # COPY	conf/init.sh /tmp/init.sh
 
 # RUN		echo "/ndaemon off;" >> /etc/nginx/nginx.conf
 
-# ENTRYPOINT	["/usr/bin/dumb-init"]
+ENTRYPOINT	["/usr/bin/dumb-init"]
 
 EXPOSE	443
 

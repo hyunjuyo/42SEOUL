@@ -6,6 +6,9 @@ services:
         build:
             context: .
             dockerfile: ./requirements/mariadb/Dockerfile
+        restart: always
+        networks:
+            - inception1
         env_file: .env
         environment:
             MYSQL_ROOT_PASSWORD: 123
@@ -22,6 +25,9 @@ services:
         build:
             context: .
             dockerfile: ./requirements/wordpress/Dockerfile
+        restart: always
+        networks:
+            - inception1
         env_file: .env
         environment:
             WORDPRESS_DB_HOST: mariadb:3306
@@ -38,8 +44,15 @@ services:
         build:
             context: .
             dockerfile: ./requirements/nginx/Dockerfile
+        restart: always
+        networks:
+            - inception1
         ports:
             - 443:443
         env_file: .env
         volumes:
             - ~/Desktop/test/nginx:/etc/nginx/sites-available
+
+networks:
+    inception1:
+        driver: bridge

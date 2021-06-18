@@ -16,7 +16,7 @@ COPY	requirements/nginx/conf/default /etc/nginx/sites-available/default
 
 # RUN		echo "/ndaemon off;" >> /etc/nginx/nginx.conf
 
-ENTRYPOINT	["/usr/bin/dumb-init"]
+# ENTRYPOINT	["/usr/bin/dumb-init"]
 
 EXPOSE	443
 

@@ -18,9 +18,9 @@
 
 # Default server configuration
 #
-#upstream server1 {
-#	server localhost:9000;
-#}
+upstream server1 {
+	server wordpress:9000;
+}
 
 server {
 	listen 443 default_server;
@@ -60,8 +60,8 @@ server {
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
+		proxy_pass https://server1;
 		try_files $uri $uri/ =404;
-#		proxy_pass https://server1;
 	}
 
 	# pass PHP scripts to FastCGI server

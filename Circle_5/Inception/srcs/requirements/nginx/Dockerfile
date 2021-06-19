@@ -10,9 +10,8 @@ RUN		openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=KR/ST=Seoul/L
 RUN		mv localhost.dev.crt /etc/ssl/certs/ && mv localhost.dev.key /etc/ssl/private/ \
 		&& chmod 600 /etc/ssl/certs/localhost.dev.crt /etc/ssl/private/localhost.dev.key
 
-# COPY	conf/default /etc/nginx/sites-available/default
-COPY	requirements/nginx/conf/default /etc/nginx/sites-available/default
-# COPY	conf/init.sh /tmp/init.sh
+COPY	conf/default /etc/nginx/sites-available/default
+COPY	conf/init.sh /tmp/init.sh
 
 # RUN		echo "/ndaemon off;" >> /etc/nginx/nginx.conf
 
@@ -20,6 +19,6 @@ COPY	requirements/nginx/conf/default /etc/nginx/sites-available/default
 
 EXPOSE	443
 
-CMD		["nginx", "-g", "daemon off;"]
+# CMD		["nginx", "-g", "daemon off;"]
 
-# CMD		["/bin/bash", "-c", "bash /tmp/init.sh"]
+CMD		["bash", "/tmp/init.sh"]

@@ -1,3 +1,4 @@
 #! bin/bash
 
-service php7.3-fpm start
+mkdir -p /run/php/
+exec /usr/sbin/php-fpm7.3

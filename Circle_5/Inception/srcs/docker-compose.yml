@@ -4,17 +4,14 @@ services:
     mariadb:
         container_name: mariadb
         build:
-            context: .
-            dockerfile: ./requirements/mariadb/Dockerfile
+            context: ./requirements/mariadb/
+            dockerfile: Dockerfile
         restart: always
         networks:
             - inception1
         env_file: .env
         environment:
-            MYSQL_ROOT_PASSWORD: 123
-            MYSQL_DATABASE: db_1
-            MYSQL_USER: user_1
-            MYSQL_PASSWORD: 1234567
+            - MYSQL_DATABASE=db_1
         volumes:
             - ~/Desktop/test/mysql:/var/lib/mysql
 
@@ -23,17 +20,17 @@ services:
         depends_on:
             - mariadb
         build:
-            context: .
-            dockerfile: ./requirements/wordpress/Dockerfile
+            context: ./requirements/wordpress/
+            dockerfile: Dockerfile
         restart: always
         networks:
             - inception1
         env_file: .env
         environment:
-            WORDPRESS_DB_HOST: mariadb:3306
-            MYSQL_ROOT_PASSWORD: 123
-            WORDPRESS_DB_NAME: db_1
-            WORDPRESS_DB_PASSWORD: 1234567
+            - WORDPRESS_DB_HOST=mariadb:3306
+            - MYSQL_ROOT_PASSWORD=123
+            - WORDPRESS_DB_NAME=db_1
+            - WORDPRESS_DB_PASSWORD=1234567
         volumes:
             - ~/Desktop/test/wordpress:/var/www/html
 
@@ -42,8 +39,8 @@ services:
         depends_on:
             - wordpress
         build:
-            context: .
-            dockerfile: ./requirements/nginx/Dockerfile
+            context: ./requirements/nginx/
+            dockerfile: Dockerfile
         restart: always
         networks:
             - inception1

@@ -11,7 +11,10 @@ services:
             - inception1
         env_file: .env
         environment:
-            - MYSQL_DATABASE=db_1
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         volumes:
             - ~/Desktop/test/mysql:/var/lib/mysql
 
@@ -28,9 +31,9 @@ services:
         env_file: .env
         environment:
             - WORDPRESS_DB_HOST=mariadb:3306
-            - MYSQL_ROOT_PASSWORD=123
-            - WORDPRESS_DB_NAME=db_1
-            - WORDPRESS_DB_PASSWORD=1234567
+            - WORDPRESS_DB_USER=${WP_DB_USER}
+            - WORDPRESS_DB_NAME=${WP_DB_NAME}
+            - WORDPRESS_DB_PASSWORD=${WP_DB_PW}
         volumes:
             - ~/Desktop/test/wordpress:/var/www/html
 

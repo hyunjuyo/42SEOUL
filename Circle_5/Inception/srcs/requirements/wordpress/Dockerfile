@@ -16,6 +16,8 @@ COPY	conf/wp-config.php /wordpress/wp-config.php
 COPY	conf/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 COPY	conf/init.sh /tmp/init.sh
 
+EXPOSE	9000
+
 # ENTRYPOINT	["/usr/bin/dumb-init"]
 
 CMD		["bash", "/tmp/init.sh"]

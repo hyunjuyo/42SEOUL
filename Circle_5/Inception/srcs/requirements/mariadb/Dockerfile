@@ -11,6 +11,7 @@ RUN		apt-get install -y \
 COPY	conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY	conf/50-client.cnf /etc/mysql/mariadb.conf.d/50-client.cnf
 COPY	conf/init.sh /tmp/init.sh
+RUN		chmod +x /tmp/init.sh
 
 EXPOSE	3306
 

@@ -1,8 +1,27 @@
 version: "3"
 
 services:
+    mariadb1:
+        container_name: mariadb1
+        build:
+            context: ./requirements/mariadb/
+            dockerfile: Dockerfile
+        restart: always
+        networks:
+            - inception1
+        env_file: .env
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        volumes:
+            - ~/Desktop/test/mysql:/var/lib/mysql
+
     wordpress1:
         container_name: wordpress1
+        depends_on:
+            - mariadb1
         build:
             context: ./requirements/wordpress/
             dockerfile: Dockerfile

@@ -60,7 +60,7 @@ server {
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-#		proxy_pass https://server1;
+		proxy_pass https://wordpress_server;
 		try_files $uri $uri/ =404;
 	}
 

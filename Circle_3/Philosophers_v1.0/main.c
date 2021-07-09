@@ -6,35 +6,55 @@
 /*   By: hyunjuyo <hyunjuyo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:55:32 by hyunjuyo          #+#    #+#             */
-/*   Updated: 2021/07/06 19:09:51 by hyunjuyo         ###   ########.fr       */
+/*   Updated: 2021/07/09 17:41:46 by hyunjuyo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <stdio.h>
-# include <sys/time.h>
+# include "philo.h"
 
-int	main(void)
+void	*philo_thread(void *data)
 {
-	struct timeval	time1;
-	int				sec1;
-	int				sec2;
-	int				usec1;
-	int				usec2;
-	int				diff_sec;
-	int				diff_usec;
+	struct timeval	cur_time;
 
-	gettimeofday(&time1, NULL);
-	sec1 = time1.tv_sec;
-	usec1 = time1.tv_usec;
-	printf("sec : %ld, usec : %06d\n", time1.tv_sec, time1.tv_usec);
+	pthread_mutex_lock(&mutex_lock);
+	gettimeofday(&cur_time, NULL);
+	printf("%ld.%06d %s is eating\n", cur_time.tv_sec, cur_time.tv_usec, (char *)data);
 	usleep(2 * 1000 * 1000);
-	gettimeofday(&time1, NULL);
-	sec2 = time1.tv_sec;
-	usec2 = time1.tv_usec;
-	printf("sec : %ld, usec : %06d\n", time1.tv_sec, time1.tv_usec);
-	diff_sec = sec2 - sec1;
-	diff_usec = usec2 - usec1;
-	printf("[diff] sec.usec : %d.%06d\n", diff_sec, diff_usec);
+	gettimeofday(&cur_time, NULL);
+	printf("%ld.%06d %s is sleeping\n", cur_time.tv_sec, cur_time.tv_usec, (char *)data);
+	pthread_mutex_unlock(&mutex_lock);
+	return (void *)0;
+}
+/*
+pthread_t	*create_forks(int num_of_philos)
+{
+	pthread_t	*temp_tid;
+
+
+
+	return 
+}
+*/
+
+int	main(int argc, char *argv[])
+{
+	pthread_t		tid1;
+	pthread_t		tid2;
+	pthread_t		tid3;
+	int				num_of_philos;
+	
+	if (argc < 2)
+		return (0);
+	num_of_philos = ft_atoi(argv[1]);
+	pthread_mutex_init(&mutex_lock, NULL);
+//	tid = create_forks(num_of_philos);
+//	printf("num_of_philos : %d\n", num_of_philos);  //test
+	pthread_create(&tid1, NULL, philo_thread, (void *)"1");
+	pthread_create(&tid2, NULL, philo_thread, (void *)"2");
+	pthread_create(&tid3, NULL, philo_thread, (void *)"3");
+	pthread_join(tid1, NULL);
+	pthread_join(tid2, NULL);
+	pthread_join(tid3, NULL);
+	printf("Last line~\n");
 	return (0);
 }

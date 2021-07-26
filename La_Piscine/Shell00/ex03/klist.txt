@@ -1,5 +1,0 @@
-Credentials cache: API:F95E66E2-FA23-422C-B81E-FAEAA82FFEC1
-        Principal: hyunjuyo@42SEOUL.KR
-
-  Issued                Expires               Principal
-Nov 18 21:40:32 2020  Nov 19 07:40:32 2020  krbtgt/42SEOUL.KR@42SEOUL.KR

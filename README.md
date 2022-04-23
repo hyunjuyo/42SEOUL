@@ -3,7 +3,7 @@
 ### ['Circle_2' > 'cub3D'] 게임 실행 첫화면
 ![image](https://user-images.githubusercontent.com/76440511/163714350-7b0b93e5-7767-44a9-a611-3e0353e02db6.png)
 
-### ['Circle_2' > 'cub3D'] 플레이어 이동 화면
+### ['Circle_2' > 'cub3D'] 게임 실행 중 화면
 
 #### 플레이어 이동, 벽 충돌, 보석 아이템 획득
 

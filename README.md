@@ -18,9 +18,9 @@
 
 #### 플레이어 웅크리기, 점프 시 시점 이동
 
-![cub3d_3](https://user-images.githubusercontent.com/76440511/164905946-e1e6ce18-77f3-497d-b50e-210f2a255f1c.gif)
+![cub3d_3](https://user-images.githubusercontent.com/76440511/164956267-906526c5-fda5-4301-8955-433038c84fa8.gif)
 <br><br>
 
-#### 플레이어 시선 위치에 따른 바닥 및 하늘 이미지 설정
+#### 플레이어 시선 방향에 따른 바닥 및 하늘 이미지 설정
 
 ![cub3d_4](https://user-images.githubusercontent.com/76440511/164906091-abbaa03f-3233-4e00-963c-1880b4417883.gif)
